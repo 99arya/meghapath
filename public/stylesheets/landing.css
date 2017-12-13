@@ -1,0 +1,73 @@
+
+
+body{
+	/*background: url(https://lh3.googleusercontent.com/aeDT-f0n96Nwk5g6MIYoCmT4ZuMMRdHPQOS65MUlsmdYaTSLkvpYw4Samm5xLzw54jagBylw1JkPHmJpRqAVTqpCN-yiO0vrFTVyug6fCcDJQCw7WB43GStOJGWB1kWKNyANpngJ8TnYC_WlgkFAZlBTpbzMT1zY5lfVrIW01e92A1Lxr43eOmvxk8Yuj6YcVRq8FczAUTNlZsIC-encxC53hUfoh-2cETFOak0kjjlJRx0VTyMOEFu4YsHtgsu5FIcyIOq6g6QOeZyFFeJEhCjEXQZVNGuwK1xORmyCRMPvBDDdX6uAPhQ4rzYn8aZkc1aKStzfM6HPegt-UK5iEefHxXxmHG1T95SM3BRXKL1vvqT8bHAjmDHIlM9InSpf0Zzc8pAurTpy0Tt1tHmP9cFl9qzkZ5ZvT4wgXpifnG56dGmEFJS-0AWQqx7ifen45HP3-xWjJpNrUc1M5DVaVFSjk7cpIx1xvGP5RZI-46Dbu9Ve1Al9V3eKQRsjcmu3g6bY5jVMn06nnryV3C02X3yrO0FNpyCjICntgUTLfZQsGUIiEG8A7yX7IhR8jUbzY-6mubBieVQlhZvjnX5qIBYQyN1Oy3fYpIrKhzUsoq-_7Q-B_gKFrewvFQ=w1017-h676-no);*/
+	/*background-size: cover;*/
+	/*background-position: center;*/
+	/*background-size:100%;*/
+	background: url(https://lh3.googleusercontent.com/-OBelyY2HBUP2Dxup2YSPPuVrJ1qVRtdVo3geopPWiqkaqlK4q0qGOHlCsxSgHR-ho3cFh6qYtp97lXDMgQkxlwTC659hM0SKML8LZcqQAxYWY7WXTcriVgMnUC6_Q55x22T5W6VkjOFJnYGu_OGIsBmfQzBsv-gXiB5Rwx7UplUz4KbVOvRZ7PRMSFO7R0hr_jo-jLf4fT5c11Fo5VbVMRrkgozV4R8BGmmOh7BeDfhAyZAj5DLYoKwFMkCn-32orFxrJLk2XW0FHZJK9izwqlwayhMrkghSw-834y753szfsWWx4F4F9cWzQu_j1X3qZTw6fArSpA5gnuaWkD0WNiBpJVe8aExnfneO_w1PQ8publO_k49vI4B-KjB4-txRxfvbglp1Tpf2p5T7sm8DNKgy4KZ7JvTrSTkrGvTuXGYd-nuIe7yUhHmTHAMJ6bAxRep0zXEzjRhPUu7GKR88DMSH6JymPFflaVmhNkaqxfA2jmCTRXFNM5thpHG5Rw4iMBOTrCw3rtnINFEHXlFdI8kptmaBFO_xURGF_yboC69i4w61evYU42mEqHhz_yb9uuXhxFSIyFZ61m_wT2S6Avf6IasYey9c__p14PTJ3vqUmrEeYat9mu2VvRoewjc_e3llV71t6BgG1IhsaZMUGuBSJJXFu-GP2Vh6njLzUQwypE=w1294-h652-no);
+    background-position: center center;
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	background-size: cover;
+	height: 100%;
+	width: 100%;
+}
+/*#content{*/
+/*	text-align: center;*/
+/*	padding-top: 15%;*/
+/*}*/
+
+body{
+	font-family: 'Open Sans', sans-serif;
+	color: white;
+
+	/*font-color:white;*/
+}
+h1{
+	font-weight: 700;
+	font-size: 5em;
+	text-shadow: 1px 1px 2px black; 
+
+}
+
+h3{
+	text-shadow: 1px 1px 2px black; 
+}
+
+h4{
+    text-shadow: 1px 1px 2px black;
+}
+
+html{
+	height: 100%;
+}
+
+hr{
+	width: 400px;
+	border-top: 1px solid #f8f8f8;
+	border-bottom: 1px solid rgba(0,0,0,0.2);
+}
+
+
+/*h1, h3{
+	color: white;
+}*/
+
+.footer {
+    
+  position: relative;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding: 1rem;
+  background-color: #2c91de;
+  text-align: center;
+}
+
+.footer{
+	font-family: 'Open Sans', sans-serif;
+	color: white;
+
+	/*font-color:white;*/
+}

@@ -1,0 +1,77 @@
+<% include ./partials/header %>
+
+<div class="container content">
+    <div class="row">
+        <div style="width: 70%; margin: 25px auto;">
+     <% if(error && error.length > 0){ %>
+        
+            <div class="alert alert-danger" role="alert">
+              <%=error%>
+            </div>
+        
+        <%    } %>
+
+
+    
+        
+       <% if(success && success.length > 0){ %>
+    
+        <div class="alert alert-success" role="alert">
+          <%=success%>
+        </div>
+    
+       <% } %>
+    <h1 style="text-align: center; " >Create A New Account!</h1>
+
+<br><br>
+
+   
+    <form action = "/register" method = "POST">
+        
+        <div class="form-group">
+            <p for="username">User Name</p>
+        <input class="form-control" type = "text" name = "username" placeholder = "User name has to be unique">
+        </div>
+        
+        <div class="form-group">
+            <p for="email">E-Mail ID</p>
+        <input class="form-control" type = "text" name = "email" placeholder = "E-Mail ID">
+        </div>
+        
+        <div class="form-group">
+            <p for="password">Password</p>
+        <input class="form-control" type = "password" name = "password" placeholder = "Password">
+        </div>
+        
+        <div class="form-group">
+            <p for="restoname">Name of your Restaurant</p>
+        <input class="form-control" type = "text" name = "restoname" placeholder = "Name of the Restaurant">
+        </div>
+        
+        <div class="form-group">
+            <p for="add1">Address Line 1</p>
+        <input class="form-control" type = "text" name = "add1" placeholder = "Address Line 1">
+        </div>
+        
+        <div class="form-group">
+            <p for="add2">Address Line 2</p>
+        <input class="form-control" type = "text" name = "add2" placeholder = "Address Line 2">
+        </div>
+        
+         <div class="form-group">
+             <p for="add3">Address Line 3</p>
+        <input class="form-control" type = "text" name = "add3" placeholder = "Address Line 3">
+        </div>
+        
+         <div class="form-group">
+             <p for="phone">Telephone</p>
+        <input class="form-control" type = "text" name = "phone" placeholder = "Telephone">
+        </div>
+        
+        
+        <div class="form-group">
+<button class="btn btn-lg btn-primary btn-block" >Sign Up</button>        </div>
+    </form>
+</div>
+
+<% include ./partials/footer %>

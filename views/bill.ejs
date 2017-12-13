@@ -1,0 +1,47 @@
+<% include ./partials/header %>
+
+
+
+<div id="content">
+ <div class='container fluid'>
+    <div class="row text-center" style = "display:flex; flex-wrap:wrap;">
+<% bills.forEach(function(bill){ %>
+            <div class="card meal-card" style="width: 15rem;">
+                    
+                    <div class="card-block">
+                        
+                        <h4 class="card-title"> Order Number :  <b><%= bill.bn %></b> </h4><hr>
+                        <h6 class="card-title"> Table Number :  <%= bill.tablenumber %> </h6>
+                        <h6 class="card-title"> Waiter Name : <%= bill.waitername %> </h6>
+                        
+                        <!--<h6 class="add" data-price="<%= bill._id  %>"><%= bill._id %></h6>-->
+                        <p>
+                            <a href="/bills/<%= bill._id %>" class="btn btn-primary">More Info</a>
+                        </p>
+                
+
+                      
+                    </div>
+            </div>
+        <% }); %>
+    </div>
+   </div>
+   </div>
+
+<style>
+    @media (min-width:320px)  {
+    /* smartphones, iPhone, portrait 480x320 phones */ 
+    #content{
+        margin-top: 4em;
+    }
+    
+    .meal-card{
+        margin-left: 4em;
+    }
+    
+
+    
+}
+</style>
+
+<% include ./partials/footer %>

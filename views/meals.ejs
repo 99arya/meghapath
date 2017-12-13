@@ -1,0 +1,93 @@
+<% include ./partials/header %>
+
+
+
+<body>
+    
+    <div id="content">
+  
+     <div class="newforms" >
+        <div class="form-group">
+    <h2 style="text-align: center; " >Add a New Meal</h2><br>
+    </div>
+        <form action="/newmeal" class="text-center" method="POST">
+            
+            <div class="form-group">
+                <input class="form-control" type="text" name="name" placeholder="Name of The Meal">
+            </div>
+            
+            <div class="form-group">
+                <input class="form-control" type="text" name="price" placeholder="Price">
+            </div>
+            
+            <div class="form-group">
+            <button class="btn btn-lg btn-primary btn-block" >Submit</button>
+            </div> 
+        </form>
+            
+           
+    
+    </div>
+  
+     <div class='container fluid'>
+    <div class="row text-center" style = "display:flex; flex-wrap:wrap;">
+        
+        <br>
+            <% meals.forEach(function(meal){ %>
+            <div class="card meal-card" style="width: 15rem;">
+                    
+                        <h4 class="add" data-price="<%= meal._id  %>"><%= meal.mealname %></h4>
+                      <!--<img class="card-img-top" src="<%=meal.image%>" alt="Card image cap" >-->
+                    <div class="card-block">
+                        
+                        <!--<h6 class="card-title"   data-name="<%= meal.name  %>"> <%= meal.name %> </h6>-->
+                        
+                        <!--<p class="card-text"><%= meal.category  %></p>-->
+                        <!--<p><%=  meal.comment %></p>-->
+                        
+                
+                        <a href="#" data-pric="<%= meal.price  %>"  class="btn btn-primary">Rs. <%= meal.mealprice  %></a>
+                        
+                      
+                    </div>
+            </div>
+        <% }); %>
+    </div>
+   </div>
+   
+    <style>
+        .meal-card{
+            padding:1.5%;
+            display:flex;
+        }
+        
+        .newforms {
+    margin-bottom: 1em;
+}
+
+.newforms {
+    display: block;
+    padding:2em;
+    margin-top: 0em;
+}
+    </style>
+
+    
+
+<style>
+    @media (min-width:320px)  {
+    /* smartphones, iPhone, portrait 480x320 phones */ 
+    #content{
+        margin-top: 4em;
+    }
+    
+    .meal-card{
+        margin-left: 4em;
+    }
+    
+
+    
+}
+</style>
+
+<% include ./partials/footer %>

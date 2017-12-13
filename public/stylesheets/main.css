@@ -1,0 +1,189 @@
+.content-contact{
+    padding-bottom: 10%;
+}
+
+/*body{*/
+/*    padding-bottom: 3%;*/
+    /*background-color: #d3e1ff;*/
+/*    https://c2.staticflickr.com/2/1294/5188892527_4acb408137_b.jpg*/
+/*}*/
+
+  /*body { */
+  /*    padding-bottom: 3%;*/
+  /*        background: url(https://c2.staticflickr.com/2/1294/5188892527_4acb408137_b.jpg) no-repeat center center fixed; */
+  /*        background: url(https://lh3.googleusercontent.com/ZP8LDyxsmYOAxVlnurt4_R9T4GPmShKAXhnem98NukaOx3Ise7jdT2KyAeE46YLTECBy0AtMoTW2rvKWZ_28TSGqX24c7IgI9pU78g1-elJ7KlzDNNHX2ukIL-_NhG3jAhZFGdcjvRDXJdAmN7zYSxlakM2KrpCqnJnbt8rKpMcdLLAxxlyy9TqntRJMDH0IkAUWnn6kE0DQP6SkgT1wbRtHfetaQ9L4SJfkdeiGpRbGVprqUqZ4OPWbMtPNVUrQBqXsZl__MlTmk7F8LxmljoPyxaMUpcRjoPeMrq2M1w2QrzJNeiKdACgsveaIkPF-hBG_yCJnAWuwZynb3CjikazZH3DyUctYvR2qVt_rKr5gyLlx50Qsv63clcwX6aXCcneNvA9sj5vvgwjQ8erVkZkVR-FPIyNBJSCfCySXEjT3IS54dDoWd515H5eOv7SsERuau51KWpJdZPeSFHYl8e8YwNv37AW3wCDtX4JjC1yFwDu8SIlzbWSGzLJNPMpjYQOn2fpHG0cPCVHZ9noE-5jj5a7Y4D4ykilgsf53NC5K_j5JfiqbbjKiVLHbsvqtZvkAMA-ob4pxx3KGYnVktTGr9Vq5MplUc4wKNO4a2kW3MR-OMvtkIEYZkwDYUcm75Ydu-fjusSxyYrGHwSOCneoQcB6zb5_RuiLZMQqAPOGxFBA=w1294-h622-no) no-repeat center center fixed; */
+  /*        -webkit-background-size: cover;*/
+  /*        -moz-background-size: cover;*/
+  /*        -o-background-size: cover;*/
+  /*        background-size: cover;*/
+  /*      }*/
+        
+
+
+
+
+ body { 
+      padding-bottom: 3%;
+          background-color: #e9ecef;
+        }
+        
+
+
+
+
+
+ html  {
+
+    width: 100%;
+    height: 100%;
+    margin: 0px;
+    padding: 0px;
+    overflow-x: hidden; 
+   
+}
+
+
+
+
+
+
+/*body {*/
+/*    padding-top: 105px;*/
+/*}*/
+
+#ftr{
+     color:white;
+    
+}
+ .navbar-brand{
+    font-size: 1.5em;
+  }
+  
+
+  #content{
+        padding-top:10%;
+    }
+    .card{
+        padding:2%;
+        margin: 10px;
+    }
+    
+     .billp{
+         line-height: 20%;
+     }
+     
+/*     ul #bri {*/
+/*    width: 100px;*/
+    
+/*}*/
+.right {
+    float: right;
+
+}
+.il{
+   list-style: none; 
+}
+#billtable{
+    margin-top: 20px;
+}
+
+#billtablemargin{
+    margin-bottom: 0px;
+}
+
+#space{
+    line-height: 20px;
+}
+
+#fb{
+    display: block;
+    margin: auto;
+    width:120px;
+    height:120px;
+}
+
+.card:hover {
+    background-color: #007bff;
+    color:white;
+   
+    -webkit-transition:transform background-color 500ms linear;
+    -ms-transition:transform background-color 500ms linear;
+    transition:transform background-color 500ms linear; 
+}
+
+.card:active{
+    background-color:#6610f2;
+}
+
+
+.ilb{
+    list-style: none;
+    font-size: 1.3em;
+    line-height: 0px;
+}
+#total_gross{
+    font-weight: bold;
+}
+
+#billdiv{
+    background-color: #f9fbff;
+    padding: 10px;
+    border-radius: 25px;
+    
+}
+
+
+
+#dates{
+    font-size: 12px;
+}
+#kotdiv{
+    background-color: #f9fbff;
+    padding: 10px;
+    border-radius: 25px;
+ 
+}
+
+
+a {
+    color: white;
+    text-decoration: none;
+}
+
+a:hover 
+{
+     color:green; 
+     text-decoration:none; 
+     cursor:pointer;  
+}
+.nav{
+	font-family: 'Open Sans', sans-serif;
+	
+
+	/*font-color:white;*/
+}
+.content{
+    margin-top: 6em;
+}
+
+
+@media (min-width:320px)  {
+    /* smartphones, iPhone, portrait 480x320 phones */ 
+    #content{
+        margin-top: 4em;
+    }
+    
+    /*.meal-card{*/
+    /*    margin-left: 6em;*/
+    /*}*/    
+    
+    .billp .ilb {
+        font-size: 8px;
+    }
+    
+    #content{
+        margin-bottom: 2em;
+    }
+    
+    
+}
