@@ -578,7 +578,7 @@ app.post("/register", function(req, res) {
  
  
  // =========================================================================================================================                                    
- app.listen(8080, process.env.IP, function(){
+ app.listen(process.env.PORT, process.env.IP, function(){
         console.log("Sumit's Server started! App is running on PORT : " + process.env.PORT);
         log.info('Express', 'Listening on port ');
     });
