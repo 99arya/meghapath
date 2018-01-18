@@ -1,7 +1,7 @@
 /* global $*/
-// $('document').ready(function() {
-//     alert("The system is ready!")
-// })
+$('document').ready(function() {
+    alert("The system is ready!")
+})
 
 
 
@@ -35,7 +35,7 @@ $(".card").on("click", function(){
      
           mealqty[mealname] = mealqty[mealname]+1;
           
-          $('#'+mealid).html('<td>' + mealname + '</td><th scope="row">'+ mealqty[mealname] +'</th><td>' + mealprice*mealqty[mealname] + '</td>')
+          $('#'+mealid).html('<td>' + mealname + '</td><th scope="row">'+ mealqty[mealname] +'</th><td>' + mealprice + '</td><td>' + mealprice*mealqty[mealname] + '</td>')
           
            var Qty=mealqty[mealname];
           
@@ -68,7 +68,7 @@ $(".card").on("click", function(){
           mealqty[mealname] = 1;
           
           
-          var newTab=$('<tr class="tableMealId" id ='+ mealid + '><td>' + mealname + '</td><th scope="row">'+ mealqty[mealname] +'</th><td>' + mealprice*mealqty[mealname] + '</td></tr>')
+          var newTab=$('<tr class="tableMealId" id ='+ mealid + '><td>' + mealname + '</td><th scope="row">'+ mealqty[mealname] +'</th><td>' + mealprice + '</td><td>' + mealprice*mealqty[mealname] + '</td></tr>')
           newTab.data('id',mealid)
            $('#billtable').append(newTab)
           
@@ -79,17 +79,12 @@ $(".card").on("click", function(){
             
             
               var myObject = new Object();
-                myObject.name = mealname;
+                myObject.name =  mealname;
                 myObject.qty = mealqty[mealname];
                 myObject.id = mealid;
                 myObject.price = mealprice;
                 myObject.rate = mealprice*mealqty[mealname];
-                
-                
-                
-               
-          
-    
+
 
               myList.push(myObject)
                   
@@ -158,7 +153,7 @@ var tax = cgst + sgst;
 
 
   
-  $(document).ready(function() {
+  $(document).ready(function(printBill) {
             $("#printbill").on("click", function () {//$btnPrint is button which will trigger print
                 var divContents = $("#billdiv").html();//div which have to print
                 var printWindow = window.open('', '', 'height=700,width=900');
@@ -225,123 +220,8 @@ $('#delkot').on('click',function(e){
       
           
 
-$('#uploadBill').on("click", function(err, upload) {
-    if(err){
-        console.log(err)
-    } 
-    
-var array = [];
-    var headers = [];
-    $('#billtable th').each(function(index, item) {
-        headers[index] = $(item).html();
-    });
-    $('#billtable tr').has('td').each(function() {
-        var arrayItem = {};
-        $('td', $(this)).each(function(index, item) {
-            arrayItem[headers[index]] = $(item).html();
-        });
-        array.push(arrayItem);
-    });
-
-alert(JSON.stringify(array));
-         
-        });
-    
-    
-    
-    
-$('#billtable').on('click', 'tr', function(){
-    alert($(this).data('id'))
-})
-
- 
-    
-    
     
 
 
 
-
-
-
-$("#qwe").click(function(){
-    $.ajax({url: "https://canatech.in:5002/getMenu", success: function(result){
-        $("#div1").html(result);
-    }});
-});
-
-
-// $('#createBill').click(function(){
-    
-//     var createUrl="/bills/"+$('#oid').data('oid')+"/meals"
-    
-    
-//     console.log(myList)
-    
-    
-//     $.ajax({
-//         method:'POST',
-//         url:createUrl,
-//         data:myList
-//     })
-//     .done(
-//         console.log("sucesssss...")
-//     )
-    
-//     .catch(function(err){
-//         console.log(err)
-//     })
-// })
-
-
-
-
-$('#createBill').click(function(){
-    var totalGross = $('#total_gross').text()
-    var waiterName = $('#waiterName').text()
-    var orderNumber = $('#orderNumber').text()
-    var tableNumber = $('#tableNumber').text()
-    var billId = $('#oid').data('oid')
-    // var xyz = "Total Gross Amount : Rs. "+totalGross
-    var Tn = {tableNumber}
-    var On = {orderNumber}
-    var Wn = {waiterName}
-    var Bi = {billId}
-    var Tgp = {totalGross}
-    
-    var billDetails =[Tn, On, Wn, Bi, Tgp]
-    
-     
-    
-    myList.push(billDetails)
-    console.log(myList)
-   
-// myList.forEach(function(element) {
-//     console.log(element);
-// });
-})
-
-
-$('#sendBill').click(function(){
-    
-    var createUrl="/bills/"+$('#oid').data('oid')+"/meals"
-    
-    
-    
-        
-    
-    $.ajax({
-        method:'POST',
-        url:createUrl,
-        data:JSON.stringify(myList),
-        contentType: 'application/json'
-    })
-    .then(
-        console.log("sucesssss...")
-    )
-    
-    .catch(function(err){
-        console.log(err)
-    })
-})
 

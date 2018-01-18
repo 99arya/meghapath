@@ -1,5 +1,5 @@
 <% include ./partials/header %>
-<script type="text/javascript" src="../js/tabletojson.js"></script>
+
 
 
 
@@ -67,14 +67,26 @@
   <li data-oid="<%= bill._id %>" id="oid" class="list-group-item">Order id : <b><%= bill._id %></b></li>
 </ul><br><h4 style="text-align: center; " >Add a New Meal to Order Number <%= bill.bn %></h4><br>
             
-            
-           
+     
+                <!--==============================START===================-->
+
+          <!--==============================END===================-->
+        <hr>
+        
+    
+      <!--==============================START===================-->
+      
+        <h1>Beverages</h1>
+         <div class="text-center" style = "display:flex; flex-wrap:wrap;">
+
+        
+        
+        <% meals.forEach(function(meal){ %>
+        
+           <% if(meal.mealcategory == "Beverages"){ %>
         
         
         
-        
- <div class="text-center" style = "display:flex; flex-wrap:wrap;">
-            <% meals.forEach(function(meal){ %>
             <div  data-id-value = "<%= meal  %>"  data-mealname-value = "<%= meal.mealname  %>"  data-mealprice-value = "<%= meal.mealprice  %>" class="card meal-card" style="width: 15rem;">
                     
                         <!--<h4 class="add" data-price="<%= meal._id  %>"><%= meal._id %></h4>-->
@@ -83,7 +95,6 @@
                         
                         <h6 class="card-title"   data-name="<%= meal.mealname  %>"> <%= meal.mealname %> </h6>
                         
-                        <!--<p class="card-text"><%= meal.category  %></p>-->
                         <!--<p><%=  meal.comment %></p>-->
                         
                 
@@ -92,8 +103,283 @@
                       
                     </div>
             </div>
+            <% } %>
         <% }); %>
+        <hr>
+        
+        
     </div>
+    
+      <!--==============================END===================-->
+       <hr>
+        
+        <!--==============================START===================-->
+      
+        <h1>Soups</h1>
+         <div class="text-center" style = "display:flex; flex-wrap:wrap;">
+
+        
+        
+        <% meals.forEach(function(meal){ %>
+        
+           <% if(meal.mealcategory == "Soups"){ %>
+        
+        
+        
+            <div  data-id-value = "<%= meal  %>"  data-mealname-value = "<%= meal.mealname  %>"  data-mealprice-value = "<%= meal.mealprice  %>" class="card meal-card" style="width: 15rem;">
+                    
+                        <!--<h4 class="add" data-price="<%= meal._id  %>"><%= meal._id %></h4>-->
+                      <!--<img class="card-img-top" src="<%=meal.image%>" alt="Card image cap" >-->
+                    <div class="card-block">
+                        
+                        <h6 class="card-title"   data-name="<%= meal.mealname  %>"> <%= meal.mealname %> </h6>
+                        
+                        <!--<p><%=  meal.comment %></p>-->
+                        
+                
+                        <h6 data-pric="<%= meal.mealprice  %>"  class="btn btn-primary">Rs. <%= meal.mealprice  %></h6>
+                        
+                      
+                    </div>
+            </div>
+            <% } %>
+        <% }); %>
+        <hr>
+        
+        
+    </div>
+    
+      <!--==============================END===================-->
+       <hr>
+      <!--==============================START===================-->
+      
+        <h1>Appetizers</h1>
+         <div class="text-center" style = "display:flex; flex-wrap:wrap;">
+
+        
+        
+        <% meals.forEach(function(meal){ %>
+        
+           <% if(meal.mealcategory == "Appetizers"){ %>
+        
+        
+        
+            <div  data-id-value = "<%= meal  %>"  data-mealname-value = "<%= meal.mealname  %>"  data-mealprice-value = "<%= meal.mealprice  %>" class="card meal-card" style="width: 15rem;">
+                    
+                        <!--<h4 class="add" data-price="<%= meal._id  %>"><%= meal._id %></h4>-->
+                      <!--<img class="card-img-top" src="<%=meal.image%>" alt="Card image cap" >-->
+                    <div class="card-block">
+                        
+                        <h6 class="card-title"   data-name="<%= meal.mealname  %>"> <%= meal.mealname %> </h6>
+                        
+                        <!--<p><%=  meal.comment %></p>-->
+                        
+                
+                        <h6 data-pric="<%= meal.mealprice  %>"  class="btn btn-primary">Rs. <%= meal.mealprice  %></h6>
+                        
+                      
+                    </div>
+            </div>
+            <% } %>
+        <% }); %>
+        <hr>
+        
+        
+    </div>
+    
+      <!--==============================END===================-->
+       <hr>
+      
+      <!--==============================START===================-->
+      
+        <h1>North Indian</h1>
+         <div class="text-center" style = "display:flex; flex-wrap:wrap;">
+
+        
+        
+        <% meals.forEach(function(meal){ %>
+        
+           <% if(meal.mealcategory == "North Indian"){ %>
+        
+        
+        
+            <div  data-id-value = "<%= meal  %>"  data-mealname-value = "<%= meal.mealname  %>"  data-mealprice-value = "<%= meal.mealprice  %>" class="card meal-card" style="width: 15rem;">
+                    
+                        <!--<h4 class="add" data-price="<%= meal._id  %>"><%= meal._id %></h4>-->
+                      <!--<img class="card-img-top" src="<%=meal.image%>" alt="Card image cap" >-->
+                    <div class="card-block">
+                        
+                        <h6 class="card-title"   data-name="<%= meal.mealname  %>"> <%= meal.mealname %> </h6>
+                        
+                        <!--<p><%=  meal.comment %></p>-->
+                        
+                
+                        <h6 data-pric="<%= meal.mealprice  %>"  class="btn btn-primary">Rs. <%= meal.mealprice  %></h6>
+                        
+                      
+                    </div>
+            </div>
+            <% } %>
+        <% }); %>
+        <hr>
+        
+        
+    </div>
+    
+      <!--==============================END===================-->
+       <hr>
+    
+    
+      <h1>Chinese</h1>
+ <div class="text-center" style = "display:flex; flex-wrap:wrap;">
+   
+            <% meals.forEach(function(meal){ %>
+            
+                       <% if(meal.mealcategory == "Chinese"){ %>
+
+            
+            <div  data-id-value = "<%= meal  %>"  data-mealname-value = "<%= meal.mealname  %>"  data-mealprice-value = "<%= meal.mealprice  %>" class="card meal-card" style="width: 15rem;">
+                    
+                        <!--<h4 class="add" data-price="<%= meal._id  %>"><%= meal._id %></h4>-->
+                      <!--<img class="card-img-top" src="<%=meal.image%>" alt="Card image cap" >-->
+                    <div class="card-block">
+                        
+                        <h6 class="card-title"   data-name="<%= meal.mealname  %>"> <%= meal.mealname %> </h6>
+                        
+                        <!--<p><%=  meal.comment %></p>-->
+                        
+                
+                        <h6 data-pric="<%= meal.mealprice  %>"  class="btn btn-primary">Rs. <%= meal.mealprice  %></h6>
+                        
+                      
+                    </div>
+            </div>
+             <% } %>
+        <% }); %>
+        </div>
+        <hr>
+        
+      <!--==============================START===================-->
+      
+        <h1>Breads</h1>
+         <div class="text-center" style = "display:flex; flex-wrap:wrap;">
+
+        
+        
+        <% meals.forEach(function(meal){ %>
+        
+           <% if(meal.mealcategory == "Breads"){ %>
+        
+        
+        
+            <div  data-id-value = "<%= meal  %>"  data-mealname-value = "<%= meal.mealname  %>"  data-mealprice-value = "<%= meal.mealprice  %>" class="card meal-card" style="width: 15rem;">
+                    
+                        <!--<h4 class="add" data-price="<%= meal._id  %>"><%= meal._id %></h4>-->
+                      <!--<img class="card-img-top" src="<%=meal.image%>" alt="Card image cap" >-->
+                    <div class="card-block">
+                        
+                        <h6 class="card-title"   data-name="<%= meal.mealname  %>"> <%= meal.mealname %> </h6>
+                        
+                        <!--<p><%=  meal.comment %></p>-->
+                        
+                
+                        <h6 data-pric="<%= meal.mealprice  %>"  class="btn btn-primary">Rs. <%= meal.mealprice  %></h6>
+                        
+                      
+                    </div>
+            </div>
+            <% } %>
+        <% }); %>
+        
+        
+        
+    </div>
+    
+      <!--==============================END===================-->
+       
+    <hr>
+        
+      <!--==============================START===================-->
+      
+        <h1>Rice</h1>
+         <div class="text-center" style = "display:flex; flex-wrap:wrap;">
+
+        
+        
+        <% meals.forEach(function(meal){ %>
+        
+           <% if(meal.mealcategory == "Rice"){ %>
+        
+        
+        
+            <div  data-id-value = "<%= meal  %>"  data-mealname-value = "<%= meal.mealname  %>"  data-mealprice-value = "<%= meal.mealprice  %>" class="card meal-card" style="width: 15rem;">
+                    
+                        <!--<h4 class="add" data-price="<%= meal._id  %>"><%= meal._id %></h4>-->
+                      <!--<img class="card-img-top" src="<%=meal.image%>" alt="Card image cap" >-->
+                    <div class="card-block">
+                        
+                        <h6 class="card-title"   data-name="<%= meal.mealname  %>"> <%= meal.mealname %> </h6>
+                        
+                        <!--<p><%=  meal.comment %></p>-->
+                        
+                
+                        <h6 data-pric="<%= meal.mealprice  %>"  class="btn btn-primary">Rs. <%= meal.mealprice  %></h6>
+                        
+                      
+                    </div>
+            </div>
+            <% } %>
+        <% }); %>
+        
+        
+        
+    </div>
+    
+      <!--==============================END===================-->
+       <hr>
+       
+        
+      <!--==============================START===================-->
+      
+        <h1>Desserts</h1>
+         <div class="text-center" style = "display:flex; flex-wrap:wrap;">
+
+        
+        
+        <% meals.forEach(function(meal){ %>
+        
+           <% if(meal.mealcategory == "Desserts"){ %>
+        
+        
+        
+            <div  data-id-value = "<%= meal  %>"  data-mealname-value = "<%= meal.mealname  %>"  data-mealprice-value = "<%= meal.mealprice  %>" class="card meal-card" style="width: 15rem;">
+                    
+                        <!--<h4 class="add" data-price="<%= meal._id  %>"><%= meal._id %></h4>-->
+                      <!--<img class="card-img-top" src="<%=meal.image%>" alt="Card image cap" >-->
+                    <div class="card-block">
+                        
+                        <h6 class="card-title"   data-name="<%= meal.mealname  %>"> <%= meal.mealname %> </h6>
+                        
+                        <!--<p><%=  meal.comment %></p>-->
+                        
+                
+                        <h6 data-pric="<%= meal.mealprice  %>"  class="btn btn-primary">Rs. <%= meal.mealprice  %></h6>
+                        
+                      
+                    </div>
+            </div>
+            <% } %>
+        <% }); %>
+        
+        
+        
+    </div>
+    
+      <!--==============================END===================-->
+       
+    
+    
+    
     </div>
     
     
@@ -139,28 +425,30 @@
       <th scope="col">Qty.</th>
       
       <th scope="col">Price</th>
+      <th scope="col">Rate</th>
     </tr>
   </thead>
   <tbody>
-     <% bill.meals.forEach(function(meal){ %> 
+     <% bill.meals.forEach(function(list){ %> 
     <tr>
       
-      <td name="foodqty"><%= meal.mealname %></td>
-      <th name="qty" scope="row"></th>
+      <td name="foodqty"><%= list.name %></td>
+      <th name="qty" scope="row"><%= list.qty %></th>
       
-      <td class="money"><%= meal.mealprice %></td>
+      <td class="money"><%= list.price %></td>
+      <td name = "rate"><%= list.rate %></td>
     </tr>
     <% }); %>  
     
   </tbody>
 </table>
 
-       <br> <li class="ilb"><b>Gross Amount: </b> <span class="right"><b>Rs.</b> <p style="display:inline" id="total_gross"></p></span></li>
+       <br> <li class="ilb"><b>Gross Amount: </b> <span class="right"><b>Rs.</b> <p style="display:inline" id="total_gross"><%=bill.total%></p></span></li>
 
     <hr><li class="il"><b> Tax Breakup</b><span class="right"> <p style="display:inline" ></p></span></li>
-    <li class="il"> C GST @ 2.5% : <span class="right"> Rs. <p style="display:inline" id="cgst"></p></span></li>
-    <li class="il"> S GST @ 2.5% : <span class="right"> Rs. <p style="display:inline" id="sgst"></p></span></li>
-    <li class="il"> Total Tax : <span class="right"> Rs. <p style="display:inline" id="tax"></p></span></li>
+    <li class="il"> C GST @ 2.5% : <span class="right"> Rs. <p style="display:inline" id="cgst"><%=bill.cgst%></p></span></li>
+    <li class="il"> S GST @ 2.5% : <span class="right"> Rs. <p style="display:inline" id="sgst"><%=bill.sgst%></p></span></li>
+    <li class="il"> Total Tax : <span class="right"> Rs. <p style="display:inline" id="tax"><%=bill.tax%></p></span></li>
 
         <!--<p style="display:inline ">Total:</p><span>   </span><p style="display:inline" id="total_forces"></p>            -->
     
@@ -171,14 +459,64 @@
   </div>
 <br>
  <div class="form-group">
-  <button style="margin-left:auto;margin-right:auto;display:block;margin-top:0%;margin-bottom:0%"  id="printbill" type="button" class="btn btn-success">Print Bill</button></div>
-  <button style="margin-left:auto;margin-right:auto;display:block;margin-top:0%;margin-bottom:0%"  id="uploadBill" type="button" class="btn btn-success">Upload Bill</button><br>
-  <button style="margin-left:auto;margin-right:auto;display:block;margin-top:0%;margin-bottom:0%"  id="createBill" type="button" class="btn btn-success">Create Bill</button><br>
-  <button style="margin-left:auto;margin-right:auto;display:block;margin-top:0%;margin-bottom:0%"  id="sendBill" type="button" class="btn btn-success">Send Bill</button><br>
+  <button style="margin-left:auto;margin-right:auto;display:block;margin-top:0%;margin-bottom:0%"  id="sendBill" type="button" class="btn btn-success">Upload Bill</button><br>
    <div class="form-group">
   <!--<button onClick="download()">Download</button>-->
   <button style="margin-left:auto;margin-right:auto;display:block;margin-top:0%;margin-bottom:0%" onClick="download()" type="button" class="btn btn-info">Download PDF</button></div>
 
+ 
+     <script>
+  
+     
+     $('#sendBill').click(function(){
+    
+          var meals = JSON.stringify(myList);
+          var total = $('#total_gross').text()
+          var cgst = $('#cgst').text()
+          var sgst = $('#sgst').text()
+          var tax = $('#tax').text()
+     var details = {total, cgst, sgst, tax}
+          console.log(details)
+          
+          
+          
+          
+    
+              $.post( "/bills/<%= bill._id %>", {meals} )
+                      .then(
+                                  
+                              
+                              $.post("/bills/<%= bill._id %>/bd", {total, cgst, sgst, tax})
+                                    .then(alert("succcess details"))
+                                )
+                              
+                          
+                      
+                      
+            
+            
+    
+        
+
+})
+
+    $('#details').click(function(){
+     var total = $('#total_gross').text()
+          var cgst = $('#cgst').text()
+          var sgst = $('#sgst').text()
+          var tax = $('#tax').text()
+
+          $.post("/bills/<%= bill._id %>/bd", {total, cgst, sgst, tax})
+                .then(printBill())
+            })
+     
+     </script>
+     
+      
+            <div class="form-group">
+            <button id="printbill" class="btn btn-lg btn-primary btn-block" >Print Bill</button>
+            </div> 
+ </form>
   
   </div>
  </div>
@@ -212,8 +550,7 @@
 }
 </style>
     
-    <button id ="qwe">zxc</button>
-    <div id="div1"></div>
+
     
 
 

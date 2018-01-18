@@ -10,6 +10,7 @@ var mongoose = require("mongoose");
 var $ = require("jquery");
 var flash = require("connect-flash");
 var log = require('npmlog');
+var methodOverride=require("method-override");
 
 var  path = require('path');
 var passport = require("passport"), 
@@ -34,7 +35,7 @@ app.use(passport.session())
 passport.use(new LocalStratregy(User.authenticate()))
 passport.serializeUser(User.serializeUser())
 passport.deserializeUser(User.deserializeUser())
-
+app.use(bodyParser.json());
 
 
   //=========================================================================================================================                                    
@@ -48,7 +49,7 @@ passport.deserializeUser(User.deserializeUser())
     app.use(express.static(path.join(__dirname, 'public')));
     app.use(express.static(__dirname + '/views'));
     app.use(bodyParser.json());
-
+    app.use(methodOverride("_method"));
     app.use(bodyParser.urlencoded({extended:true}));
     app.set("view engine","ejs");
     
@@ -67,7 +68,8 @@ passport.deserializeUser(User.deserializeUser())
 var mealSchema = new mongoose.Schema({
     mealname: String,
     mealprice: Number,
-    username:String
+    username:String,
+    mealcategory: String
     });
 
 var Meal = mongoose.model("Meal", mealSchema);
@@ -82,26 +84,17 @@ var Meal = mongoose.model("Meal", mealSchema);
 
 
 var listSchema = new mongoose.Schema({
-    list:[
-        {name: String, qty: Number, id: String, price: Number, rate: Number},
-        [
-            {tableNumber: Number},
-
-{orderNumber: Number},
-
-{waiterName: String},
-
-{billId: String},
-
-{totalGross: String}
-            ]
-            
-            ]
     
+    name:String,
+    qty:String,
+    id:String,
+    price:String,
+    rate:String
+     
+            
     });
 
 var List = mongoose.model("List", listSchema);
-
 
 
 
@@ -118,15 +111,26 @@ var billSchema = new mongoose.Schema({
     created: {type: Date, default: Date.now},
     
     username: String,
+    total: Number,
+    cgst: Number,
+    sgst: Number,
+    tax: Number,
+   
     
-    meals: [
-        {type: mongoose.Schema.Types.ObjectId,
-            ref: "Meal"
-        }
-        ],
-        lists: [{type: mongoose.Schema.Types.ObjectId,
-            ref: "List"
-        }]
+    meals: [{
+            
+                name:String,
+                qty:Number,
+                id:String,
+                price:String,
+                rate:String
+             
+                    
+            }]
+            
+      
+                
+    
     });
 
 var Bill = mongoose.model("Bill", billSchema);
@@ -250,19 +254,7 @@ app.get("/newbill", isLoggedIn, function(req, res){
    
 app.post("/newbill",  isLoggedIn, function(req, res){
         
-        // Bill.count( { author: { $eq: req.user.username } } )
-        // var val=Bill.find()
-        
-        // Bill.find({"author.username": { $eq: req.user.username }}, function(err, allBills){
-        //             if(err){
-        //                 console.log(err);
-        //             } else {
-        //                 var x=allBills.size()
-                       
-        //             console.log("success----------"+x)
-        //             }
-        //         })
-        
+      
         
         Bill.count({username: req.user.username},function(err, count){
             if(err){
@@ -333,7 +325,7 @@ app.get("/bills", isLoggedIn,  function(req, res) {
 app.get("/bills/:id",  isLoggedIn, function(req, res) {
         
         
-        Bill.findById(req.params.id).populate("meals bills").exec(function(err, foundBill){
+        Bill.findById(req.params.id).populate("meals bills meals").exec(function(err, foundBill){
             if(err){
                 console.log(err)
             } else {
@@ -370,12 +362,13 @@ app.get("/newmeal", isLoggedIn,  function(req, res) {
 app.post("/newmeal", isLoggedIn,  function(req, res){
 
         var name = req.body.name;
-        
+        var category = req.body.category;
         var price = req.body.price;
         var username = req.user.username;
         
-    var newMeal = {mealname:name, mealprice:price, username:username}
+    var newMeal = {mealname:name, mealprice:price, username:username, mealcategory:category}
     
+    console.log("___CAT___" + category)
 
 
     Meal.create(newMeal, function(err, newlyCreated){
@@ -388,90 +381,85 @@ app.post("/newmeal", isLoggedIn,  function(req, res){
     });
     });
 
-                
 // =========================================================================================
-// POST A NEW MEAL
+// POST A NEW LIST TO BILL ID
 // =========================================================================================                
-                
-// app.post("/bills/:id/meals", isLoggedIn,  function(req, res) {
+
+	
+app.post("/bills/:id", function(req, res) {
     
-//         Bill.findById(req.params.id, function(err, bill) {
-//             if(err){
-//                 console.log(err)
-//             } 
-            
-            
-            
-//             // Meal.create(req.body.meal, function(err, meal) {
-//             //     if(err){
-//             //         console.log(err)
-//             //     }
-//             //     bill.meals.push(meal)
-               
-//             //     bill.save()
-//             //      console.log(bill)
-//             //     res.redirect('/bills/' + bill._id);
-//             // })
-//         })
-// })
- 
- 
- 
- 
-//  ====================================================TEST============
-
-// app.post("/bills/:id/meals", isLoggedIn,  function(req, res) {
     
-//         Bill.findById(req.params.id, function(err, bill) {
-//             if(err){
-//                 console.log(err)
-//             } 
+    var myList = req.body;
+    // console.log(myList)
+    var arr = myList.meals;
+    var arr2 = JSON.parse(arr)
+    //console.log(arr2);
+    var billId = req.params.id;
+    var myarray = [];
+    for(var i=0 ; i < arr2.length; i++ )
+    {
+        console.log(arr2[i])
+        var obj = arr2[i];
+        var myListObj = new List(obj);
+        
+        myarray.push(myListObj);
+        
+    
+    
+     Bill.findOneAndUpdate({_id: billId},{ $push:{meals: myListObj}}, { new:true}, function(err, list){
+        
+        if(err){
+            console.log(err)
+        } else {
             
-            
-//             List.create(req.body.forEach(function(myList) {
-//                   var transfer = new transfer(myList);
-//                   transfer.save();
-//                 })
-                
-                
-//                 , function(err, list) {
-//                 if(err){
-//                     console.log(err)
-//                 }
-                
-                
-                
-//                 bill.lists.push(list)
-               
-//                 bill.save()
-//                  console.log(bill)
-//                 res.redirect('/bills/' + bill._id);
-//             })
-//         })
-// })
-
- 
-  // =========================================================================================================================                                    
- // create meal and push to specific bill
-// =========================================================================================================================                                    
+   
+            console.log("___" + myListObj + "___" );
+        }
+        
+        
+    
+     
+   
+    
+});
+        
+    }})
 
 
-// app.post("/bills/:id/meals", isLoggedIn,  function(req, res) {
-//     Bill.findById(req.params.id, function(err, bill) {
-//         if(err){
-//             console.log(err)
-//         } Meal.create(req.body.meal, function(err, meal) {
-//             if(err){
-//                 console.log(err)
-//             }bill.meals.push(meal)
-           
-//             bill.save()
-//              console.log(bill)
-//             res.redirect('/bills/' + bill._id);
-//         })
-//     })
-// })
- 
+
+
+// =========================================================end
+// =========================================================start
+
+app.post("/bills/:id/bd", function(req, res) {
+
+    var total = req.body.total;
+    var cgst = req.body.cgst;
+    var sgst = req.body.sgst;
+    var tax = req.body.tax;
+    
+    console.log("__START__")
+    console.log(total)
+    console.log(cgst)
+    console.log(sgst)
+    console.log(tax)
+    console.log("__END__")
+
+    
+         Bill.findByIdAndUpdate({_id: req.params.id},{ $set:{total:total, cgst:cgst, sgst:sgst, tax:tax}}, { new:true}, function(err, newDetails){
+            if(err){
+                console.log(err)
+            } else {
+                console.log("details updated" + newDetails)
+            }
+             
+         })
+    
+})
+
+// =========================================================end
+
+
  
   // ==================================================================
  //API
@@ -588,8 +576,7 @@ app.post("/register", function(req, res) {
     
     
     
-    
-    
+
   //=========================================================================================================================                                    
  //  DESIGNED AND DEVELOPED BY "SUMIT ARYA" : "<ARYASUMIT145@GMAIL.COM>" "ALTUM Lab" "WWW.SUMITARYA.TK"
-//=========================================================================================================================                                    
+//===========================================================================================================================
