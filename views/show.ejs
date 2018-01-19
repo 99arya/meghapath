@@ -429,7 +429,9 @@
     </tr>
   </thead>
   <tbody>
-     <% bill.meals.forEach(function(list){ %> 
+     <% bill.meals.forEach(function(list){ %>
+
+      
     <tr>
       
       <td name="foodqty"><%= list.name %></td>
@@ -438,6 +440,8 @@
       <td class="money"><%= list.price %></td>
       <td name = "rate"><%= list.rate %></td>
     </tr>
+    
+    
     <% }); %>  
     
   </tbody>
@@ -464,53 +468,6 @@
   <!--<button onClick="download()">Download</button>-->
   <button style="margin-left:auto;margin-right:auto;display:block;margin-top:0%;margin-bottom:0%" onClick="download()" type="button" class="btn btn-info">Download PDF</button></div>
 
- 
-     <script>
-  
-     
-     $('#sendBill').click(function(){
-    
-          var meals = JSON.stringify(myList);
-          var total = $('#total_gross').text()
-          var cgst = $('#cgst').text()
-          var sgst = $('#sgst').text()
-          var tax = $('#tax').text()
-     var details = {total, cgst, sgst, tax}
-          console.log(details)
-          
-          
-          
-          
-    
-              $.post( "/bills/<%= bill._id %>", {meals} )
-                      .then(
-                                  
-                              
-                              $.post("/bills/<%= bill._id %>/bd", {total, cgst, sgst, tax})
-                                    .then(alert("succcess details"))
-                                )
-                              
-                          
-                      
-                      
-            
-            
-    
-        
-
-})
-
-    $('#details').click(function(){
-     var total = $('#total_gross').text()
-          var cgst = $('#cgst').text()
-          var sgst = $('#sgst').text()
-          var tax = $('#tax').text()
-
-          $.post("/bills/<%= bill._id %>/bd", {total, cgst, sgst, tax})
-                .then(printBill())
-            })
-     
-     </script>
      
       
             <div class="form-group">
@@ -553,7 +510,8 @@
 
     
 
-
 <script type="text/javascript" src="../js/main.js"></script>
 <script type="text/javascript" src="../js/alert.js"></script>
+
+
 <% include ./partials/footer %>

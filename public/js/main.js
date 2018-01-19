@@ -17,6 +17,8 @@ var kotMealList = []
 
 var myList=[]
 
+//  =======================================
+
 $(".card").on("click", function(){
  var mealid=$(this).data("id-value");
 
@@ -35,7 +37,7 @@ $(".card").on("click", function(){
      
           mealqty[mealname] = mealqty[mealname]+1;
           
-          $('#'+mealid).html('<td>' + mealname + '</td><th scope="row">'+ mealqty[mealname] +'</th><td>' + mealprice + '</td><td>' + mealprice*mealqty[mealname] + '</td>')
+          $('#'+mealid).html('<td>' + mealname + '</td><th scope="row"><span>'+ mealqty[mealname] +'</span> <span class = "del"><i class="fa fa-minus-circle" aria-hidden="true"></i></span></th><td>' + mealprice + '</td><td>' + mealprice*mealqty[mealname] + '</td>')
           
            var Qty=mealqty[mealname];
           
@@ -68,7 +70,7 @@ $(".card").on("click", function(){
           mealqty[mealname] = 1;
           
           
-          var newTab=$('<tr class="tableMealId" id ='+ mealid + '><td>' + mealname + '</td><th scope="row">'+ mealqty[mealname] +'</th><td>' + mealprice + '</td><td>' + mealprice*mealqty[mealname] + '</td></tr>')
+          var newTab=$('<tr class="tableMealId"  id ='+ mealid + '><td>' + mealname + '</td ><th scope="row"><span>' + mealqty[mealname] + '</span> <span class = "del"><i class="fa fa-minus-circle" aria-hidden="true"></i></span></th><td>' + mealprice + '</td><td>' + mealprice*mealqty[mealname] + '</td></tr>')
           newTab.data('id',mealid)
            $('#billtable').append(newTab)
           
@@ -91,21 +93,164 @@ $(".card").on("click", function(){
 
  }
  
+//  =======================================
+ 
+ 
+ $('span.del').unbind().click(function(event){
+     console.log(event.currentTarget)
+          console.log(event.target)
+
+     console.log("Event fired")
+                    var mealid = $(this).closest("tr").attr("id")
+                        console.log(mealid)
+     
+                     var span=$(this).parent().find("span").first();
+                        console.log("this- " + span.text())
+                        var qtyspan = span.text();
+                     
+                     var mealname=$(this).closest("tr").find("td").first().text();
+                        console.log(mealname)
+                     
+                      var mealprice=$(this).closest("tr").find("td").first().next().next().text();
+                        console.log(mealprice)
+    
+                    var mealrate = $(this).closest("tr").find("td").first().next().next().next().text();
+
+    
+  if(qtyspan==1){
+      console.log("IF Quantity = 1")
+      // Delete Row
+       $("#billtable tr#"+mealid).remove();
+
+            mealList = $.grep(mealList, function(e){ 
+                  return e.name != mealname; 
+                    });
+              
+      
+      // Delete object from myList 
+           myList = $.grep(myList, function(e){ 
+                  return e.name != mealname; 
+                    });
+              
+        //change total grosss amount accordingly in bill table
+    
+        var total = $('#total_gross').text()
+        var cgst = $('#cgst').text()
+        var sgst = $('#sgst').text()
+        var tax = $('#tax').text()
+        
+        var t = total - mealprice
+        $('#total_gross').text(t.toFixed(2)) 
+      
+        var c = cgst - (0.025*mealprice)      
+        $('#cgst').text(c.toFixed(2))
+        
+        var s = sgst - (0.025*mealprice)      
+        $('#sgst').text(s.toFixed(2))
+        
+        var ta = c + s;
+                    if(isNaN(ta)){
+                        ta=0
+                            }
+        $('#tax').text(ta.toFixed(2))
+        
+        
+        console.log("TA_ " + ta)
+                    
+      
+  } else {
+      
+      console.log("ELSE Quantity > 1")
+      // Decrement qty span
+      qtyspan = Number(qtyspan) - 1;
+      
+    span.text(qtyspan)
+    // change qty obj
+    
+      
+      // decreasing myObject.qty from myList
+        
+                myList = $.grep(myList, function(e){ 
+                    if(e.id==mealid){
+                        e.qty=Number(e.qty)-1;
+                    }
+                  return e; 
+                    });
+              
+        //change rate accordingly in myList
+        
+                myList = $.grep(myList, function(e){ 
+                    if(e.id==mealid){
+                        e.rate=Number(e.rate)-Number(mealprice);
+                    }
+                  return e; 
+                    });
+        
+        //change total grosss amount accordingly in bill table
+    
+        var total = $('#total_gross').text()
+        var t = total - mealprice
+        $('#total_gross').text(t) 
+        
+      //change html
+      
+            var nee = mealrate - mealprice
+                $(this).closest("tr").find("td").first().next().next().next().text(nee);
+                
+                   //change total grosss amount accordingly in bill table
+                
+                    var total = Number($('#total_gross').text())
+                    var cgst = Number($('#cgst').text())
+                    var sgst = Number($('#sgst').text())
+                    var tax = Number($('#tax').text())
+                    
+                    
+                  
+                    var c = cgst - (0.025*mealprice)      
+                    $('#cgst').text(c.toFixed(2))
+                    
+                    var s = sgst - (0.025*mealprice)      
+                    $('#sgst').text(s.toFixed(2))
+                    
+                    var ta =  (c + s);
+                    console.log("TA_ " + ta)
+                    if(isNaN(ta)){
+                        ta=0
+                    }
+                    
+                     $('#tax').text(ta.toFixed(2))
+                     console.log("C" + c)
+                     console.log("S" + s)
+                     console.log("T" + ta)
+
+  }
+
+})
+
+ //  =======================================
+ 
+ 
+ 
+ 
+ 
+ 
+ 
  
  
  
 if (kotMealList.includes(mealname)){
-  mealqty2[mealname] = mealqty2[mealname]+1;
+    
+          mealqty2[mealname] = mealqty2[mealname]+1;
+          
+          $('#'+mealid+'_a').html('<td>' + mealname + '</td><th scope="row">'+ mealqty2[mealname] +'</th>')
+          
+ } else {
   
-  $('#'+mealid+'_a').html('<td>' + mealname + '</td><th scope="row">'+ mealqty2[mealname] +'</th>')
-  }
- else {
-  
-  kotMealList.push(mealname);
-  mealqty2[mealname] = 1;
-  
-  $('#kottable').append('<tr id ='+ mealid+ '_a><td>' + mealname + '</td><th scope="row">'+ mealqty2[mealname] +'</th></tr>');
- 
+          kotMealList.push(mealname);
+          mealqty2[mealname] = 1;
+          
+          $('#kottable').append('<tr id ='+ mealid+ '_a><td>' + mealname + '</td><th scope="row">'+ mealqty2[mealname] +'</th></tr>');
+         
  }
 
 
@@ -131,17 +276,20 @@ var result = [];
   });
   
   $('table').append('<tr></tr>');
+  
+  
   $(result).each(function(){
+      
   	$('#total_forces').html(this.toFixed(2))
  
-  var cgst=this*0.025;
-     	$('#cgst').html(cgst.toFixed(2))
-
-  var sgst=this*0.025;
-     	$('#sgst').html(sgst.toFixed(2))
-var tax = cgst + sgst;
-  
- var pregsttotal = (this ).toFixed(2);
+        var cgst=this*0.025;
+         	$('#cgst').html(cgst.toFixed(2))
+    
+        var sgst=this*0.025;
+         	$('#sgst').html(sgst.toFixed(2))
+        var tax = cgst + sgst;
+      
+        var pregsttotal = (this ).toFixed(2);
 
    	$('#total_gross').html(pregsttotal)
     $('#tax').html(tax.toFixed(2))
@@ -219,9 +367,3 @@ $('#delkot').on('click',function(e){
       });
       
           
-
-    
-
-
-
-
