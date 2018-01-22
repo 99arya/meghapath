@@ -63,10 +63,8 @@
   <li class="list-group-item active">Order Number : <b id="orderNumber" ><%= bill.bn %> </b></li>
   <li class="list-group-item">Table Number : <b id="tableNumber" ><%= bill.tablenumber %></b></li>
   <li class="list-group-item">Waiter Name : <b id="waiterName" ><%= bill.waitername %></b></li>
-  <li class="list-group-item">User Name : <b id="userName" ><%= bill.username %></b></li>
-  <li data-oid="<%= bill._id %>" id="oid" class="list-group-item">Order id : <b><%= bill._id %></b></li>
-</ul><br><h4 style="text-align: center; " >Add a New Meal to Order Number <%= bill.bn %></h4><br>
-            
+</ul>
+           
      
                 <!--==============================START===================-->
 
@@ -221,7 +219,7 @@
             </div>
             <% } %>
         <% }); %>
-        <hr>
+        
         
         
     </div>
@@ -425,9 +423,10 @@
  <!--SHOW ITEMS IN BILL-->
  <!--========================================================================================-->
          <div class="col-lg-4 col-sm-10 col-md-10">
-            
+
     <div id ="billdiv" >
-        <hr>
+
+        <br>
         
         <p class = "text-center billp" ><b><%= currentUser.restoname %></b></p>
          <p class = "text-center billp" ><%= currentUser.add1  %></p>
@@ -446,9 +445,11 @@
           
           <hr id="billtablemargin">
           
-    <li class="il">Waiter Name : <%= bill.waitername %><span class="right"> Order No. : <%= bill.bn %></span></li>
+    <li class="il"><b>Waiter Name: </b><%= bill.waitername %><span class="right"> <b>Order No.:</b> <%= bill.bn %></span></li>
+    <li class="il dates" style="margin-top:0.8em; margin-bottom:0.8em; line-height:2px;" ><b>Date: </b> <%= bill.created %></li>
+
+    <li class="il dates"><b>Bill ID: </b><%= bill._id %></li>
    
-   <p class="il" id="dates" style="margin-top:0.8em; line-height:2px;" ><%= bill.created %></p>
     <!--<li class="il" id="asd"><span class="right">Date: <%= bill.created %> </span></li>-->
 
          
@@ -495,9 +496,10 @@
         <!--<p style="display:inline ">Total:</p><span>   </span><p style="display:inline" id="total_forces"></p>            -->
     
     
-       <br><hr><p class="text-center">SCAN THIS QR CODE ⇊ LIKE US ON FACEBOOK</p><img id="fb" src="https://lh3.googleusercontent.com/wGpOYLQ-QVqsgV5cznD_QwUQt9nfe7_qFKZDDVaQoBPzKTLxyNt0d0hH0sCUkyCnQK7pNgZik52wlnl4bFLu4boiFJ015JrnOBmh9Ds2UzTE9TZ3l9E9ATfxiSe-uZ2QJR83PnzukSuppe58SWAFAFEcu7qEyzrIZbxiKeCgR8oNqAgnAOICAyE7EXw6SRRCyHoRs2trR0B9lwg09IkYtfSSKlEkiAuFVyeM938_dXgJ8lb1X9QA1zzecyi5VrxxaCI_rtQZFfwMnXZuCNKsfkh-JgEQbVaxTrFgyBSqbZq87MN7wODA8_6ifpKNlhblrN4PltG_wHDORLbCRWTO-hUPlfmMoiY0ct_MTLveGHdaBU2gaqzKP9viBbwQaBfI22WlBwhxPst4ZOAd9uEjMmufk4NHyxTiD4DVEk8wR2xAtbQA8xy4Bfl7ckTJdIrv6tOu65hCZHNT79cmfcFXjEfprU3a0Jv6z0FWRwR3XOtrdDdTOuqC7Rr6yEAVNAnPWnOiyrC4usQXVDhr51uvrKJomLzbCOp5ewNA995zKyl0-lztJY23WiLQo_RJlvnTNe0nnYPteB_oacc_b4nWRMdPo8aYzO8Hp9RD6Hn0FWao2XlITR1qPLVY95iNo9DlnVO3qBYSf7KU0y1kOCiGamxnjaDVypz8jg=s328-no" class="img-thumbnail">
+       <hr><p class="text-center">SCAN THIS QR CODE ⇊ LIKE US ON FACEBOOK</p><img id="fb" src="https://lh3.googleusercontent.com/wGpOYLQ-QVqsgV5cznD_QwUQt9nfe7_qFKZDDVaQoBPzKTLxyNt0d0hH0sCUkyCnQK7pNgZik52wlnl4bFLu4boiFJ015JrnOBmh9Ds2UzTE9TZ3l9E9ATfxiSe-uZ2QJR83PnzukSuppe58SWAFAFEcu7qEyzrIZbxiKeCgR8oNqAgnAOICAyE7EXw6SRRCyHoRs2trR0B9lwg09IkYtfSSKlEkiAuFVyeM938_dXgJ8lb1X9QA1zzecyi5VrxxaCI_rtQZFfwMnXZuCNKsfkh-JgEQbVaxTrFgyBSqbZq87MN7wODA8_6ifpKNlhblrN4PltG_wHDORLbCRWTO-hUPlfmMoiY0ct_MTLveGHdaBU2gaqzKP9viBbwQaBfI22WlBwhxPst4ZOAd9uEjMmufk4NHyxTiD4DVEk8wR2xAtbQA8xy4Bfl7ckTJdIrv6tOu65hCZHNT79cmfcFXjEfprU3a0Jv6z0FWRwR3XOtrdDdTOuqC7Rr6yEAVNAnPWnOiyrC4usQXVDhr51uvrKJomLzbCOp5ewNA995zKyl0-lztJY23WiLQo_RJlvnTNe0nnYPteB_oacc_b4nWRMdPo8aYzO8Hp9RD6Hn0FWao2XlITR1qPLVY95iNo9DlnVO3qBYSf7KU0y1kOCiGamxnjaDVypz8jg=s328-no" class="img-thumbnail">
       <!--https://photos.google.com/share/AF1QipOfX0Q45p09vNr4zcpciNxzthegIYQMigvf8Kmi3mJ3GlK_qHuQ7JlGi1ROU5kh0A/photo/AF1QipO-7vEN9q_2AnEciij8Z5Uy_XJUjq9iQh68_7sC?key=WUJmLUJSXzZhbWhaU2MzUUtXQklKbElMdTJlUXV3-->
  <p class = "text-center" >Come again another day</p><hr>
+ <p class = "text-center" style="font-size:10px;" >Billing system developed by Altum Lab - AryaSumit145@gmail.com</p><hr>
   </div>
 <br>
  <div class="form-group">
@@ -526,7 +528,7 @@
                                   
                               
                               $.post("/bills/<%= bill._id %>/bd", {total, cgst, sgst, tax})
-                                    .then(alert("succcess details"))
+                                    .done(alert("BILL SAVED!"))
                                 )
        
 

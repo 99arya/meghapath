@@ -78,23 +78,21 @@ var Meal = mongoose.model("Meal", mealSchema);
 
 
 
-  //=========================================================================================================================                                    
- //  MEAL MODEL AND SCHEMA
-//=========================================================================================================================                                    
 
 
-var listSchema = new mongoose.Schema({
+
+// var listSchema = new mongoose.Schema({
     
-    name:String,
-    qty:String,
-    id:String,
-    price:String,
-    rate:String
+//     name:String,
+//     qty:String,
+//     id:String,
+//     price:String,
+//     rate:String
      
             
-    });
+//     });
 
-var List = mongoose.model("List", listSchema);
+// var List = mongoose.model("List", listSchema);
 
 
 
@@ -136,7 +134,70 @@ var billSchema = new mongoose.Schema({
 var Bill = mongoose.model("Bill", billSchema);
     
 
+  //=========================================================================================================================                                    
+ //  FEEDBACK MODEL AND SCHEMA
+//=========================================================================================================================                                    
 
+var feedbackSchema = new mongoose.Schema({
+    created: {type: Date, default: Date.now},
+    custName: String,
+    custPhone: String,
+    orderNumber: String,
+    comment: String
+    
+    
+    
+})
+
+var Feedback = mongoose.model("Feedback", feedbackSchema)
+
+
+  //=========================================================================================================================                                    
+ //  FEEDBACK GET AND POST ROUTES
+//=========================================================================================================================                                    
+
+app.get("/feedback", function(req, res) {
+    res.render("feedback")
+})
+
+app.post("/feedback", function(req, res) {
+    
+    var custName = req.body.custName;
+    var custPhone = req.body.custPhone;
+    var orderNumber = req.body.orderNumber;
+    var comment = req.body.comment;
+    
+    var newFeedback = new Feedback({custName:custName, custPhone:custPhone, orderNumber:orderNumber, comment:comment })
+    
+    Feedback.create(newFeedback, function(err, feedback) {
+        if(err){
+            console.log(err)
+        } else {
+            newFeedback.save(function(err, feedback){
+                if(err){
+                    console.log(err)
+                } else {
+                    res.json("FEEDBACK SAVED")
+                }
+            })
+    }
+    
+})
+
+})
+        
+        app.get("/feedbacks", function(req, res) {
+            
+            Feedback.find(function(err, allFeedbacks){
+            if(err){
+                console.log(err);
+            } else {
+                res.render("feedbacks",{feedbacks:allFeedbacks, currentUser:req.user}); 
+          
+            }
+        })
+            
+        })
 
 
   //=========================================================================================================================                                    
@@ -291,7 +352,9 @@ app.post("/newbill",  isLoggedIn, function(req, res){
             
              
             
-        });});
+        });
+        
+        });
                 });
     
         

@@ -129,13 +129,14 @@
     background-color: #f9fbff;
     padding: 10px;
     border-radius: 25px;
+    /*font-family:"fake_receiptregular";*/
     
 }
 
 
 
-#dates{
-    font-size: 12px;
+.dates{
+    font-size: 14px;
 }
 #kotdiv{
     background-color: #f9fbff;
@@ -187,3 +188,14 @@ a:hover
     
     
 }
+
+
+@font-face {
+    font-family: 'fake_receiptregular';
+    src: url('fake_receipt-webfont.woff2') format('woff2'),
+         url('fake_receipt-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+

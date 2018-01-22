@@ -1,0 +1,64 @@
+<% include ./partials/header %>
+
+
+
+<body>
+    
+    <div id="content">
+        
+     
+     <div class='container fluid'>
+    <h1>FEEDBACKS</h1> 
+        
+            <% feedbacks.forEach(function(feedback){ %>
+            <br><hr><br>
+            
+            <ul class="list-group">
+              <li class="list-group-item disabled"><b>Order Number: </b><%= feedback.orderNumber %></li>
+              <li class="list-group-item"><b>Customer Name: </b><%= feedback.custName %></li>
+              <li class="list-group-item"><b>Customer Phone Number: </b><%= feedback.custPhone %></li>
+              <li class="list-group-item"><b>Comment: </b><%= feedback.comment %></li>
+              <li class="list-group-item"><b>Date: </b><%= feedback.created %></li>
+            </ul>
+                        
+            
+        <% }); %>
+    </div>
+   </div>
+   
+    <style>
+        .meal-card{
+            padding:1.5%;
+            display:flex;
+        }
+        
+        .newforms {
+    margin-bottom: 1em;
+}
+
+.newforms {
+    display: block;
+    padding:2em;
+    margin-top: 0em;
+}
+    </style>
+
+    
+
+<style>
+    @media (min-width:320px)  {
+    /* smartphones, iPhone, portrait 480x320 phones */ 
+    #content{
+        margin-top: 4em;
+    }
+    
+    .meal-card{
+        margin-left: 4em;
+    }
+    
+
+    
+}
+</style>
+
+<% include ./partials/footer %>

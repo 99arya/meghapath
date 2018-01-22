@@ -190,7 +190,7 @@ $(".card").on("click", function(){
     
         var total = $('#total_gross').text()
         var t = total - mealprice
-        $('#total_gross').text(t) 
+        $('#total_gross').text(t.toFixed(2)) 
         
       //change html
       
