@@ -76,23 +76,28 @@ var Meal = mongoose.model("Meal", mealSchema);
 
 
 
+  //=========================================================================================================================                                    
+ //  LIST MODEL AND SCHEMA
+//=========================================================================================================================                                    
 
-
-
-
-
-// var listSchema = new mongoose.Schema({
     
-//     name:String,
-//     qty:String,
-//     id:String,
-//     price:String,
-//     rate:String
+
+
+
+
+
+var listSchema = new mongoose.Schema({
+    
+    name:String,
+    qty:String,
+    id:String,
+    price:String,
+    rate:String
      
             
-//     });
+    });
 
-// var List = mongoose.model("List", listSchema);
+var List = mongoose.model("List", listSchema);
 
 
 
@@ -113,6 +118,7 @@ var billSchema = new mongoose.Schema({
     cgst: Number,
     sgst: Number,
     tax: Number,
+    pm: String,
    
     
     meals: [{
@@ -140,6 +146,7 @@ var Bill = mongoose.model("Bill", billSchema);
 
 var feedbackSchema = new mongoose.Schema({
     created: {type: Date, default: Date.now},
+    fn: Number,
     custName: String,
     custPhone: String,
     orderNumber: String,
@@ -157,17 +164,44 @@ var Feedback = mongoose.model("Feedback", feedbackSchema)
 //=========================================================================================================================                                    
 
 app.get("/feedback", function(req, res) {
-    res.render("feedback")
-})
+    
+    Feedback.count(function(err, count){
+        if(err){
+            console.log(err)
+        }
+        console.log("feedback count - " + count)
+        res.render("feedback", {currentUser:req.user, error:req.flash("error"), success:req.flash("success") })
+            ;});
+         });
+
+    
+    
+    // res.render("feedback")
+
+
+
+
 
 app.post("/feedback", function(req, res) {
     
+    
+    Feedback.count(function(err, count){
+        if(err){
+            console.log(err)
+        } else {
+        
+            console.log("old -" + count)
+    
+    
+    var fn = count + 1;
     var custName = req.body.custName;
     var custPhone = req.body.custPhone;
     var orderNumber = req.body.orderNumber;
     var comment = req.body.comment;
     
-    var newFeedback = new Feedback({custName:custName, custPhone:custPhone, orderNumber:orderNumber, comment:comment })
+    var newFeedback = new Feedback({fn:fn, custName:custName, custPhone:custPhone, orderNumber:orderNumber, comment:comment })
+    
+    console.log("new -" + fn)
     
     Feedback.create(newFeedback, function(err, feedback) {
         if(err){
@@ -177,12 +211,25 @@ app.post("/feedback", function(req, res) {
                 if(err){
                     console.log(err)
                 } else {
-                    res.json("FEEDBACK SAVED")
+                    res.json("FEEDBACK SAVED" + feedback);
+                    console.log(feedback)
                 }
             })
-    }
+            
+        }
+    })
+            
+            
+            
+            
+            
+        }      
+    })
     
-})
+    
+    
+    
+
 
 })
         
@@ -453,12 +500,15 @@ app.post("/bills/:id", function(req, res) {
     
     
     var myList = req.body;
-    // console.log(myList)
+    
     var arr = myList.meals;
     var arr2 = JSON.parse(arr)
-    //console.log(arr2);
+    
     var billId = req.params.id;
     var myarray = [];
+    
+    
+    
     for(var i=0 ; i < arr2.length; i++ )
     {
         console.log(arr2[i])
@@ -475,8 +525,9 @@ app.post("/bills/:id", function(req, res) {
             console.log(err)
         } else {
             
-   
-            console.log("___" + myListObj + "___" );
+                  
+            console.log("success___" + list + "___" );
+            
         }
         
         
@@ -485,8 +536,15 @@ app.post("/bills/:id", function(req, res) {
    
     
 });
+
+                  
         
-    }})
+    }//for
+    
+   
+    
+    
+})
 
 
 
@@ -500,16 +558,18 @@ app.post("/bills/:id/bd", function(req, res) {
     var cgst = req.body.cgst;
     var sgst = req.body.sgst;
     var tax = req.body.tax;
+    var pm = req.body.pm;
     
     console.log("__START__")
     console.log(total)
     console.log(cgst)
     console.log(sgst)
     console.log(tax)
+    console.log(pm)
     console.log("__END__")
 
     
-         Bill.findByIdAndUpdate({_id: req.params.id},{ $set:{total:total, cgst:cgst, sgst:sgst, tax:tax}}, { new:true}, function(err, newDetails){
+         Bill.findByIdAndUpdate({_id: req.params.id},{ $set:{total:total, cgst:cgst, sgst:sgst, tax:tax, pm:pm }}, { new:true}, function(err, newDetails){
             if(err){
                 console.log(err)
             } else {

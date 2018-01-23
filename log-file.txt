@@ -1,0 +1,94 @@
+Sumit's Server started! App is running on PORT : 8080
+Total matches: 47
+{ __v: 0,
+  bn: 44,
+  tablenumber: 3,
+  waitername: 'f',
+  username: 'Sumit145',
+  _id: 5a66f5cee5f9ec0f3cd9cc80,
+  meals: [],
+  created: 2018-01-23T08:43:58.831Z }
+{ __v: 0,
+  bn: 44,
+  tablenumber: 3,
+  waitername: 'f',
+  username: 'Sumit145',
+  _id: 5a66f5cee5f9ec0f3cd9cc80,
+  meals: [],
+  created: 2018-01-23T08:43:58.831Z }
+{ name: 'Dal Tadka',
+  qty: 1,
+  id: '5a609f6994a4860e5d8d4430',
+  price: 150,
+  rate: 150 }
+{ name: 'Chana Masala',
+  qty: 1,
+  id: '5a609f4c94a4860e5d8d442f',
+  price: 180,
+  rate: 180 }
+__START__
+330.00
+8.25
+8.25
+16.50
+Cash
+__END__
+success___{ _id: 5a66f5cee5f9ec0f3cd9cc80,
+  bn: 44,
+  tablenumber: 3,
+  waitername: 'f',
+  username: 'Sumit145',
+  __v: 0,
+  meals: 
+   [ { name: 'Dal Tadka',
+       qty: 1,
+       id: '5a609f6994a4860e5d8d4430',
+       price: '150',
+       rate: '150',
+       _id: 5a66f5d7e5f9ec0f3cd9cc81 } ],
+  created: 2018-01-23T08:43:58.831Z }___
+success___{ _id: 5a66f5cee5f9ec0f3cd9cc80,
+  bn: 44,
+  tablenumber: 3,
+  waitername: 'f',
+  username: 'Sumit145',
+  __v: 0,
+  meals: 
+   [ { name: 'Dal Tadka',
+       qty: 1,
+       id: '5a609f6994a4860e5d8d4430',
+       price: '150',
+       rate: '150',
+       _id: 5a66f5d7e5f9ec0f3cd9cc81 },
+     { name: 'Chana Masala',
+       qty: 1,
+       id: '5a609f4c94a4860e5d8d442f',
+       price: '180',
+       rate: '180',
+       _id: 5a66f5d7e5f9ec0f3cd9cc82 } ],
+  created: 2018-01-23T08:43:58.831Z }___
+details updated{ _id: 5a66f5cee5f9ec0f3cd9cc80,
+  bn: 44,
+  tablenumber: 3,
+  waitername: 'f',
+  username: 'Sumit145',
+  __v: 0,
+  pm: 'Cash',
+  tax: 16.5,
+  sgst: 8.25,
+  cgst: 8.25,
+  total: 330,
+  meals: 
+   [ { name: 'Dal Tadka',
+       qty: 1,
+       id: '5a609f6994a4860e5d8d4430',
+       price: '150',
+       rate: '150',
+       _id: 5a66f5d7e5f9ec0f3cd9cc81 },
+     { name: 'Chana Masala',
+       qty: 1,
+       id: '5a609f4c94a4860e5d8d442f',
+       price: '180',
+       rate: '180',
+       _id: 5a66f5d7e5f9ec0f3cd9cc82 } ],
+  created: 2018-01-23T08:43:58.831Z }

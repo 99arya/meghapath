@@ -492,22 +492,39 @@
     <li class="il"> C GST @ 2.5% : <span class="right"> Rs. <p style="display:inline" id="cgst"><%=bill.cgst%></p></span></li>
     <li class="il"> S GST @ 2.5% : <span class="right"> Rs. <p style="display:inline" id="sgst"><%=bill.sgst%></p></span></li>
     <li class="il"> Total Tax : <span class="right"> Rs. <p style="display:inline" id="tax"><%=bill.tax%></p></span></li>
+    <li class="il"> Payment Method : <span class="right"> <p style="display:inline" id="tax"><%=bill.pm%></p></span></li>
+
+        
 
         <!--<p style="display:inline ">Total:</p><span>   </span><p style="display:inline" id="total_forces"></p>            -->
+        
     
-    
-       <hr><p class="text-center">SCAN THIS QR CODE ⇊ LIKE US ON FACEBOOK</p><img id="fb" src="https://lh3.googleusercontent.com/wGpOYLQ-QVqsgV5cznD_QwUQt9nfe7_qFKZDDVaQoBPzKTLxyNt0d0hH0sCUkyCnQK7pNgZik52wlnl4bFLu4boiFJ015JrnOBmh9Ds2UzTE9TZ3l9E9ATfxiSe-uZ2QJR83PnzukSuppe58SWAFAFEcu7qEyzrIZbxiKeCgR8oNqAgnAOICAyE7EXw6SRRCyHoRs2trR0B9lwg09IkYtfSSKlEkiAuFVyeM938_dXgJ8lb1X9QA1zzecyi5VrxxaCI_rtQZFfwMnXZuCNKsfkh-JgEQbVaxTrFgyBSqbZq87MN7wODA8_6ifpKNlhblrN4PltG_wHDORLbCRWTO-hUPlfmMoiY0ct_MTLveGHdaBU2gaqzKP9viBbwQaBfI22WlBwhxPst4ZOAd9uEjMmufk4NHyxTiD4DVEk8wR2xAtbQA8xy4Bfl7ckTJdIrv6tOu65hCZHNT79cmfcFXjEfprU3a0Jv6z0FWRwR3XOtrdDdTOuqC7Rr6yEAVNAnPWnOiyrC4usQXVDhr51uvrKJomLzbCOp5ewNA995zKyl0-lztJY23WiLQo_RJlvnTNe0nnYPteB_oacc_b4nWRMdPo8aYzO8Hp9RD6Hn0FWao2XlITR1qPLVY95iNo9DlnVO3qBYSf7KU0y1kOCiGamxnjaDVypz8jg=s328-no" class="img-thumbnail">
+       <hr ><p class="text-center">SCAN THIS QR CODE ⇊ LIKE US ON FACEBOOK</p><img id="fb" src="https://lh3.googleusercontent.com/wGpOYLQ-QVqsgV5cznD_QwUQt9nfe7_qFKZDDVaQoBPzKTLxyNt0d0hH0sCUkyCnQK7pNgZik52wlnl4bFLu4boiFJ015JrnOBmh9Ds2UzTE9TZ3l9E9ATfxiSe-uZ2QJR83PnzukSuppe58SWAFAFEcu7qEyzrIZbxiKeCgR8oNqAgnAOICAyE7EXw6SRRCyHoRs2trR0B9lwg09IkYtfSSKlEkiAuFVyeM938_dXgJ8lb1X9QA1zzecyi5VrxxaCI_rtQZFfwMnXZuCNKsfkh-JgEQbVaxTrFgyBSqbZq87MN7wODA8_6ifpKNlhblrN4PltG_wHDORLbCRWTO-hUPlfmMoiY0ct_MTLveGHdaBU2gaqzKP9viBbwQaBfI22WlBwhxPst4ZOAd9uEjMmufk4NHyxTiD4DVEk8wR2xAtbQA8xy4Bfl7ckTJdIrv6tOu65hCZHNT79cmfcFXjEfprU3a0Jv6z0FWRwR3XOtrdDdTOuqC7Rr6yEAVNAnPWnOiyrC4usQXVDhr51uvrKJomLzbCOp5ewNA995zKyl0-lztJY23WiLQo_RJlvnTNe0nnYPteB_oacc_b4nWRMdPo8aYzO8Hp9RD6Hn0FWao2XlITR1qPLVY95iNo9DlnVO3qBYSf7KU0y1kOCiGamxnjaDVypz8jg=s328-no" class="img-thumbnail">
       <!--https://photos.google.com/share/AF1QipOfX0Q45p09vNr4zcpciNxzthegIYQMigvf8Kmi3mJ3GlK_qHuQ7JlGi1ROU5kh0A/photo/AF1QipO-7vEN9q_2AnEciij8Z5Uy_XJUjq9iQh68_7sC?key=WUJmLUJSXzZhbWhaU2MzUUtXQklKbElMdTJlUXV3-->
  <p class = "text-center" >Come again another day</p><hr>
  <p class = "text-center" style="font-size:10px;" >Billing system developed by Altum Lab - AryaSumit145@gmail.com</p><hr>
   </div>
 <br>
  <div class="form-group">
-  <button style="margin-left:auto;margin-right:auto;display:block;margin-top:0%;margin-bottom:0%"  id="sendBill" type="button" class="btn btn-success">Upload Bill</button><br>
+     <p class="ilm"><b>Payment Method </b> 
+        <span class="right">
+                <select  style="display:inline" class="form-control" id="payment">
+                  <option id="cash">Cash</option>
+                  <option id="cash" >Card</option>
+                  <option id="electronic">Electronic</option>
+                  
+                  
+                </select></span></p><br>
+  <button style="margin-left:auto;margin-right:auto;display:block;margin-top:0%;margin-bottom:0%"  id="sendBill" type="button" class="btn btn-lg btn-success btn-block">Upload Bill</button><br>
    <div class="form-group">
   <!--<button onClick="download()">Download</button>-->
-  <button style="margin-left:auto;margin-right:auto;display:block;margin-top:0%;margin-bottom:0%" onClick="download()" type="button" class="btn btn-info">Download PDF</button></div>
+  <button style="margin-left:auto;margin-right:auto;display:block;margin-top:0%;margin-bottom:0%" onClick="download()" type="button" class="btn btn-lg btn-info btn-block">Download PDF</button></div>
 
+    <div class="form-group">
+            <button id="printbill" class="btn btn-lg btn-primary btn-block" >Print Bill</button>
+            </div>
+   
+   
  
      <script>
   
@@ -519,7 +536,9 @@
           var cgst = $('#cgst').text()
           var sgst = $('#sgst').text()
           var tax = $('#tax').text()
-     var details = {total, cgst, sgst, tax}
+          var pm = $('#payment').find(":selected").text();
+
+     var details = {total, cgst, sgst, tax, pm}
           console.log(details)
           
    
@@ -527,8 +546,8 @@
                       .then(
                                   
                               
-                              $.post("/bills/<%= bill._id %>/bd", {total, cgst, sgst, tax})
-                                    .done(alert("BILL SAVED!"))
+                              $.post("/bills/<%= bill._id %>/bd", {total, cgst, sgst, tax, pm})
+                                    .then(console.log("BILL SAVED!"))
                                 )
        
 
@@ -539,9 +558,7 @@
      </script>
      
       
-            <div class="form-group">
-            <button id="printbill" class="btn btn-lg btn-primary btn-block" >Print Bill</button>
-            </div> 
+             
  </form>
   
   </div>

@@ -83,6 +83,12 @@
 .il{
    list-style: none; 
 }
+
+#hrAbovePayment{
+   list-style: none; 
+       margin-top: 30px;
+}
+
 #billtable{
     margin-top: 20px;
 }
