@@ -138,6 +138,90 @@ var billSchema = new mongoose.Schema({
     });
 
 var Bill = mongoose.model("Bill", billSchema);
+
+  // ===================================================
+ //  Contact model and schema
+//======================================================
+
+var contactSchema = new mongoose.Schema({
+    created: {type: Date, default: Date.now},
+    name: String,
+    email: String,
+    subject: String,
+    mobile: String,
+    message: String,
+    cn: Number
+})
+    
+    var Contact = mongoose.model("Contact", contactSchema)
+    
+    
+    // =========
+    
+app.post("/contact", function(req, res) {
+    
+    
+    Contact.count(function(err, count){
+        if(err){
+            console.log(err)
+        } else {
+        
+            console.log("old -" + count)
+    
+    
+    var cn = count + 1;
+    var name = req.body.name;
+    var email = req.body.email;
+    var subject = req.body.subject;
+    var mobile = req.body.mobile;
+    var message = req.body.message;
+    
+    var newContact = new Contact({cn:cn, name:name, email:email, subject:subject, mobile:mobile, message:message })
+    
+    console.log("new -" + cn)
+    
+    Contact.create(newContact, function(err, contact) {
+        if(err){
+            console.log(err)
+        } else {
+            newContact.save(function(err, contact){
+                if(err){
+                    console.log(err)
+                } else {
+                    res.json("contact SAVED" + contact);
+                    console.log(contact)
+                }
+            })
+            
+        }
+    })
+            
+            
+            
+            
+            
+        }      
+    })
+    
+   
+
+})
+    
+   
+        app.get("/contacts", function(req, res) {
+            
+            Contact.find(function(err, allContacts){
+            if(err){
+                console.log(err);
+            } else {
+                res.render("contacts",{contacts:allContacts, currentUser:req.user}); 
+          
+            }
+        })
+            
+        })
+ 
+    
     
 
   //=========================================================================================================================                                    
@@ -157,6 +241,8 @@ var feedbackSchema = new mongoose.Schema({
 })
 
 var Feedback = mongoose.model("Feedback", feedbackSchema)
+
+
 
 
   //=========================================================================================================================                                    
@@ -526,7 +612,7 @@ app.post("/bills/:id", function(req, res) {
         } else {
             
                   
-            console.log("success___" + list + "___" );
+            console.log("___" + list + "___" );
             
         }
         

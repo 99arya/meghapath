@@ -26,6 +26,7 @@
     "moment": "^2.20.1",
     "mongoose": "^4.13.5",
     "mongoose-auto-increment": "^5.0.1",
+    "nodemailer": "^4.4.2",
     "nodemon": "^1.14.11",
     "npmlog": "^4.1.2",
     "passport": "^0.4.0",

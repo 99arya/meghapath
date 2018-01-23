@@ -1,0 +1,66 @@
+<% include ./partials/header %>
+
+
+
+<body>
+    
+    <div id="content">
+        
+     
+     <div class='container fluid'>
+    <h1>MESSAGES</h1> 
+        
+            <% contacts.forEach(function(contact){ %>
+            <br><hr><br>
+            
+            <ul class="list-group">
+              <li class="list-group-item"><b>Message Number: </b><%= contact.cn %></li>
+              <li class="list-group-item"><b>Name: </b><%= contact.name %></li>
+              <li class="list-group-item"><b>E-Mail: </b><%= contact.email %></li>
+              <li class="list-group-item"><b>Customer Phone Number: </b><%= contact.mobile %></li>
+              <li class="list-group-item"><b>Subject: </b><%= contact.subject %></li>
+              <li class="list-group-item"><b>Message: </b><%= contact.message %></li>
+              <li class="list-group-item"><b>Date: </b><%= contact.created %></li>
+            </ul>
+                        
+            
+        <% }); %>
+    </div>
+   </div>
+   
+    <style>
+        .meal-card{
+            padding:1.5%;
+            display:flex;
+        }
+        
+        .newforms {
+    margin-bottom: 1em;
+}
+
+.newforms {
+    display: block;
+    padding:2em;
+    margin-top: 0em;
+}
+    </style>
+
+    
+
+<style>
+    @media (min-width:320px)  {
+    /* smartphones, iPhone, portrait 480x320 phones */ 
+    #content{
+        margin-top: 4em;
+    }
+    
+    .meal-card{
+        margin-left: 4em;
+    }
+    
+
+    
+}
+</style>
+
+<% include ./partials/footer %>
