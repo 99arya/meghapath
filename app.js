@@ -119,6 +119,16 @@ var billSchema = new mongoose.Schema({
     sgst: Number,
     tax: Number,
     pm: String,
+    
+    feedback: [{
+        created: {type: Date, default: Date.now},
+        fn: Number,
+        custName: String,
+        custPhone: String,
+        orderNumber: String,
+        comment: String
+        
+    }],
    
     
     meals: [{
@@ -263,6 +273,32 @@ app.get("/feedback", function(req, res) {
     
     
     // res.render("feedback")
+// =====================
+app.get("/feedback/:id", function(req, res) {
+    
+    var billId = req.params.id;
+    
+    Feedback.count(function(err, count){
+        if(err){
+            console.log(err)
+        }
+        
+        Bill.findById({_id:billId}, function(err, foundBill){
+            if(err){
+                console.log(err)
+            } else {
+                console.log("HAHA" + foundBill)
+                console.log("feedback count - " + count)
+                 res.render("feedback", {bill:foundBill, currentUser:req.user, error:req.flash("error"), success:req.flash("success") })
+           
+                
+                
+            }
+        })
+        
+        
+         ;});
+         });
 
 
 
@@ -318,7 +354,186 @@ app.post("/feedback", function(req, res) {
 
 
 })
+        // ==================test start
         
+
+
+// app.post("/feedback/:id", function(req, res) {
+    
+    
+//     Feedback.count(function(err, count){
+//         if(err){
+//             console.log(err)
+//         } else {
+        
+//             console.log("old -" + count)
+    
+    
+//     var fn = count + 1;
+//     var custName = req.body.custName;
+//     var custPhone = req.body.custPhone;
+//     var orderNumber = req.body.orderNumber;
+//     var comment = req.body.comment;
+//     var billId = req.params.id;
+    
+//     var newFeedback = new Feedback({fn:fn, custName:custName, custPhone:custPhone, orderNumber:orderNumber, comment:comment })
+    
+//     console.log("new -" + fn)
+    
+    
+    
+
+    
+//     //=====create start
+//     Feedback.create(newFeedback, function(err, feedback) {
+//         if(err){
+//             console.log(err)
+//         } else {
+//             newFeedback.save(function(err, feedback){
+//                 if(err){
+//                     console.log(err)
+//                 } else {
+//                     res.json("FEEDBACK SAVED" + feedback);
+//                     console.log(feedback)
+                    
+                    
+                    
+                        
+//      Bill.findById({_id: req.params.id},{ $push:{feedback:newFeedback}}, { new:true, upsert:true }, function(err, bill, newFeedback){
+//           if(err){
+//               console.log("cho " + err)
+//           } else {
+//               console.log(bill)
+//               console.log("details updated" + newFeedback)
+        
+    
+                    
+                    
+//                 }
+//             })
+            
+//         }
+//     })
+         
+//          //=====create end
+         
+         
+         
+//           } //
+
+//       }) //===bill.update end
+            
+            
+            
+            
+            
+//         }      
+//     }) 
+//     //====count end
+    
+    
+    
+    
+
+
+// })
+
+//===post end
+        
+        
+        
+        // ===================test end
+        
+        // ============================TEST START
+        
+        
+
+app.post("/feedback/:id", function(req, res) {
+    
+    
+    Feedback.count(function(err, count){
+        if(err){
+            console.log(err)
+        } else {
+        
+            console.log("old -" + count)
+    
+
+    
+    
+    
+            
+                    
+                    
+                        
+     Bill.findById({_id: req.params.id},  function(err, bill){
+          if(err){
+              console.log("cho " + err)
+          } else {
+              console.log("found bill " + bill)
+             
+            
+                 
+                var fn = count + 1;
+                var custName = req.body.custName;
+                var custPhone = req.body.custPhone;
+                var orderNumber = req.body.orderNumber;
+                var comment = req.body.comment;
+                var billId = req.params.id;
+                
+                var newFeedback = new Feedback({fn:fn, custName:custName, custPhone:custPhone, orderNumber:orderNumber, comment:comment })
+                
+                console.log("new -" + fn)
+                
+                
+                console.log("xyz " + newFeedback)
+                
+                    Feedback.create(newFeedback, function(err, feedback) {
+                        if(err){
+                            console.log(err)
+                        } else {
+                            feedback.save();
+                            bill.feedback.push(feedback);
+                            bill.save()
+                            console.log("done " )
+                            req.flash("success", "Feedback Saved")
+                            res.redirect("/")
+                        }
+                    })
+    
+                    
+                    
+                }
+            })
+            
+        }
+    })
+         
+         //=====create end
+         
+         
+        //===bill.update end
+            
+            
+            
+            
+            
+            
+   
+    //====count end
+    
+    
+    
+    
+
+
+})
+        
+        // ============================TEST END
+        
+        
+        
+        // ==================
         app.get("/feedbacks", function(req, res) {
             
             Feedback.find(function(err, allFeedbacks){

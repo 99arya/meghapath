@@ -499,9 +499,10 @@
         <!--<p style="display:inline ">Total:</p><span>   </span><p style="display:inline" id="total_forces"></p>            -->
         
     
-       <hr ><p class="text-center">SCAN THIS QR CODE ⇊ LIKE US ON FACEBOOK</p><img id="fb" src="https://lh3.googleusercontent.com/wGpOYLQ-QVqsgV5cznD_QwUQt9nfe7_qFKZDDVaQoBPzKTLxyNt0d0hH0sCUkyCnQK7pNgZik52wlnl4bFLu4boiFJ015JrnOBmh9Ds2UzTE9TZ3l9E9ATfxiSe-uZ2QJR83PnzukSuppe58SWAFAFEcu7qEyzrIZbxiKeCgR8oNqAgnAOICAyE7EXw6SRRCyHoRs2trR0B9lwg09IkYtfSSKlEkiAuFVyeM938_dXgJ8lb1X9QA1zzecyi5VrxxaCI_rtQZFfwMnXZuCNKsfkh-JgEQbVaxTrFgyBSqbZq87MN7wODA8_6ifpKNlhblrN4PltG_wHDORLbCRWTO-hUPlfmMoiY0ct_MTLveGHdaBU2gaqzKP9viBbwQaBfI22WlBwhxPst4ZOAd9uEjMmufk4NHyxTiD4DVEk8wR2xAtbQA8xy4Bfl7ckTJdIrv6tOu65hCZHNT79cmfcFXjEfprU3a0Jv6z0FWRwR3XOtrdDdTOuqC7Rr6yEAVNAnPWnOiyrC4usQXVDhr51uvrKJomLzbCOp5ewNA995zKyl0-lztJY23WiLQo_RJlvnTNe0nnYPteB_oacc_b4nWRMdPo8aYzO8Hp9RD6Hn0FWao2XlITR1qPLVY95iNo9DlnVO3qBYSf7KU0y1kOCiGamxnjaDVypz8jg=s328-no" class="img-thumbnail">
+       <!--<hr ><p class="text-center">SCAN THIS QR CODE ⇊ LIKE US ON FACEBOOK</p><img id="fb" src="https://lh3.googleusercontent.com/wGpOYLQ-QVqsgV5cznD_QwUQt9nfe7_qFKZDDVaQoBPzKTLxyNt0d0hH0sCUkyCnQK7pNgZik52wlnl4bFLu4boiFJ015JrnOBmh9Ds2UzTE9TZ3l9E9ATfxiSe-uZ2QJR83PnzukSuppe58SWAFAFEcu7qEyzrIZbxiKeCgR8oNqAgnAOICAyE7EXw6SRRCyHoRs2trR0B9lwg09IkYtfSSKlEkiAuFVyeM938_dXgJ8lb1X9QA1zzecyi5VrxxaCI_rtQZFfwMnXZuCNKsfkh-JgEQbVaxTrFgyBSqbZq87MN7wODA8_6ifpKNlhblrN4PltG_wHDORLbCRWTO-hUPlfmMoiY0ct_MTLveGHdaBU2gaqzKP9viBbwQaBfI22WlBwhxPst4ZOAd9uEjMmufk4NHyxTiD4DVEk8wR2xAtbQA8xy4Bfl7ckTJdIrv6tOu65hCZHNT79cmfcFXjEfprU3a0Jv6z0FWRwR3XOtrdDdTOuqC7Rr6yEAVNAnPWnOiyrC4usQXVDhr51uvrKJomLzbCOp5ewNA995zKyl0-lztJY23WiLQo_RJlvnTNe0nnYPteB_oacc_b4nWRMdPo8aYzO8Hp9RD6Hn0FWao2XlITR1qPLVY95iNo9DlnVO3qBYSf7KU0y1kOCiGamxnjaDVypz8jg=s328-no" class="img-thumbnail">-->
       <!--https://photos.google.com/share/AF1QipOfX0Q45p09vNr4zcpciNxzthegIYQMigvf8Kmi3mJ3GlK_qHuQ7JlGi1ROU5kh0A/photo/AF1QipO-7vEN9q_2AnEciij8Z5Uy_XJUjq9iQh68_7sC?key=WUJmLUJSXzZhbWhaU2MzUUtXQklKbElMdTJlUXV3-->
- <p class = "text-center" >Come again another day</p><hr>
+ <!--<p class = "text-center" >Come again another day</p><hr>--><hr>
+ <p class = "text-center" style="font-size:10px;" >Give your valuable feedback and get an offer on your next bill @ <a style="color:black" href = "https://altum.herokuapp.com/feedback/<%= bill.id%>">https://altum.herokuapp.com/feedback/<%= bill.id%></a> </p><hr>
  <p class = "text-center" style="font-size:10px;" >Billing system developed by Altum Lab - AryaSumit145@gmail.com</p><hr>
   </div>
 <br>
@@ -523,6 +524,7 @@
     <div class="form-group">
             <button id="printbill" class="btn btn-lg btn-primary btn-block" >Print Bill</button>
             </div>
+   
    
    
  
@@ -571,12 +573,29 @@
 <!--========================================================================================-->
     
     
+<div class='container fluid'>
+    <hr>
+    <h1>Feedback</h1> 
+        
+            <hr>
+                        <% bill.feedback.forEach(function(feedback){ %>
 
+            <ul class="list-group">
+              <li class="list-group-item"><b>Feedback Number: </b><%= feedback.fn %></li>
+              <li class="list-group-item"><b>Order Number: </b><%= feedback.orderNumber %></li>
+              <li class="list-group-item"><b>Customer Name: </b><%= feedback.custName %></li>
+              <li class="list-group-item"><b>Customer Phone Number: </b><%= feedback.custPhone %></li>
+              <li class="list-group-item"><b>Comment: </b><%= feedback.comment %></li>
+              <li class="list-group-item"><b>Date: </b><%= feedback.created %></li>
+            </ul><br>
+                       <% }) %> 
+            
+    </div>
     
 
     
 
-    
+    <!--===========================================================-->
 <style>
     @media (max-width:480px)  {
     /* smartphones, iPhone, portrait 480x320 phones */ 
