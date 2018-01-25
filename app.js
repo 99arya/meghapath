@@ -120,8 +120,8 @@ var billSchema = new mongoose.Schema({
     tax: Number,
     pm: String,
     custName: String,
-    custPhone:{type: Number, unique: true},
-    custEmail: {type: String, unique: true},
+    custPhone:{type: Number},
+    custEmail: {type: String},
     
     feedback: [{
         created: {type: Date, default: Date.now},
