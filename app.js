@@ -119,6 +119,9 @@ var billSchema = new mongoose.Schema({
     sgst: Number,
     tax: Number,
     pm: String,
+    custName: String,
+    custPhone:{type: Number, unique: true},
+    custEmail: {type: String, unique: true},
     
     feedback: [{
         created: {type: Date, default: Date.now},
@@ -860,17 +863,14 @@ app.post("/bills/:id/bd", function(req, res) {
     var sgst = req.body.sgst;
     var tax = req.body.tax;
     var pm = req.body.pm;
+    var custName = req.body.custName;
+    var custPhone = req.body.custPhone;
+    var custEmail = req.body.custEmail;
     
-    console.log("__START__")
-    console.log(total)
-    console.log(cgst)
-    console.log(sgst)
-    console.log(tax)
-    console.log(pm)
-    console.log("__END__")
+    
 
     
-         Bill.findByIdAndUpdate({_id: req.params.id},{ $set:{total:total, cgst:cgst, sgst:sgst, tax:tax, pm:pm }}, { new:true}, function(err, newDetails){
+         Bill.findByIdAndUpdate({_id: req.params.id},{ $set:{total:total, cgst:cgst, sgst:sgst, tax:tax, pm:pm, custName:custName, custPhone:custPhone, custEmail:custEmail }}, { new:true}, function(err, newDetails){
             if(err){
                 console.log(err)
             } else {

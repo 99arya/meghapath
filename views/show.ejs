@@ -21,8 +21,11 @@
      <div class="col-lg-2 col-sm-10 col-md-10">
      <div id = "kotdiv">
          <h3 class="text-center">KOT</h3>
-         <p class="text-center">Order No. : <%= bill.bn %></p>
-         <p class="text-center">Table Number : <b><%= bill.tablenumber %></b></p>
+            <p class="text-center"><b>Table Number : </b><%= bill.tablenumber %></p>
+            <p class="text-center"><b>Waiter Name: </b><%= bill.waitername %></p>
+            <p class="text-center"><b>Order No. : </b><%= bill.bn %></p>
+         
+
          <hr>
                <table id="kottable" class="table table-sm table-bordered ">
   <thead>
@@ -448,7 +451,17 @@
     <li class="il"><b>Waiter Name: </b><%= bill.waitername %><span class="right"> <b>Order No.:</b> <%= bill.bn %></span></li>
     <li class="il dates" style="margin-top:0.8em; margin-bottom:0.8em; line-height:2px;" ><b>Date: </b> <%= bill.created %></li>
 
+
+
     <li class="il dates"><b>Bill ID: </b><%= bill._id %></li>
+   
+        <hr><li class="il"><b> Customer Details: </b><span class="right"> <p style="display:inline" ></p></span></li>
+
+        <li class="il"><b>Name: </b><%= bill.custName %><span class="right"> <b>Phone: </b><%= bill.custPhone %></span></li>
+
+    
+    
+    <li class="il dates"><b>E-Mail: </b><%= bill.custEmail %></li><hr>
    
     <!--<li class="il" id="asd"><span class="right">Date: <%= bill.created %> </span></li>-->
 
@@ -506,6 +519,26 @@
  <p class = "text-center" style="font-size:10px;" >Billing system developed by Altum Lab - AryaSumit145@gmail.com</p><hr>
   </div>
 <br>
+
+    <form class="form-inline">
+            
+
+        <div class="form-group">
+             <p style="display:inline-block"  for="custName">Customer Name</p>
+        <input class="form-control" style="margin-left:2.1em;" type = "text" id = "custName" placeholder = "Customer Name" value="<%= bill.custName %>"></div>
+        
+        
+        <div class="form-group">
+             <p style="display:inline-block"  for="custPhone">Customer Phone</p>
+        <input class="form-control"  style="margin-left:2em;" type = "text" id = "custPhone" placeholder = "Customer Phone" value="<%= bill.custPhone %>"></div>
+        
+        
+        <div class="form-group">
+             <p style="display:inline-block"  for="custEmail">Customer E-Mail</p>
+        <input class="form-control"  style="margin-left:2em;" type = "text" id = "custEmail" placeholder = "Customer E-Mail"  value="<%= bill.custEmail %>"></div>
+    </form>  
+
+
  <div class="form-group">
      <p class="ilm"><b>Payment Method </b> 
         <span class="right">
@@ -539,8 +572,14 @@
           var sgst = $('#sgst').text()
           var tax = $('#tax').text()
           var pm = $('#payment').find(":selected").text();
+          var custName = $('#custName').val()
+          var custPhone = $('#custPhone').val()
+          var custEmail = $('#custEmail').val()
 
-     var details = {total, cgst, sgst, tax, pm}
+
+
+
+     var details = {total, cgst, sgst, tax, pm, custName, custPhone, custEmail}
           console.log(details)
           
    
@@ -548,7 +587,7 @@
                       .then(
                                   
                               
-                              $.post("/bills/<%= bill._id %>/bd", {total, cgst, sgst, tax, pm})
+                              $.post("/bills/<%= bill._id %>/bd", {total, cgst, sgst, tax, pm, custName, custPhone, custEmail})
                                     .then(console.log("BILL SAVED!"))
                                 )
        
@@ -559,7 +598,16 @@
      
      </script>
      
+      <script>
       
+          $('#sendUser').click(function(){
+              var custName = $('#custName').val()
+              var custPhone = $('#custPhone').val()
+              var custEmail = $('#custEmail').val()
+              alert("name " + custName + "phone " + custPhone + "email " + custEmail)
+          })
+      
+      </script>
              
  </form>
   

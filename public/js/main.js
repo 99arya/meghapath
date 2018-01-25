@@ -123,7 +123,7 @@ $(".card").on("click", function(){
        $("#billtable tr#"+mealid).remove();
 
             mealList = $.grep(mealList, function(e){ 
-                  return e.name != mealname; 
+                  return e != mealname; 
                     });
               
       
@@ -131,6 +131,14 @@ $(".card").on("click", function(){
            myList = $.grep(myList, function(e){ 
                   return e.name != mealname; 
                     });
+                    
+                    
+         // Delete object from kotList 
+           kotMealList = $.grep(kotMealList, function(e){ 
+                  return e != mealname; 
+                    });            
+                    
+        kotMealList            
               
         //change total grosss amount accordingly in bill table
     
@@ -140,18 +148,29 @@ $(".card").on("click", function(){
         var tax = $('#tax').text()
         
         var t = total - mealprice
+        
         $('#total_gross').text(t.toFixed(2)) 
       
-        var c = cgst - (0.025*mealprice)      
+        var c = cgst - (0.025*mealprice)  
+        if(isNaN(c)|| c<0)   {
+                                     c=0
+                                    }
+                                    
         $('#cgst').text(c.toFixed(2))
         
-        var s = sgst - (0.025*mealprice)      
+        var s = sgst - (0.025*mealprice)     
+         if(isNaN(s)|| s<0)   {
+                                     s=0
+                                    }
+                                    
         $('#sgst').text(s.toFixed(2))
         
         var ta = c + s;
-                    if(isNaN(ta)){
-                        ta=0
-                            }
+        
+                    if(isNaN(ta)|| ta<0 || ta<1)   {
+                                     ta=0
+                                    }
+                                    
         $('#tax').text(ta.toFixed(2))
         
         
@@ -224,8 +243,26 @@ $(".card").on("click", function(){
                      console.log("T" + ta)
 
   }
+  
+   
+ 
+if (kotMealList.includes(mealname)){
+    
+          mealqty2[mealname] = mealqty2[mealname]-1;
+          
+          $('#'+mealid+'_a').html('<td>' + mealname + '</td><th scope="row">'+ mealqty2[mealname] +'</th>')
+          
+ } else {
+  
+        //   $('table#billtable tr#'+mealid+'_a').remove();
+        //   $("#billtable tr#"+mealid).remove();
+          $('#'+mealid+'_a').remove()
+console.log("HERE")
+ }
 
-})
+
+
+}) //== minus icon click end
 
  //  =======================================
  

@@ -21,9 +21,7 @@
     
     <form action = "/feedback/<%= bill.id %>" method = "POST">
          <div class="form-group">
-             <p for="custName">Bill ID</p>
-        <input class="form-control" type = "text" name = "billId" placeholder = "<%= bill.id %>">
-        </div> 
+           
         
         <div class="form-group">
              <p for="custName">Name</p>
@@ -35,8 +33,7 @@
         <input class="form-control" type = "text" name = "custPhone" placeholder = "Phone">
         </div>
         <div class="form-group">
-            <p for="orderNumber">Order Number</p>
-        <input class="form-control" type = "text" name = "orderNumber" placeholder = "Order Number">
+        <input class="form-control" type = "hidden" name = "orderNumber"  value="<%= bill.bn %>">
         </div>
          <div class="form-group">
              <p for="comment">Comment</p>
