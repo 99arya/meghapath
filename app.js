@@ -109,8 +109,8 @@ var List = mongoose.model("List", listSchema);
 var billSchema = new mongoose.Schema({
    
     bn:Number,
-    tablenumber: { type: Number, required: true },
-    waitername: { type: String, required: true },
+    tablenumber: { type: Number },
+    waitername: { type: String },
     created: {type: Date, default: Date.now},
     
     username: String,
@@ -119,9 +119,9 @@ var billSchema = new mongoose.Schema({
     sgst: Number,
     tax: Number,
     pm: String,
-    custName: String,
-    custPhone:{type: Number},
-    custEmail: {type: String},
+    cName: String,
+    cPhone:Number,
+    cEmail:String,
     
     feedback: [{
         created: {type: Date, default: Date.now},
@@ -201,7 +201,8 @@ app.post("/contact", function(req, res) {
                 if(err){
                     console.log(err)
                 } else {
-                    res.json("contact SAVED" + contact);
+                    req.flash("success", "Message Sent")
+                    res.redirect("/");
                     console.log(contact)
                 }
             })
@@ -863,14 +864,14 @@ app.post("/bills/:id/bd", function(req, res) {
     var sgst = req.body.sgst;
     var tax = req.body.tax;
     var pm = req.body.pm;
-    var custName = req.body.custName;
-    var custPhone = req.body.custPhone;
-    var custEmail = req.body.custEmail;
+    var cName = req.body.cName;
+    var cPhone = req.body.cPhone;
+    var cEmail = req.body.cEmail;
     
     
 
     
-         Bill.findByIdAndUpdate({_id: req.params.id},{ $set:{total:total, cgst:cgst, sgst:sgst, tax:tax, pm:pm, custName:custName, custPhone:custPhone, custEmail:custEmail }}, { new:true}, function(err, newDetails){
+         Bill.findByIdAndUpdate({_id: req.params.id},{ $set:{total:total, cgst:cgst, sgst:sgst, tax:tax, pm:pm, cName:cName, cPhone:cPhone, cEmail:cEmail }}, { new:true}, function(err, newDetails){
             if(err){
                 console.log(err)
             } else {

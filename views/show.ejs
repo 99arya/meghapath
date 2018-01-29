@@ -457,11 +457,11 @@
    
         <hr><li class="il"><b> Customer Details: </b><span class="right"> <p style="display:inline" ></p></span></li>
 
-        <li class="il"><b>Name: </b><%= bill.custName %><span class="right"> <b>Phone: </b><%= bill.custPhone %></span></li>
+        <li class="il"><b>Name: </b><%= bill.cName %><span class="right"> <b>Phone: </b><%= bill.cPhone %></span></li>
 
     
     
-    <li class="il dates"><b>E-Mail: </b><%= bill.custEmail %></li><hr>
+    <li class="il dates"><b>E-Mail: </b><%= bill.cEmail %></li><hr>
    
     <!--<li class="il" id="asd"><span class="right">Date: <%= bill.created %> </span></li>-->
 
@@ -525,17 +525,17 @@
 
         <div class="form-group">
              <p style="display:inline-block"  for="custName">Customer Name</p>
-        <input class="form-control" style="margin-left:2.1em;" type = "text" id = "custName" placeholder = "Customer Name" value="<%= bill.custName %>"></div>
+        <input class="form-control" style="margin-left:2.1em;" type = "text" id = "cName" placeholder = "Customer Name" value="<%= bill.cName %>"></div>
         
         
         <div class="form-group">
              <p style="display:inline-block"  for="custPhone">Customer Phone</p>
-        <input class="form-control"  style="margin-left:2em;" type = "text" id = "custPhone" placeholder = "Customer Phone" value="<%= bill.custPhone %>"></div>
+        <input class="form-control"  style="margin-left:2em;" type = "text" id = "cPhone" placeholder = "Customer Phone" value="<%= bill.cPhone %>"></div>
         
         
         <div class="form-group">
              <p style="display:inline-block"  for="custEmail">Customer E-Mail</p>
-        <input class="form-control"  style="margin-left:2em;" type = "text" id = "custEmail" placeholder = "Customer E-Mail"  value="<%= bill.custEmail %>"></div>
+        <input class="form-control"  style="margin-left:2em;" type = "text" id = "cEmail" placeholder = "Customer E-Mail"  value="<%= bill.cEmail %>"></div>
     </form>  
 
 
@@ -572,14 +572,14 @@
           var sgst = $('#sgst').text()
           var tax = $('#tax').text()
           var pm = $('#payment').find(":selected").text();
-          var custName = $('#custName').val()
-          var custPhone = $('#custPhone').val()
-          var custEmail = $('#custEmail').val()
+          var cName = $('#cName').val()
+          var cPhone = $('#cPhone').val()
+          var cEmail = $('#cEmail').val()
 
 
 
 
-     var details = {total, cgst, sgst, tax, pm, custName, custPhone, custEmail}
+     var details = {total, cgst, sgst, tax, pm, cName, cPhone, cEmail}
           console.log(details)
           
    
@@ -587,7 +587,7 @@
                       .then(
                                   
                               
-                              $.post("/bills/<%= bill._id %>/bd", {total, cgst, sgst, tax, pm, custName, custPhone, custEmail})
+                              $.post("/bills/<%= bill._id %>/bd", {total, cgst, sgst, tax, pm, cName, cPhone, cEmail})
                                     .then(console.log("BILL SAVED!"))
                                 )
        

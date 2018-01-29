@@ -196,12 +196,3 @@ a:hover
 }
 
 
-@font-face {
-    font-family: 'fake_receiptregular';
-    src: url('fake_receipt-webfont.woff2') format('woff2'),
-         url('fake_receipt-webfont.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-
-}
-

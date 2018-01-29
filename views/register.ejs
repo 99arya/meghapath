@@ -26,10 +26,11 @@
 <br><br>
 
    
-    <form action = "/register" method = "POST">
+    <form action = "/register" method = "POST"  id='theform' >
+        <p>*All Fields are mandatory</p>
         
         <div class="form-group">
-            <p for="username">User Name</p>
+            <p for="username">User Name (Case Sensitive)</p>
         <input class="form-control" type = "text" name = "username" placeholder = "User name has to be unique">
         </div>
         
@@ -38,14 +39,21 @@
         <input class="form-control" type = "text" name = "email" placeholder = "E-Mail ID">
         </div>
         
+         
         <div class="form-group">
             <p for="password">Password</p>
-        <input class="form-control" type = "password" name = "password" placeholder = "Password">
+        <input class="form-control" type = "password" name = "password" id="confirm_password" placeholder = "Password">
         </div>
         
         <div class="form-group">
-            <p for="restoname">Name of your Restaurant</p>
-        <input class="form-control" type = "text" name = "restoname" placeholder = "Name of the Restaurant">
+            <p for="password">Confirm Password</p>
+        <input class="form-control" type = "password"  id="password" placeholder = "Confirm Password">
+        </div>
+       
+        
+        <div class="form-group">
+            <p for="restoname">Restaurant Name:</p>
+        <input class="form-control" type = "text" name = "restoname" placeholder = "Restaurant Name">
         </div>
         
         <div class="form-group">
@@ -70,8 +78,36 @@
         
         
         <div class="form-group">
-<button class="btn btn-lg btn-primary btn-block" >Sign Up</button>        </div>
+<button class="btn btn-lg btn-primary btn-block"  value="Submit" id='btnsubmit' >Sign Up</button>        </div>
     </form>
 </div>
+
+<script>
+
+
+
+    var password = document.getElementById("password")
+  , confirm_password = document.getElementById("confirm_password");
+
+function validatePassword(){
+  if(password.value != confirm_password.value) {
+    confirm_password.setCustomValidity("Passwords Don't Match");
+  } else {
+    confirm_password.setCustomValidity('');
+  }
+}
+
+password.onchange = validatePassword;
+confirm_password.onkeyup = validatePassword;
+
+
+$('#btnsubmit').on('click',function()
+  {
+    $(this).val('Please wait ...')
+      .attr('disabled','disabled');
+    $('#theform').submit();
+  });
+
+</script>
 
 <% include ./partials/footer %>

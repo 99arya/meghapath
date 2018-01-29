@@ -37,7 +37,7 @@
 
     <div style="width: 30%; margin: 25px auto">
     
-        <form action="/newbill" method="POST">
+        <form action="/newbill" method="POST"  id='theform'>
             
             <!--<div class="form-group">-->
                 <!--<h3 for="ordernumber">Order Number</h3>-->
@@ -57,7 +57,7 @@
              <!--onclick="UserAction()" -->
             
             <div class="form-group">
-            <button class="btn btn-lg btn-primary btn-block" >Submit</button>
+            <button class="btn btn-lg btn-primary btn-block"  id='btnsubmit' >Submit</button>
             </div> 
         </form>
             
@@ -72,6 +72,15 @@
 
 
 
-			  
+			  <script>
+    
+$('#btnsubmit').on('click',function()
+  {
+    $(this).val('Please wait ...')
+      .attr('disabled','disabled');
+    $('#theform').submit();
+  });
+</script>
+
 
 <% include ./partials/footer %>
