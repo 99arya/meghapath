@@ -1,8 +1,6 @@
 <% include ./partials/header %>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.js"></script>
 
-
-
-<body>
   <div id="content">
 <div class="row">
 <div class="col-lg-7">
@@ -13,7 +11,7 @@
       <br>
           
       
-      <form class="contact" action="/contact" method="post">
+      <form class="contact" action="/contact" method="post"  id='theform'>
         
        
           <div class="form-group">
@@ -56,11 +54,13 @@
               
             </div>
         
-       
+         <div class="form-group">
+        <button class="btn btn-lg btn-primary btn-block" id='btnsubmit' >SUBMIT</button>
+        </div>
           
-          <div class="form-group">
-            <button type="submit" class="btn btn-success">Send</button>
-          </div>
+          <!--<div class="form-group">-->
+          <!--  <button type="submit" class="btn btn-success">Send</button>-->
+          <!--</div>-->
         </div>
       </form>
     </div>
@@ -95,5 +95,68 @@
   </div>
   
   </div></div>
+
+<script>
+    
+    
+     $('#theform').validate({ // initialize the plugin
+        rules: {
+            name:{
+              required:true,
+            
+            },
+            subject:{
+              required:true
+            },
+            message:{
+              required:true
+            },
+            email: {
+                required: true,
+                email: true
+            },
+            mobile: {
+                required: true,
+                minlength: 10
+            }
+        },
+        messages:{
+            name: "Please specify your name",
+            email: {
+                required: "We need your email address to contact you",
+                email: "Your email address must be in the format of name@example.com"
+              },
+            mobile: "Please enter at least 10 digits",
+            
+            message: "Please give us a little detail about the subject",
+            subject: "The reason why you are contacting us"
+          
+        }
+    });
+    
+    
+$('#btnsubmit').on('click',function()
+  {
+    if($('#theform').invalid){ 
+      
+    $(this).val('Please wait ...')
+      .attr('disabled','disabled');
+    $('#theform').submit();
+  }});
+  
+  
+  
+  
+</script>
+
+<style>
+  .error {
+    color:#c50707a6;
+}
+.form-control error{
+      border: 1px solid red;
+
+}
+</style>
 
 <% include ./partials/footer %>

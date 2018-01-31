@@ -1,5 +1,8 @@
 <% include ./partials/header %>
 
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.js"></script>
+
+
 <div class="container content">
     <div class="row">
         <div style="width: 70%; margin: 25px auto;">
@@ -101,13 +104,68 @@ password.onchange = validatePassword;
 confirm_password.onkeyup = validatePassword;
 
 
+     $('#theform').validate({ // initialize the plugin
+        rules: {
+            username:{
+              required:true,
+            
+            },
+            restoname:{
+              required:true
+            },
+            password:{
+              required:true
+            },
+            add1:{
+              required:true
+            },
+            add2:{
+              required:true
+            },
+            add3:{
+              required:true
+            },
+            email: {
+                required: true,
+                email: true
+            },
+            phone: {
+                required: true,
+                minlength: 10
+            }
+        },
+        messages:{
+            name: "Please specify your name",
+            email: {
+                required: "We need your email address to contact you",
+                email: "Your email address must be in the format of name@example.com"
+              },
+            mobile: "Please enter at least 10 digits",
+            
+            restoname: "What's your restaurant called"
+        }
+    });
+
+
 $('#btnsubmit').on('click',function()
   {
+    if($('#theform').invalid){ 
+      
     $(this).val('Please wait ...')
       .attr('disabled','disabled');
     $('#theform').submit();
-  });
+  }});
 
 </script>
+
+<style>
+  .error {
+    color:#c50707a6;
+}
+.form-control error{
+      border: 1px solid red;
+
+}
+</style>
 
 <% include ./partials/footer %>

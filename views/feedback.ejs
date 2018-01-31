@@ -1,21 +1,14 @@
 <% include ./partials/header %>
 
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.js"></script>
+
+
 <div class="container content">
     <div class="row">
         <div style="width: 70%; margin: 25px auto">
 
 
      
-
-    
-
-        
-        
-
-    
-    
-    
-    
     <h1 style="text-align: center; " >Leave your valuable feedback</h1>
 <br><br>
     
@@ -49,12 +42,54 @@
 
 <script>
     
+    
+     $('#theform').validate({ // initialize the plugin
+        rules: {
+            custName:{
+              required:true,
+            
+            },
+            orderNumber:{
+              required:true
+            },
+            comment:{
+              required:true
+            },
+            custPhone: {
+                required: true,
+                minlength: 10
+            }
+        },
+        messages:{
+            custName: "Please specify your name",
+            
+            custPhone: "Please enter at least 10 digits",
+            
+            comment: "The reason why you are contacting us",
+
+        }
+    });
+    
+    
+    
+    
 $('#btnsubmit').on('click',function()
   {
+          if($('#theform').invalid){ 
+
     $(this).val('Please wait ...')
       .attr('disabled','disabled');
     $('#theform').submit();
-  });
+  }});
 </script>
 
+<style>
+  .error {
+    color:#c50707a6;
+}
+.form-control error{
+      border: 1px solid red;
+
+}
+</style>
 <% include ./partials/footer %>
