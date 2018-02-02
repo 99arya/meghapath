@@ -1,7 +1,7 @@
 {
   "name": "bill",
   "version": "1.0.0",
-  "description": "billing system for cafe o2",
+  "description": "billing system for restaurant",
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -10,7 +10,7 @@
   "keywords": [
     "'"
   ],
-  "author": "sumit Arya <aryasumit145@gmail.com> - ALTUM Lab",
+  "author": "sumit Arya <aryasumit145@gmail.com> - Ornio Lab",
   "license": "ISC",
   "dependencies": {
     "alertify": "^0.3.0",

@@ -1,5 +1,5 @@
   //=========================================================================================================================                                    
- //  DESIGNED AND DEVELOPED BY "SUMIT ARYA" : "<ARYASUMIT145@GMAIL.COM>" "ALTUM Lab" "WWW.SUMITARYA.TK"
+ //  DESIGNED AND DEVELOPED BY "SUMIT ARYA" : "<ARYASUMIT145@GMAIL.COM>" "Ornio Lab" "WWW.SUMITARYA.TK"
 //=========================================================================================================================                                    
 
 
@@ -912,7 +912,7 @@ app.post("/register", function(req, res) {
     var newUser = new User(
         {
         username:req.body.username, 
-        email:req.body.email,
+        oname:req.body.oname,
         restoname:req.body.restoname,
         add1:req.body.add1,
         add2:req.body.add2,
@@ -929,7 +929,7 @@ app.post("/register", function(req, res) {
         
         console.log("user---"+user)
         passport.authenticate("local")(req, res, function(){
-            req.flash("success", "Welcome "+user.username)
+            req.flash("success", "Welcome "+user.oname)
             res.redirect("/newbill")
         })
     })
@@ -958,7 +958,7 @@ app.post("/register", function(req, res) {
       failureFlash : true
     }), function(req, res, err) {
     
-            req.flash("success", "Welcome "+req.body.username)
+            req.flash("success", "Welcome  "+req.body.oname)
             req.flash("error", err.message)
       
   });
@@ -996,5 +996,5 @@ app.post("/register", function(req, res) {
     
 
   //=========================================================================================================================                                    
- //  DESIGNED AND DEVELOPED BY "SUMIT ARYA" : "<ARYASUMIT145@GMAIL.COM>" "ALTUM Lab" "WWW.SUMITARYA.TK"
+ //  DESIGNED AND DEVELOPED BY "SUMIT ARYA" : "<ARYASUMIT145@GMAIL.COM>" "Ornio Lab" "WWW.SUMITARYA.TK"
 //===========================================================================================================================
