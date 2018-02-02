@@ -57,7 +57,8 @@
             },
             custPhone: {
                 required: true,
-                minlength: 10
+                minlength: 10,
+                number:true
             }
         },
         messages:{
@@ -75,7 +76,7 @@
     
 $('#btnsubmit').on('click',function()
   {
-          if($('#theform').invalid){ 
+          if($('#theform').invalid=true){ 
 
     $(this).val('Please wait ...')
       .attr('disabled','disabled');

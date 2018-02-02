@@ -1,6 +1,7 @@
 <% include ./partials/header %>
 
 
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.js"></script>
 
 
  <!--========================================================================================-->
@@ -520,22 +521,22 @@
   </div>
 <br>
 
-    <form class="form-inline">
+    <form class="form-inline" id = "theform">
             
 
         <div class="form-group">
              <p style="display:inline-block"  for="custName">Customer Name</p>
-        <input class="form-control" style="margin-left:2.1em;" type = "text" id = "cName" placeholder = "Customer Name" value="<%= bill.cName %>"></div>
+        <input class="form-control" style="margin-left:2.1em;" type = "text" name="cName" id = "cName" placeholder = "Customer Name" value="<%= bill.cName %>"></div>
         
         
         <div class="form-group">
              <p style="display:inline-block"  for="custPhone">Customer Phone</p>
-        <input class="form-control"  style="margin-left:2em;" type = "text" id = "cPhone" placeholder = "Customer Phone" value="<%= bill.cPhone %>"></div>
+        <input class="form-control"  style="margin-left:2em;" type = "text" name="cPhone" id = "cPhone" placeholder = "Customer Phone" value="<%= bill.cPhone %>"></div>
         
         
         <div class="form-group">
              <p style="display:inline-block"  for="custEmail">Customer E-Mail</p>
-        <input class="form-control"  style="margin-left:2em;" type = "text" id = "cEmail" placeholder = "Customer E-Mail"  value="<%= bill.cEmail %>"></div>
+        <input class="form-control"  style="margin-left:2em;" type = "text" name="cEmail" id = "cEmail" placeholder = "Customer E-Mail"  value="<%= bill.cEmail %>"></div>
     </form>  
 
 
@@ -565,7 +566,7 @@
   
      
      $('#sendBill').click(function(){
-    
+    $(this).prop('disabled', true);
           var meals = JSON.stringify(myList);
           var total = $('#total_gross').text()
           var cgst = $('#cgst').text()
@@ -588,9 +589,10 @@
                                   
                               
                               $.post("/bills/<%= bill._id %>/bd", {total, cgst, sgst, tax, pm, cName, cPhone, cEmail})
-                                    .then(console.log("BILL SAVED!"))
+                                    .success(window.location.href = "/newbill" )
                                 )
        
+      
 
 })
 
@@ -598,16 +600,7 @@
      
      </script>
      
-      <script>
       
-          $('#sendUser').click(function(){
-              var custName = $('#custName').val()
-              var custPhone = $('#custPhone').val()
-              var custEmail = $('#custEmail').val()
-              alert("name " + custName + "phone " + custPhone + "email " + custEmail)
-          })
-      
-      </script>
              
  </form>
   
@@ -661,7 +654,21 @@
 </style>
     
 
+    <script>
     
+    
+// $('#sendBill').on('click',function()
+//   {
+
+//     $(this).parent().val('Please wait ...')
+//       .attr('disabled','disabled');
+//     $('#theform').submit();
+//   });
+  
+  
+    </script>
+    
+
 
 <script type="text/javascript" src="../js/main.js"></script>
 <script type="text/javascript" src="../js/alert.js"></script>

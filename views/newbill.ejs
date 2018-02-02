@@ -1,5 +1,6 @@
 <% include ./partials/header %>
 
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.js"></script>
 
 
 <div class="content">
@@ -73,14 +74,48 @@
 
 
 			  <script>
+			  
+     $('#theform').validate({ // initialize the plugin
+        rules: {
+            waitername:{
+              required:true,
+            
+            },
+            tablenumber:{
+              required:true
+              
+            }
+        },
+        messages:{
+            waitername: "Please specify the waiter's name.",
+            
+            tablenumber: "Please enter the table number on which the order is placed.",
+
+        }
+    });
     
-$('#btnsubmit').on('click',function()
-  {
+    
+			  
+    
+    
+
+     $('#btnsubmit').click(function(){
+
     $(this).val('Please wait ...')
       .attr('disabled','disabled');
     $('#theform').submit();
-  });
+    
+     })
 </script>
 
+<style>
+  .error {
+    color:#c50707a6;
+}
+.form-control error{
+      border: 1px solid red;
+
+}
+</style>
 
 <% include ./partials/footer %>

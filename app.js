@@ -109,8 +109,8 @@ var List = mongoose.model("List", listSchema);
 var billSchema = new mongoose.Schema({
    
     bn:Number,
-    tablenumber: { type: Number },
-    waitername: { type: String },
+    tablenumber: String,
+    waitername: String,
     created: {type: Date, default: Date.now},
     
     username: String,
@@ -120,7 +120,7 @@ var billSchema = new mongoose.Schema({
     tax: Number,
     pm: String,
     cName: String,
-    cPhone:Number,
+    cPhone:String,
     cEmail:String,
     
     feedback: [{
@@ -308,56 +308,56 @@ app.get("/feedback/:id", function(req, res) {
 
 
 
-app.post("/feedback", function(req, res) {
+// app.post("/feedback", function(req, res) {
     
     
-    Feedback.count(function(err, count){
-        if(err){
-            console.log(err)
-        } else {
+//     Feedback.count(function(err, count){
+//         if(err){
+//             console.log(err)
+//         } else {
         
-            console.log("old -" + count)
+//             console.log("old -" + count)
     
     
-    var fn = count + 1;
-    var custName = req.body.custName;
-    var custPhone = req.body.custPhone;
-    var orderNumber = req.body.orderNumber;
-    var comment = req.body.comment;
+//     var fn = count + 1;
+//     var custName = req.body.custName;
+//     var custPhone = req.body.custPhone;
+//     var orderNumber = req.body.orderNumber;
+//     var comment = req.body.comment;
     
-    var newFeedback = new Feedback({fn:fn, custName:custName, custPhone:custPhone, orderNumber:orderNumber, comment:comment })
+//     var newFeedback = new Feedback({fn:fn, custName:custName, custPhone:custPhone, orderNumber:orderNumber, comment:comment })
     
-    console.log("new -" + fn)
+//     console.log("new -" + fn)
     
-    Feedback.create(newFeedback, function(err, feedback) {
-        if(err){
-            console.log(err)
-        } else {
-            newFeedback.save(function(err, feedback){
-                if(err){
-                    console.log(err)
-                } else {
-                    res.json("FEEDBACK SAVED" + feedback);
-                    console.log(feedback)
-                }
-            })
+//     Feedback.create(newFeedback, function(err, feedback) {
+//         if(err){
+//             console.log(err)
+//         } else {
+//             newFeedback.save(function(err, feedback){
+//                 if(err){
+//                     console.log(err)
+//                 } else {
+//                     res.json("FEEDBACK SAVED" + feedback);
+//                     console.log(feedback)
+//                 }
+//             })
             
-        }
-    })
-            
-            
+//         }
+//     })
             
             
             
-        }      
-    })
+            
+            
+//         }      
+//     })
     
     
     
     
 
 
-})
+// })
         // ==================test start
         
 
@@ -461,14 +461,7 @@ app.post("/feedback/:id", function(req, res) {
         } else {
         
             console.log("old -" + count)
-    
-
-    
-    
-    
-            
-                    
-                    
+         
                         
      Bill.findById({_id: req.params.id},  function(err, bill){
           if(err){
@@ -830,12 +823,12 @@ app.post("/bills/:id", function(req, res) {
             console.log(err)
         } else {
             
-                  
-            console.log("___" + list + "___" );
+        
+        console.log("___" + list + "___" );
             
         }
         
-        
+        console.log("f")
     
      
    
@@ -847,7 +840,7 @@ app.post("/bills/:id", function(req, res) {
     }//for
     
    
-    
+    res.send({status:200})
     
 })
 
@@ -867,7 +860,7 @@ app.post("/bills/:id/bd", function(req, res) {
     var cName = req.body.cName;
     var cPhone = req.body.cPhone;
     var cEmail = req.body.cEmail;
-    
+    var idd = req.params.id;
     
 
     
@@ -877,7 +870,7 @@ app.post("/bills/:id/bd", function(req, res) {
             } else {
                 console.log("details updated" + newDetails)
             }
-             
+             res.redirect("/bills/" + idd)
          })
     
 })
