@@ -21,7 +21,9 @@
    
      <div class="col-lg-2 col-sm-10 col-md-10">
      <div id = "kotdiv">
-         <h3 class="text-center">KOT</h3>
+         
+                 <p class="head">-<%= bill.billType %>-</p><hr>
+
             <p class="text-center"><b>Table Number : </b><%= bill.tablenumber %></p>
             <p class="text-center"><b>Waiter Name: </b><%= bill.waitername %></p>
             <p class="text-center"><b>Order No. : </b><%= bill.bn %></p>
@@ -32,7 +34,7 @@
   <thead>
     <tr>
       
-      <th scope="col">Name</th>
+      <th scope="col">Particulars</th>
       <th scope="col">Qty.</th>
       
     </tr>
@@ -430,14 +432,16 @@
 
     <div id ="billdiv" >
 
-        <br>
         
-        <p class = "text-center billp" ><b><%= currentUser.restoname %></b></p>
+        <p class="head">---<%= bill.billType %><span id="bt"></span>---</p><hr>
+        <p class = "head" ><b><%= currentUser.restoname %></b></p>
          <p class = "text-center billp" ><%= currentUser.add1  %></p>
         
          <p class = "text-center billp" ><%= currentUser.add2  %></p>
          <p class = "text-center billp" ><%= currentUser.add3  %></p>
-          <p class = "text-center billp" ><%= currentUser.phone  %></p>
+          <p class = "text-center billp" >PH. <%= currentUser.phone  %></p>
+          <p class = "text-center billp" >GST No. <%= currentUser.gst  %></p>
+          <p class = "text-center billp" >CIN No. <%= currentUser.cin  %></p>
         
          <!--<p class = "text-center billp" ><b>CAFE - O2</b></p>-->
          <!--<p class = "text-center billp" >PLOT 147, NEAR RAHEJA ATLANTIS</p>-->
@@ -455,14 +459,14 @@
 
 
     <li class="il dates"><b>Bill ID: </b><%= bill._id %></li>
-   
+
         <hr><li class="il"><b> Customer Details: </b><span class="right"> <p style="display:inline" ></p></span></li>
 
-        <li class="il"><b>Name: </b><%= bill.cName %><span class="right"> <b>Phone: </b><%= bill.cPhone %></span></li>
+        <li class="il"><b>Name: </b><%= bill.cName %><span id="cn"></span><span class="right"> <b>Phone: </b><%= bill.cPhone %><span id="cp"></span></span></li>
 
     
     
-    <li class="il dates"><b>E-Mail: </b><%= bill.cEmail %></li><hr>
+    <li class="il"><b>E-Mail: </b><%= bill.cEmail %><span id="ce"></span></li><hr>
    
     <!--<li class="il" id="asd"><span class="right">Date: <%= bill.created %> </span></li>-->
 
@@ -474,11 +478,11 @@
   <thead>
     <tr>
       
-      <th scope="col">Item Name</th>
+      <th scope="col">Particulars</th>
       <th scope="col">Qty.</th>
       
-      <th scope="col">Price</th>
       <th scope="col">Rate</th>
+      <th scope="col">Amount</th>
     </tr>
   </thead>
   <tbody>
@@ -499,16 +503,18 @@
     
   </tbody>
 </table>
+    <li class="il"> <b>Total Amount : </b><span class="right"> Rs. <p style="display:inline" id="totalAmt"><%=bill.totalAmt%><spanid="toa"></span></p></span></li>
+    <li class="il"> Discount (-): <span class="right">  <p style="display:inline" ><%=bill.discount%><span id="dis"></span> %</p></span></li>
+<br>
 
-       <br> <li class="ilb"><b>Gross Amount: </b> <span class="right"><b>Rs.</b> <p style="display:inline" id="total_gross"><%=bill.total%></p></span></li>
-
-    <hr><li class="il"><b> Tax Breakup</b><span class="right"> <p style="display:inline" ></p></span></li>
+    <li class="il"><b> Tax Breakup </b><span class="right"> <p style="display:inline" ></p></span></li>
     <li class="il"> C GST @ 2.5% : <span class="right"> Rs. <p style="display:inline" id="cgst"><%=bill.cgst%></p></span></li>
     <li class="il"> S GST @ 2.5% : <span class="right"> Rs. <p style="display:inline" id="sgst"><%=bill.sgst%></p></span></li>
-    <li class="il"> Total Tax : <span class="right"> Rs. <p style="display:inline" id="tax"><%=bill.tax%></p></span></li>
-    <li class="il"> Payment Method : <span class="right"> <p style="display:inline" id="tax"><%=bill.pm%></p></span></li>
+    <li class="il"> Total Tax (+): <span class="right"> Rs. <p style="display:inline" id="tax"><%=bill.tax%></p></span></li>
 
-        
+               <br> <li class="ilb"><b>Gross Amount: </b> <span class="right"><b>Rs.</b> <p style="display:inline" id="total_gross"><%=bill.total%></p></span></li>
+    <br><li class="il"> Payment Method : <span class="right"> <p style="display:inline" id="tax"><%=bill.pm%><span id="pm"></span></p></span></li>
+
 
         <!--<p style="display:inline ">Total:</p><span>   </span><p style="display:inline" id="total_forces"></p>            -->
         
@@ -518,6 +524,8 @@
  <!--<p class = "text-center" >Come again another day</p><hr>--><hr>
  <p class = "text-center" style="font-size:10px;" >Give your valuable feedback and get an offer on your next bill @ <a style="color:black" href = "https://Ornio.herokuapp.com/feedback/<%= bill.id%>">https://Ornio.herokuapp.com/feedback/<%= bill.id%></a> </p><hr>
  <p class = "text-center" style="font-size:10px;" >Billing system developed by Ornio Lab - AryaSumit145@gmail.com</p><hr>
+
+  
   </div>
 <br>
 
@@ -541,6 +549,35 @@
 
 
  <div class="form-group">
+     
+
+      <form>
+  <div class="row">
+    <div class="col">
+      <p style="display:inline" ><b>Discount: </b></p>
+    </div>
+    <div class="col">
+      <input type="text" id="discountPercentage" class="form-control" placeholder="In %">
+    </div>
+    <div class="col">
+     <button type="button" class="btn btn-success" id = "applyDiscount">Apply Discount</button>
+    </div>
+  </div>
+</form>
+      
+      
+      <!--<p class="ilm"><b>Discount </b> -->
+      <!--  <span class="right">-->
+      <!--          <input  style="display:inline" class="form-control" id="discount" value="<%= bill.discount %>">-->
+                  <!--<option id="5">5 %</option>-->
+                  <!--<option id="10" >10 %</option>-->
+                  <!--<option id="el">15 %</option>-->
+                  
+      <!--          </input></span>-->
+      <!--          <button style="display:inline" >Calculate</button>-->
+                
+      <!--          </p><br>-->
+         
      <p class="ilm"><b>Payment Method </b> 
         <span class="right">
                 <select  style="display:inline" class="form-control" id="payment">
@@ -548,23 +585,37 @@
                   <option id="cash" >Card</option>
                   <option id="electronic">Electronic</option>
                   
+                </select></span></p><br>
+                
+                <p class="ilm"><b>Bill Type </b> 
+        <span class="right">
+                <select  style="display:inline" class="form-control" id="billType">
+                  <option id="dineIn">Dine In</option>
+                  <option id="takeAway" >Take Away</option>
+                  <option id="delivery">Delivery</option>
                   
                 </select></span></p><br>
+                
+                
   <button style="margin-left:auto;margin-right:auto;display:block;margin-top:0%;margin-bottom:0%"  id="sendBill" type="button" class="btn btn-lg btn-success btn-block">Upload Bill</button><br>
-   <div class="form-group">
+  <button style="margin-left:auto;margin-right:auto;display:block;margin-top:0%;margin-bottom:0%"  id="newBill" type="button" class="btn btn-lg btn-primary btn-block">New Bill</button><br>
+   <!--<div class="form-group">-->
   <!--<button onClick="download()">Download</button>-->
-  <button style="margin-left:auto;margin-right:auto;display:block;margin-top:0%;margin-bottom:0%" onClick="download()" type="button" class="btn btn-lg btn-info btn-block">Download PDF</button></div>
+  <!--<button style="margin-left:auto;margin-right:auto;display:block;margin-top:0%;margin-bottom:0%" onClick="download()" type="button" class="btn btn-lg btn-info btn-block">Download PDF</button></div>-->
 
-    <div class="form-group">
-            <button id="printbill" class="btn btn-lg btn-primary btn-block" >Print Bill</button>
-            </div>
+    <!--<div class="form-group">-->
+    <!--        <button id="printbill" class="btn btn-lg btn-primary btn-block" >Print Bill</button>-->
+    <!--        </div>-->
    
    
    
  
      <script>
   
-     
+          $('#newBill').click(function(){
+            window.location.href= "/newbill"  
+              
+          })
      $('#sendBill').click(function(){
     $(this).prop('disabled', true);
           var meals = JSON.stringify(myList);
@@ -576,11 +627,45 @@
           var cName = $('#cName').val()
           var cPhone = $('#cPhone').val()
           var cEmail = $('#cEmail').val()
+          var billType = $('#billType').find(":selected").text();
+          var discount = $('#discountPercentage').val();
+          var totalAmt = $('#totalAmt').text()
+
+        $('#cn').html(cName)
+        $('#cp').html(cPhone)
+        $('#ce').html(cEmail)
+        $('#bt').html(billType)
+        $('#dis').html(discount)
+        $('#toa').html(totalAmt)
+        $('#pm').html(pm)
+        
+        
+        var divContents = $("#billdiv").html();//div which have to print
+                var printWindow = window.open('', '', 'height=700,width=900');
+                printWindow.document.write('<html><head><title>BILL</title>');
+                printWindow.document.write('<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" >');//external styles
+                printWindow.document.write('<link href="https://fonts.googleapis.com/css?family=Share+Tech+Mono" rel="stylesheet">');//external styles
+                printWindow.document.write('<style>font-family: "Share Tech Mono", monospace;</style>');//external styles
+                printWindow.document.write('<link rel="stylesheet" href="/stylesheets/main.css" type="text/css"/>');
+                printWindow.document.write('</head><body>');
+                
+                printWindow.document.write(divContents);
+                printWindow.document.write('</body></html>');
+                printWindow.document.close();
+
+                printWindow.onload=function(){
+                printWindow.focus();                                         
+                printWindow.print();
+                printWindow.close();
+                }
 
 
 
 
-     var details = {total, cgst, sgst, tax, pm, cName, cPhone, cEmail}
+
+
+
+     var details = {billType, total, cgst, sgst, tax, pm, cName, cPhone, cEmail, discount, totalAmt}
           console.log(details)
           
    
@@ -588,9 +673,11 @@
                       .then(
                                   
                               
-                              $.post("/bills/<%= bill._id %>/bd", {total, cgst, sgst, tax, pm, cName, cPhone, cEmail})
-                                    .success(window.location.href = "/newbill" )
-                                )
+                              $.post("/bills/<%= bill._id %>/bd", {billType, total, cgst, sgst, tax, pm, cName, cPhone, cEmail, discount, totalAmt:totalAmt})
+                                    .success(
+                                        // window.location.href = "/bills/<%= bill._id %>"                          
+                                
+                                ))
        
       
 

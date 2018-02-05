@@ -122,6 +122,9 @@ var billSchema = new mongoose.Schema({
     cName: String,
     cPhone:String,
     cEmail:String,
+    billType: String,
+    discount: Number,
+    totalAmt: Number,
     
     feedback: [{
         created: {type: Date, default: Date.now},
@@ -861,16 +864,22 @@ app.post("/bills/:id/bd", function(req, res) {
     var cPhone = req.body.cPhone;
     var cEmail = req.body.cEmail;
     var idd = req.params.id;
+    var billType = req.body.billType;
+    var discount = req.body.discount;
+    var totalAmt = req.body.totalAmt;
     
 
     
-         Bill.findByIdAndUpdate({_id: req.params.id},{ $set:{total:total, cgst:cgst, sgst:sgst, tax:tax, pm:pm, cName:cName, cPhone:cPhone, cEmail:cEmail }}, { new:true}, function(err, newDetails){
+         Bill.findByIdAndUpdate({_id: req.params.id},{ $set:{total:total, cgst:cgst, sgst:sgst, tax:tax, pm:pm, cName:cName, cPhone:cPhone, cEmail:cEmail, billType:billType, discount:discount, totalAmt:totalAmt }}, { new:true}, function(err, newDetails){
             if(err){
                 console.log(err)
             } else {
                 console.log("details updated" + newDetails)
+                
             }
-             res.redirect("/bills/" + idd)
+            //  res.redirect("/bills/" + idd)
+                res.json(newDetails)         
+             
          })
     
 })
@@ -932,6 +941,35 @@ app.post("/register", function(req, res) {
             req.flash("success", "Welcome "+user.oname)
             res.redirect("/newbill")
         })
+    })
+})
+
+ //=========================================================================================================================                                    
+// EDIT PROFILE
+app.get("/edit", function(req, res){
+    
+    User.find({username: { $eq: req.user.username }}, function(err, foundUser){
+        if(err){
+            console.log(err)
+        } else{
+            res.render("edituser",{user:foundUser, currentUser:req.user})
+        }
+        
+    })
+})
+
+
+
+
+app.put("/edit", function(req, res){
+    
+    User.find( function(err){
+        if(err){
+            console.log(err)
+        } else{
+            res.render("edituser",{ currentUser:req.user})
+        }
+        
     })
 })
 

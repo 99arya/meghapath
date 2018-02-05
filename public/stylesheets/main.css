@@ -196,3 +196,8 @@ a:hover
 }
 
 
+.head{
+    font-size: 1.5em;
+    text-align: center;
+     text-transform: uppercase;
+}

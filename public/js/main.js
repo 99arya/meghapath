@@ -1,7 +1,7 @@
 /* global $*/
-$('document').ready(function() {
-    alert("The system is ready!")
-})
+// $('document').ready(function() {
+//     alert("The system is ready!")
+// })
 
 
 
@@ -294,7 +294,7 @@ if (kotMealList.includes(mealname)){
 
 
   var pregst = mealprice - 0.05*mealprice;
-
+     
  
  
  
@@ -317,8 +317,7 @@ var result = [];
   
   $(result).each(function(){
       
-  	$('#total_forces').html(this.toFixed(2))
- 
+
         var cgst=this*0.025;
          	$('#cgst').html(cgst.toFixed(2))
     
@@ -328,7 +327,11 @@ var result = [];
       
         var pregsttotal = (this ).toFixed(2);
 
-   	$('#total_gross').html(pregsttotal)
+    var x = tax;
+    var y = this;
+    var z = x+y
+    $('#totalAmt').html(pregsttotal)
+   	$('#total_gross').html(z.toFixed(2))
     $('#tax').html(tax.toFixed(2))
 
   });
@@ -404,3 +407,11 @@ $('#delkot').on('click',function(e){
       });
       
           
+$('#applyDiscount').click(function(){
+    var old = $('#total_gross').text()
+    var x = $('#discountPercentage').val()
+    var y = x/100
+    var z = y*old
+    var next = old - z
+    $('#total_gross').html(next.toFixed(2))
+})

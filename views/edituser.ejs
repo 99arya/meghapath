@@ -6,41 +6,24 @@
 <div class="container content">
     <div class="row">
         <div style="width: 70%; margin: 25px auto;">
-     <% if(error && error.length > 0){ %>
-        
-            <div class="alert alert-danger" role="alert">
-              <%=error%>
-            </div>
-        
-        <%    } %>
-
-
     
-        
-       <% if(success && success.length > 0){ %>
-    
-        <div class="alert alert-success" role="alert">
-          <%=success%>
-        </div>
-    
-       <% } %>
-    <h1 style="text-align: center; " >Create A New Account!</h1>
+    <h1 style="text-align: center; " >Edit Profile</h1>
 
 <br><br>
 
    
-    <form action = "/register" method = "POST"  id='theform' >
+    <form action = "/edit?_method=PUT" method = "POST"  id='theform' >
         <p>*All Fields are mandatory</p>
         
         
         <div class="form-group">
             <p for="email">Name of the Owner</p>
-        <input class="form-control" type = "text" name = "oname" placeholder = "Owner's Name">
+        <input class="form-control" type = "text" name = "oname" placeholder = "Owner's Name" value="<%= currentUser.oname%>">
         </div>
         
         <div class="form-group">
             <p for="username">E-Mail</p>
-        <input class="form-control" type = "text" name = "username" placeholder = "E-Mail ID">
+        <input class="form-control" type = "text" name = "username" placeholder = "E-Mail ID" value="<%= currentUser.username%>">
         </div>
         
         
@@ -72,27 +55,27 @@
         
         <div class="form-group">
             <p for="restoname">Restaurant Name:</p>
-        <input class="form-control" type = "text" name = "restoname" placeholder = "Restaurant Name">
+        <input class="form-control" type = "text" name = "restoname" placeholder = "Restaurant Name" value="<%= currentUser.restoname%>">
         </div>
         
         <div class="form-group">
             <p for="add1">Address Line 1</p>
-        <input class="form-control" type = "text" name = "add1" placeholder = "Address Line 1">
+        <input class="form-control" type = "text" name = "add1" placeholder = "Address Line 1" value="<%= currentUser.add1%>">
         </div>
         
         <div class="form-group">
             <p for="add2">Address Line 2</p>
-        <input class="form-control" type = "text" name = "add2" placeholder = "Address Line 2">
+        <input class="form-control" type = "text" name = "add2" placeholder = "Address Line 2" value="<%= currentUser.add2%>">
         </div>
         
          <div class="form-group">
              <p for="add3">Address Line 3</p>
-        <input class="form-control" type = "text" name = "add3" placeholder = "Address Line 3">
+        <input class="form-control" type = "text" name = "add3" placeholder = "Address Line 3" value="<%= currentUser.add3%>">
         </div>
         
          <div class="form-group">
              <p for="phone">Telephone</p>
-        <input class="form-control" type = "text" name = "phone" placeholder = "Telephone">
+        <input class="form-control" type = "text" name = "phone" placeholder = "Telephone" value="<%= currentUser.phone%>">
         </div>
         
         
@@ -120,72 +103,11 @@ password.onchange = validatePassword;
 confirm_password.onkeyup = validatePassword;
 
 
-     $('#theform').validate({ // initialize the plugin
-        rules: {
-            username:{
-              required:true,
-            
-            },
-            restoname:{
-              required:true
-            },
-            oname:{
-              required:true
-            },
-            password:{
-              required:true
-            },
-            add1:{
-              required:true
-            },
-            add2:{
-              required:true
-            },
-            add3:{
-              required:true
-            },
-            email: {
-                required: true,
-                email: true
-            },
-            phone: {
-                required: true,
-                minlength: 10,
-                number:true
-            }
-        },
-        messages:{
-            name: "Please specify your name",
-            email: {
-                required: "We need your email address to contact you",
-                email: "Your email address must be in the format of name@example.com"
-              },
-            mobile: "Please enter at least 10 digits",
-            
-            restoname: "What's your restaurant called"
-        }
-    });
 
 
-$('#btnsubmit').on('click',function()
-  {
-    if($('#theform').invalid){ 
-      
-    $(this).val('Please wait ...')
-      .attr('disabled','disabled');
-    $('#theform').submit();
-  }});
 
 </script>
 
-<style>
-  .error {
-    color:#c50707a6;
-}
-.form-control error{
-      border: 1px solid red;
 
-}
-</style>
 
 <% include ./partials/footer %>

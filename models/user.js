@@ -9,7 +9,11 @@ var UserSchema = new mongoose.Schema({
     add1:String,
     add2:String,
     add3:String,
+    pin: Number,
+    gst:String,
+    cin:String,
     phone:String,
+    
 })
 
 UserSchema.plugin(passportLocalMongoose)
