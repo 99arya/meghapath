@@ -56,20 +56,16 @@
     
     <ul class="nav navbar-nav mr-auto">
       
-        <li class="nav-item active">
-          <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
-        </li>
+        <li class="nav-item"><a class="nav-link" href="/about">About Us</a></li>
+                      <li class="nav-item"><a class="nav-link" href="/contact">Contact Us</a></li>
+                      
+                      
         
         <% if(currentUser){ %>
         
         
-      <li class="nav-item"><a class="nav-link" href="/bills">Bills</a></li>
+      
         
-         
-        
-        <li class="nav-item"><a class="nav-link" href="/meals">Meals</a></li>
-        <li class="nav-item"><a class="nav-link" href="/feedbacks">Feedbacks</a></li>
-        <li class="nav-item"><a class="nav-link" href="/contacts">Messages</a></li>
         <%  } else { %>
         
        <!--<li class="nav-item"><a class="nav-link" href="/feedback">Feedback</a></li>-->
@@ -85,10 +81,7 @@
     
     <ul class="nav navbar-nav navbar-right">
                     
-                    <li class="nav-item"><a class="nav-link" href="/about">About Us</a></li>
-                      <li class="nav-item"><a class="nav-link" href="/contact">Contact Us</a></li>
-                      
-                      
+                    
 
                     
                     
@@ -98,12 +91,27 @@
                     <li><a class="nav-link"  href="/register"></span> Sign Up</a></li>
                     
                     <% } else { %>
-                    <li class="nav-item"><a class="nav-link" href="/newbill">    +    </a></li>
+                    <li class="nav-item"><a class="nav-link" href="/newbill"> + New Bill</a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                           Welcome <%= currentUser.oname %>
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                          <a class="dropdown-item" href="/bills"> Bills</a>
+                          <a class="dropdown-item" href="/meals"> Meals</a>
+                          <a class="dropdown-item" href="/feedbacks"> Feedbacks</a>
+                          <a class="dropdown-item" href="/contacts"> Messages</a>
+                          <a class="dropdown-item" href="/edit"> Edit Profile</a>
+                          <a class="dropdown-item" href="/logout"> Sign Out</a>
+                          
+                        </div>
+                    </li>
+                    
 
-                    <li><a class="nav-link"  href="/newbill"></span> Welcome <%= currentUser.oname %></a></li>
+                    <!--<li><a class="nav-link"  href="/newbill"></span> Welcome <%= currentUser.oname %></a></li>-->
 
                     
-                    <li><a class="nav-link"  href="/logout"></span> Sign Out</a></li>
+                    
                    
                   <%  } %>
                    

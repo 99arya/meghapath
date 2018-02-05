@@ -714,14 +714,14 @@ app.post("/newbill",  isLoggedIn, function(req, res){
         
 app.get("/bills", isLoggedIn,  function(req, res) {
           
-                         
- 
-        Bill.find({username: { $eq: req.user.username }}, function(err, allBills){
+                         $orderby :{start_date : -1}
+//  , {sort:{'createdAt':-1}},
+        Bill.find({username: { $eq: req.user.username}}, function(err, allBills){
                     if(err){
                         console.log(err);
                     } else {
                         res.render("bill",{bills:allBills, currentUser:req.user}); 
-                 
+                    
                     }
                 })
     
@@ -963,11 +963,13 @@ app.get("/edit", function(req, res){
 
 app.put("/edit", function(req, res){
     
-    User.find( function(err){
+    User.findOneAndUpdate({username: { $eq: req.user.username }}, {$set:{username:req.body.username, oname:req.body.oname, restoname:req.body.restoname, add1:req.body.add1, add2:req.body.add2, add3:req.body.add3, phone:req.body.phone}},function(err, foundUser){
         if(err){
             console.log(err)
         } else{
-            res.render("edituser",{ currentUser:req.user})
+            req.flash("success", "Profile Updated!")
+            res.redirect("/")
+            // res.render("edituser",{user:foundUser, currentUser:req.user})
         }
         
     })

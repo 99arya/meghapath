@@ -80,33 +80,9 @@
         
         
         <div class="form-group">
-<button class="btn btn-lg btn-primary btn-block"  value="Submit" id='btnsubmit' >Sign Up</button>        </div>
+<button class="btn btn-lg btn-primary btn-block"  value="Submit" id='btnsubmit' >Update</button>        </div>
     </form>
 </div>
-
-<script>
-
-
-
-    var password = document.getElementById("password")
-  , confirm_password = document.getElementById("confirm_password");
-
-function validatePassword(){
-  if(password.value != confirm_password.value) {
-    confirm_password.setCustomValidity("Passwords Don't Match");
-  } else {
-    confirm_password.setCustomValidity('');
-  }
-}
-
-password.onchange = validatePassword;
-confirm_password.onkeyup = validatePassword;
-
-
-
-
-
-</script>
 
 
 

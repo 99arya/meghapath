@@ -3,27 +3,39 @@
 
 
 <div id="content">
+    
  <div class='container fluid'>
+     
     <div class="row text-center" style = "display:flex; flex-wrap:wrap;">
+        <h1>BILLS</h1>
+       <% bills.reverse(); %>
+       
+       <table class="table table-striped table-hover">
+  <thead>
+    <tr >
+      <th scope="col">Order Number</th>
+      <th scope="col">Table Number</th>
+      <th scope="col">Waiter Name</th>
+      <th scope="col">Date</th>
+    </tr>
+  </thead>
+        <tbody>
 <% bills.forEach(function(bill){ %>
-            <div class="card meal-card" style="width: 15rem;">
-                    
-                    <div class="card-block">
-                        
-                        <h4 class="card-title"> Order Number :  <b><%= bill.bn %></b> </h4><hr>
-                        <h6 class="card-title"> Table Number :  <%= bill.tablenumber %> </h6>
-                        <h6 class="card-title"> Waiter Name : <%= bill.waitername %> </h6>
-                        
-                        <!--<h6 class="add" data-price="<%= bill._id  %>"><%= bill._id %></h6>-->
-                        <p>
-                            <a href="/bills/<%= bill._id %>" class="btn btn-primary">More Info</a>
-                        </p>
-                
 
-                      
-                    </div>
-            </div>
-        <% }); %>
+
+
+ 
+    <tr onclick="window.location='/bills/<%=bill._id%>';">
+      <th scope="row"><a class="tbl" href="/bills/<%=bill._id%>"><%= bill.bn %></a></th>
+      <td><%= bill.tablenumber %></td>
+      <td><%= bill.waitername %></td>
+      <td><%= bill.created %></td>
+    </tr>
+    <% }); %>
+  </tbody>
+</table>
+            
+        
     </div>
    </div>
    </div>
@@ -39,8 +51,14 @@
         margin-left: 4em;
     }
     
-
+tr:hover td{
+background-color:#aab7ff;
+}
     
+}
+.tbl{
+    text:2em;
+    color:black;
 }
 </style>
 
