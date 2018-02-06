@@ -1,7 +1,8 @@
 /* global $*/
-// $('document').ready(function() {
-//     alert("The system is ready!")
-// })
+$('document').ready(function() {
+    $("#kottable tr").remove();
+        $("#kottable").append('<tr><th scope="col">Name</th><th scope="col">Qty.</th></tr>');
+})
 
 
 
@@ -367,6 +368,12 @@ var result = [];
 
   $(document).ready(function() {
             $("#printkot").on("click", function () {//$btnPrint is button which will trigger print
+            var billType = $('#billType').find(":selected").text();
+            $('#kotspan').html(billType)
+            
+            
+            
+            
                 var divContents = $("#kotdiv").html();//div which have to print
                 var printWindow = window.open('', '', 'height=700,width=900');
                 printWindow.document.write('<html><head><title></title>');
@@ -404,6 +411,7 @@ $('#delkot').on('click',function(e){
         
         kotMealList = [];
         mealqty2={}
+        
       });
       
           
@@ -415,3 +423,43 @@ $('#applyDiscount').click(function(){
     var next = old - z
     $('#total_gross').html(next.toFixed(2))
 })
+
+
+
+
+
+
+
+$('#findCust').click(function () {
+    var cPhone = $('#cPhone').val();
+    
+    
+ 
+    
+    $.ajax({
+        url: '/api/getcust',
+        type: "POST",
+        data: {cPhone},
+        dataType: 'json',
+        success: function (data) {
+           var name = data.cName
+           var email = data.cEmail
+           var phone = data.cPhone
+           
+           $('#cPhone').val(phone)
+           $('#cEmail').val(email)
+           $('#cName').val(name)
+           
+            $('#cn').html(name)
+            $('#cp').html(phone)
+            $('#ce').html(email)
+           
+           $('#cPhone').css('border','2px solid lightgreen')
+           $('#cEmail').css('border','2px solid lightgreen')
+           $('#cName').css('border','2px solid lightgreen')
+            
+        }
+    });
+});
+
+

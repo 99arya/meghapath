@@ -119,9 +119,11 @@ var billSchema = new mongoose.Schema({
     sgst: Number,
     tax: Number,
     pm: String,
+    
     cName: String,
     cPhone:String,
     cEmail:String,
+    
     billType: String,
     discount: Number,
     totalAmt: Number,
@@ -848,7 +850,24 @@ app.post("/bills/:id", function(req, res) {
 })
 
 
+// =========================================================start
 
+app.post("/api/getcust", function(req, res) {
+    var cPhone = req.body.cPhone;
+    console.log("-----" + cPhone + "-----")
+    
+    Bill.findOne({cPhone: cPhone},  function(err, foundCust) {
+        if(err){
+            console.log(err)
+        } else {
+            res.json(foundCust)
+        }
+    })
+    
+})
+
+
+// =========================================================end
 
 // =========================================================end
 // =========================================================start
@@ -963,7 +982,7 @@ app.get("/edit", function(req, res){
 
 app.put("/edit", function(req, res){
     
-    User.findOneAndUpdate({username: { $eq: req.user.username }}, {$set:{username:req.body.username, oname:req.body.oname, restoname:req.body.restoname, add1:req.body.add1, add2:req.body.add2, add3:req.body.add3, phone:req.body.phone}},function(err, foundUser){
+    User.findOneAndUpdate({username: { $eq: req.user.username }}, {$set:{username:req.body.username, oname:req.body.oname, restoname:req.body.restoname, add1:req.body.add1, add2:req.body.add2, add3:req.body.add3, phone:req.body.phone, gst:req.body.gst, cin:req.body.cin}},function(err, foundUser){
         if(err){
             console.log(err)
         } else{

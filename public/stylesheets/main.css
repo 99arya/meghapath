@@ -152,16 +152,16 @@
 }
 
 
-a {
+#xx {
     color: white;
     text-decoration: none;
 }
 
-a:hover 
+#xx:hover 
 {
-     color:green; 
+     color:lightblue; 
      text-decoration:none; 
-     cursor:pointer;  
+     cursor:alias;  
 }
 .nav{
 	font-family: 'Open Sans', sans-serif;
@@ -200,4 +200,30 @@ a:hover
     font-size: 1.5em;
     text-align: center;
      text-transform: uppercase;
+}
+
+#billType{
+    width:12.5rem
+}
+
+#findCust{
+    width:4rem;
+    margin-right: 0px;
+    
+}
+
+#space{
+    padding-bottom: 1em
+}
+
+#cPhone{
+    width:7rem;
+}
+
+#cName{
+    margin-bottom: 1em
+}
+
+#payment{
+    width:8.5rem;
 }
