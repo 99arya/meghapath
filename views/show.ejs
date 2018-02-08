@@ -24,7 +24,7 @@
                  <p class="head">-<%= bill.billType %><span id="kotspan"></span>-</p><hr>
 
             <p class="text-center"><b>Table Number : </b><%= bill.tablenumber %></p>
-            <p class="text-center"><b>Waiter Name: </b><%= bill.waitername %></p>
+            <p class="text-center"><b>Waiter Name: </b><%= bill.waitername %><span id="kwn"></span></p>
             <p class="text-center"><b>Order No. : </b><%= bill.bn %></p>
          
 
@@ -67,357 +67,77 @@
 <ul class="list-group">
   <li class="list-group-item active">Order Number : <b id="orderNumber" ><%= bill.bn %> </b></li>
   <li class="list-group-item">Table Number : <b id="tableNumber" ><%= bill.tablenumber %></b></li>
-  <li class="list-group-item">Waiter Name : <b id="waiterName" ><%= bill.waitername %></b></li>
+  <li class="list-group-item">Waiter Name : <b id="waiterName" ><%= bill.waitername %><span class="wn"></span></b></li>
 </ul>
            
      
+     <hr>
+     
+     
+     
                 <!--==============================START===================-->
 
+<ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+     
+      <% cats.forEach(function(cat){ %>
+
+  <li class="nav-item">
+    <a class="nav-link" id="pills-<%=cat.name%>-tab" data-toggle="pill" href="#pills-<%=cat.name%>" role="tab" aria-controls="pills-<%=cat.name%>" aria-selected="true"><%=cat.name%></a>
+  </li>
+    <% }) %>
+    
+  
+
+</ul>
+
+
+
+<div class="tab-content" id="pills-tabContent">
+          <% cats.forEach(function(cat){ %>
+
+  <div class="tab-pane fade show" id="pills-<%=cat.name%>" role="tabpanel" aria-labelledby="pills-<%=cat.name%>-tab"><h1><%=cat.name%></h1>
+  
+  <div class="text-center" style = "display:flex; flex-wrap:wrap;">
+
+        
+        
+        <% meals.forEach(function(meal){ %>
+        
+           <% if(meal.mealcategory ==  cat.name ){ %>
+
+        
+        
+            <div  data-id-value = "<%= meal  %>"  data-mealname-value = "<%= meal.mealname  %>"  data-mealprice-value = "<%= meal.mealprice  %>" class="card meal-card" style="width: 7rem;">
+                    
+                        <!--<h4 class="add" data-price="<%= meal._id  %>"><%= meal._id %></h4>-->
+                      <!--<img class="card-img-top" src="<%=meal.image%>" alt="Card image cap" >-->
+                    <div class="card-block">
+                        
+                        <h6 class="card-title"   data-name="<%= meal.mealname  %>"> <%= meal.mealname %> </h6>
+                        
+                        <!--<p><%=  meal.comment %></p>-->
+                        
+                
+                        <h6 data-pric="<%= meal.mealprice  %>"  class="btn btn-primary">Rs. <%= meal.mealprice  %></h6>
+                        
+                      
+                    </div>
+            </div>
+            <% } %>
+        <% }); %>
+        
+        
+        
+    </div>
+  
+  
+  </div>
+           
+           <% }) %> 
+  </div>
           <!--==============================END===================-->
         <hr>
         
-    
-      <!--==============================START===================-->
-      
-        <h1>Beverages</h1>
-         <div class="text-center" style = "display:flex; flex-wrap:wrap;">
-
-        
-        
-        <% meals.forEach(function(meal){ %>
-        
-           <% if(meal.mealcategory == "Beverages"){ %>
-        
-        
-        
-            <div  data-id-value = "<%= meal  %>"  data-mealname-value = "<%= meal.mealname  %>"  data-mealprice-value = "<%= meal.mealprice  %>" class="card meal-card" style="width: 7rem;">
-                    
-                        <!--<h4 class="add" data-price="<%= meal._id  %>"><%= meal._id %></h4>-->
-                      <!--<img class="card-img-top" src="<%=meal.image%>" alt="Card image cap" >-->
-                    <div class="card-block">
-                        
-                        <h6 class="card-title"   data-name="<%= meal.mealname  %>"> <%= meal.mealname %> </h6>
-                        
-                        <!--<p><%=  meal.comment %></p>-->
-                        
-                
-                        <h6 data-pric="<%= meal.mealprice  %>"  class="btn btn-primary">Rs. <%= meal.mealprice  %></h6>
-                        
-                      
-                    </div>
-            </div>
-            <% } %>
-        <% }); %>
-        <hr>
-        
-        
-    </div>
-    
-      <!--==============================END===================-->
-       <hr>
-        
-        <!--==============================START===================-->
-      
-        <h1>Soups</h1>
-         <div class="text-center" style = "display:flex; flex-wrap:wrap;">
-
-        
-        
-        <% meals.forEach(function(meal){ %>
-        
-           <% if(meal.mealcategory == "Soups"){ %>
-        
-        
-        
-            <div  data-id-value = "<%= meal  %>"  data-mealname-value = "<%= meal.mealname  %>"  data-mealprice-value = "<%= meal.mealprice  %>" class="card meal-card" style="width: 7rem;">
-                    
-                        <!--<h4 class="add" data-price="<%= meal._id  %>"><%= meal._id %></h4>-->
-                      <!--<img class="card-img-top" src="<%=meal.image%>" alt="Card image cap" >-->
-                    <div class="card-block">
-                        
-                        <h6 class="card-title"   data-name="<%= meal.mealname  %>"> <%= meal.mealname %> </h6>
-                        
-                        <!--<p><%=  meal.comment %></p>-->
-                        
-                
-                        <h6 data-pric="<%= meal.mealprice  %>"  class="btn btn-primary">Rs. <%= meal.mealprice  %></h6>
-                        
-                      
-                    </div>
-            </div>
-            <% } %>
-        <% }); %>
-        <hr>
-        
-        
-    </div>
-    
-      <!--==============================END===================-->
-       <hr>
-      <!--==============================START===================-->
-      
-        <h1>Appetizers</h1>
-         <div class="text-center" style = "display:flex; flex-wrap:wrap;">
-
-        
-        
-        <% meals.forEach(function(meal){ %>
-        
-           <% if(meal.mealcategory == "Appetizers"){ %>
-        
-        
-        
-            <div  data-id-value = "<%= meal  %>"  data-mealname-value = "<%= meal.mealname  %>"  data-mealprice-value = "<%= meal.mealprice  %>" class="card meal-card" style="width: 7rem;">
-                    
-                        <!--<h4 class="add" data-price="<%= meal._id  %>"><%= meal._id %></h4>-->
-                      <!--<img class="card-img-top" src="<%=meal.image%>" alt="Card image cap" >-->
-                    <div class="card-block">
-                        
-                        <h6 class="card-title"   data-name="<%= meal.mealname  %>"> <%= meal.mealname %> </h6>
-                        
-                        <!--<p><%=  meal.comment %></p>-->
-                        
-                
-                        <h6 data-pric="<%= meal.mealprice  %>"  class="btn btn-primary">Rs. <%= meal.mealprice  %></h6>
-                        
-                      
-                    </div>
-            </div>
-            <% } %>
-        <% }); %>
-        <hr>
-        
-        
-    </div>
-    
-      <!--==============================END===================-->
-       <hr>
-      
-      <!--==============================START===================-->
-      
-        <h1>North Indian</h1>
-         <div class="text-center" style = "display:flex; flex-wrap:wrap;">
-
-        
-        
-        <% meals.forEach(function(meal){ %>
-        
-           <% if(meal.mealcategory == "North Indian"){ %>
-        
-        
-        
-            <div  data-id-value = "<%= meal  %>"  data-mealname-value = "<%= meal.mealname  %>"  data-mealprice-value = "<%= meal.mealprice  %>" class="card meal-card" style="width: 7rem;">
-                    
-                        <!--<h4 class="add" data-price="<%= meal._id  %>"><%= meal._id %></h4>-->
-                      <!--<img class="card-img-top" src="<%=meal.image%>" alt="Card image cap" >-->
-                    <div class="card-block">
-                        
-                        <h6 class="card-title"   data-name="<%= meal.mealname  %>"> <%= meal.mealname %> </h6>
-                        
-                        <!--<p><%=  meal.comment %></p>-->
-                        
-                
-                        <h6 data-pric="<%= meal.mealprice  %>"  class="btn btn-primary">Rs. <%= meal.mealprice  %></h6>
-                        
-                      
-                    </div>
-            </div>
-            <% } %>
-        <% }); %>
-        
-        
-        
-    </div>
-    
-      <!--==============================END===================-->
-       <hr>
-    
-    
-      <h1>Chinese</h1>
- <div class="text-center" style = "display:flex; flex-wrap:wrap;">
-   
-            <% meals.forEach(function(meal){ %>
-            
-                       <% if(meal.mealcategory == "Chinese"){ %>
-
-            
-            <div  data-id-value = "<%= meal  %>"  data-mealname-value = "<%= meal.mealname  %>"  data-mealprice-value = "<%= meal.mealprice  %>" class="card meal-card" style="width: 7rem;">
-                    
-                        <!--<h4 class="add" data-price="<%= meal._id  %>"><%= meal._id %></h4>-->
-                      <!--<img class="card-img-top" src="<%=meal.image%>" alt="Card image cap" >-->
-                    <div class="card-block">
-                        
-                        <h6 class="card-title"   data-name="<%= meal.mealname  %>"> <%= meal.mealname %> </h6>
-                        
-                        <!--<p><%=  meal.comment %></p>-->
-                        
-                
-                        <h6 data-pric="<%= meal.mealprice  %>"  class="btn btn-primary">Rs. <%= meal.mealprice  %></h6>
-                        
-                      
-                    </div>
-            </div>
-             <% } %>
-        <% }); %>
-        </div>
-        <hr>
-        
-      <!--==============================START===================-->
-      
-        <h1>Breads</h1>
-         <div class="text-center" style = "display:flex; flex-wrap:wrap;">
-
-        
-        
-        <% meals.forEach(function(meal){ %>
-        
-           <% if(meal.mealcategory == "Breads"){ %>
-        
-        
-        
-            <div  data-id-value = "<%= meal  %>"  data-mealname-value = "<%= meal.mealname  %>"  data-mealprice-value = "<%= meal.mealprice  %>" class="card meal-card" style="width: 7rem;">
-                    
-                        <!--<h4 class="add" data-price="<%= meal._id  %>"><%= meal._id %></h4>-->
-                      <!--<img class="card-img-top" src="<%=meal.image%>" alt="Card image cap" >-->
-                    <div class="card-block">
-                        
-                        <h6 class="card-title"   data-name="<%= meal.mealname  %>"> <%= meal.mealname %> </h6>
-                        
-                        <!--<p><%=  meal.comment %></p>-->
-                        
-                
-                        <h6 data-pric="<%= meal.mealprice  %>"  class="btn btn-primary">Rs. <%= meal.mealprice  %></h6>
-                        
-                      
-                    </div>
-            </div>
-            <% } %>
-        <% }); %>
-        
-        
-        
-    </div>
-    
-      <!--==============================END===================-->
-       
-    <hr>
-        
-      <!--==============================START===================-->
-      
-        <h1>Rice</h1>
-         <div class="text-center" style = "display:flex; flex-wrap:wrap;">
-
-        
-        
-        <% meals.forEach(function(meal){ %>
-        
-           <% if(meal.mealcategory == "Rice"){ %>
-        
-        
-        
-            <div  data-id-value = "<%= meal  %>"  data-mealname-value = "<%= meal.mealname  %>"  data-mealprice-value = "<%= meal.mealprice  %>" class="card meal-card" style="width: 7rem;">
-                    
-                        <!--<h4 class="add" data-price="<%= meal._id  %>"><%= meal._id %></h4>-->
-                      <!--<img class="card-img-top" src="<%=meal.image%>" alt="Card image cap" >-->
-                    <div class="card-block">
-                        
-                        <h6 class="card-title"   data-name="<%= meal.mealname  %>"> <%= meal.mealname %> </h6>
-                        
-                        <!--<p><%=  meal.comment %></p>-->
-                        
-                
-                        <h6 data-pric="<%= meal.mealprice  %>"  class="btn btn-primary">Rs. <%= meal.mealprice  %></h6>
-                        
-                      
-                    </div>
-            </div>
-            <% } %>
-        <% }); %>
-        
-        
-        
-    </div>
-    
-      <!--==============================END===================-->
-       <hr>
-       
-        
-      <!--==============================START===================-->
-      
-        <h1>Desserts</h1>
-         <div class="text-center" style = "display:flex; flex-wrap:wrap;">
-
-        
-        
-        <% meals.forEach(function(meal){ %>
-        
-           <% if(meal.mealcategory == "Desserts"){ %>
-        
-        
-        
-            <div  data-id-value = "<%= meal  %>"  data-mealname-value = "<%= meal.mealname  %>"  data-mealprice-value = "<%= meal.mealprice  %>" class="card meal-card" style="width: 7rem;">
-                    
-                        <!--<h4 class="add" data-price="<%= meal._id  %>"><%= meal._id %></h4>-->
-                      <!--<img class="card-img-top" src="<%=meal.image%>" alt="Card image cap" >-->
-                    <div class="card-block">
-                        
-                        <h6 class="card-title"   data-name="<%= meal.mealname  %>"> <%= meal.mealname %> </h6>
-                        
-                        <!--<p><%=  meal.comment %></p>-->
-                        
-                
-                        <h6 data-pric="<%= meal.mealprice  %>"  class="btn btn-primary">Rs. <%= meal.mealprice  %></h6>
-                        
-                      
-                    </div>
-            </div>
-            <% } %>
-        <% }); %>
-        
-        
-        
-    </div>
-    
-      <!--==============================END===================-->
-       
-    <hr>
-    
-     <!--==============================START===================-->
-      
-        <h1>Others</h1>
-         <div class="text-center" style = "display:flex; flex-wrap:wrap;">
-
-        
-        
-        <% meals.forEach(function(meal){ %>
-        
-           <% if(meal.mealcategory != "Desserts" && meal.mealcategory !=  "Rice" && meal.mealcategory !=  "Breads" && meal.mealcategory !=  "Chinese" && meal.mealcategory !=  "North Indian" && meal.mealcategory !=  "Beverages" && meal.mealcategory !=  "Soups" && meal.mealcategory !=  "Appetizers" ){ %>
-        
-        
-        
-            <div  data-id-value = "<%= meal  %>"  data-mealname-value = "<%= meal.mealname  %>"  data-mealprice-value = "<%= meal.mealprice  %>" class="card meal-card" style="width: 7rem;">
-                    
-                        <!--<h4 class="add" data-price="<%= meal._id  %>"><%= meal._id %></h4>-->
-                      <!--<img class="card-img-top" src="<%=meal.image%>" alt="Card image cap" >-->
-                    <div class="card-block">
-                        
-                        <h6 class="card-title"   data-name="<%= meal.mealname  %>"> <%= meal.mealname %> </h6>
-                        
-                        <!--<p><%=  meal.comment %></p>-->
-                        
-                
-                        <h6 data-pric="<%= meal.mealprice  %>"  class="btn btn-primary">Rs. <%= meal.mealprice  %></h6>
-                        
-                      
-                    </div>
-            </div>
-            <% } %>
-        <% }); %>
-        
-        
-        
-    </div>
-    
       <!--==============================END===================-->
     
     
@@ -452,7 +172,39 @@
     </div>
   </div>
 </form>
-             
+           <script>
+$('#findCust').click(function () {
+    var cPhone = $('#cPhone').val();
+    
+    
+ 
+    
+    $.ajax({
+        url: '/api/getcust',
+        type: "POST",
+        data: {cPhone},
+        dataType: 'json',
+        success: function (data) {
+           var name = data.cName
+           var email = data.cEmail
+           var phone = data.cPhone
+           
+           $('#cPhone').val(phone)
+           $('#cEmail').val(email)
+           $('#cName').val(name)
+           
+            $('#cn').html(name)
+            $('#cp').html(phone)
+            $('#ce').html(email)
+           
+           $('#cPhone').css('border','2px solid lightgreen')
+           $('#cEmail').css('border','2px solid lightgreen')
+           $('#cName').css('border','2px solid lightgreen')
+            
+        }
+    });
+});
+</script>  
              
     <form class="form-inline" id = "theform">
         
@@ -470,31 +222,31 @@
         <div class="form-group">
              <p style="display:inline-block"  for="custEmail">Customer E-Mail</p>
         <input class="form-control"  style="margin-left:2em;" type = "text" name="cEmail" id = "cEmail" placeholder = "Customer E-Mail"  value="<%= bill.cEmail %>"></div>
+    
+    
+           <div class="form-group">
+             <p style="display:inline-block "  for="wName"> Waiter's -- Name </p>
+        <input class="form-control"  style="margin-left:2em;" type = "text" name="wName" id = "wName" placeholder = "Waiter Name"  value="<%= bill.waitername %>"></div>
+    
+    
     </form>  
+    
     <div id ="billdiv" >
 
         
         <p class="head">---<%= bill.billType %><span id="bt"></span>---</p><hr>
         <p class = "head" ><b><%= currentUser.restoname %></b></p>
          <p class = "text-center billp" ><%= currentUser.add1  %></p>
-        
+        <p  id = "tId"><%= bill.tableId %></p>
          <p class = "text-center billp" ><%= currentUser.add2  %></p>
          <p class = "text-center billp" ><%= currentUser.add3  %></p>
           <p class = "text-center billp" >PH. <%= currentUser.phone  %></p>
           <p class = "text-center billp" >GST No. <%= currentUser.gst  %></p>
           <p class = "text-center billp" >CIN No. <%= currentUser.cin  %></p>
         
-         <!--<p class = "text-center billp" ><b>CAFE - O2</b></p>-->
-         <!--<p class = "text-center billp" >PLOT 147, NEAR RAHEJA ATLANTIS</p>-->
-        
-         <!--<p class = "text-center billp" >SECTOR-31, GURGAON</p>-->
-         <!--<p class = "text-center billp" >HARYANA 122001</p>-->
-         <!-- <p class = "text-center billp" >PH. 9891471187, 8447343632</p>-->
-          
-          
           <hr id="billtablemargin">
           
-    <li class="il"><b>Waiter Name: </b><%= bill.waitername %><span class="right"> <b>Order No.:</b> <%= bill.bn %></span></li>
+    <li class="il"><b>Waiter Name: </b><%= bill.waitername %><span class="wn"></span><span class="right"> <b>Order No.:</b> <%= bill.bn %></span></li>
     <li class="il dates" style="margin-top:0.8em; margin-bottom:0.8em; line-height:2px;" ><b>Date: </b> <%= bill.created %></li>
 
 
@@ -530,10 +282,10 @@
      <% bill.meals.forEach(function(list){ %>
 
       
-    <tr>
+    <tr id="<%=list.id%>">
       
       <td name="foodqty"><%= list.name %></td>
-      <th name="qty" scope="row"><%= list.qty %></th>
+      <td name="qty"><%= list.qty %></td>
       
       <td class="money"><%= list.price %></td>
       <td name = "rate"><%= list.rate %></td>
@@ -617,6 +369,7 @@
                 
   <button style="margin-left:auto;margin-right:auto;display:block;margin-top:0%;margin-bottom:0%"  id="sendBill" type="button" class="btn btn-lg btn-success btn-block">Upload Bill</button><br>
   <button style="margin-left:auto;margin-right:auto;display:block;margin-top:0%;margin-bottom:0%"  id="newBill" type="button" class="btn btn-lg btn-primary btn-block">New Bill</button><br>
+  <a  href="/api/dashboard" ><button style="margin-left:auto;margin-right:auto;display:block;margin-top:0%;margin-bottom:0%"  class="btn btn-lg btn-primary btn-block">Dashboard</button></a><br>
    <!--<div class="form-group">-->
   <!--<button onClick="download()">Download</button>-->
   <!--<button style="margin-left:auto;margin-right:auto;display:block;margin-top:0%;margin-bottom:0%" onClick="download()" type="button" class="btn btn-lg btn-info btn-block">Download PDF</button></div>-->
@@ -629,11 +382,17 @@
    
  
      <script>
+     
+      $("#tId").hide();
+
+
   
           $('#newBill').click(function(){
             window.location.href= "/newbill"  
               
           })
+          
+          
      $('#sendBill').click(function(){
     $(this).prop('disabled', true);
           var meals = JSON.stringify(myList);
@@ -648,6 +407,8 @@
           var billType = $('#billType').find(":selected").text();
           var discount = $('#discountPercentage').val();
           var totalAmt = $('#totalAmt').text()
+          var wName = $('#wName').val()
+          console.log("wName "+ wName)
 
         $('#cn').html(cName)
         $('#cp').html(cPhone)
@@ -656,6 +417,36 @@
         $('#dis').html(discount)
         $('#toa').html(totalAmt)
         $('#pm').html(pm)
+        $('.wn').html(wName)
+        console.log(wName)
+        
+        
+        var id = $('#tId').text()
+        
+        // xxx
+        $.ajax({
+        url: '/api/falsetable?_method=PUT',
+        type: "POST",
+        data: {id},
+        dataType: 'json',
+        success: function (data) {
+           var name = data.name
+           var available = data.available
+           var username = data.username
+           
+           console.log(name)
+           console.log(available)
+           console.log(username)
+           
+                      $(this).toggleClass("black")
+
+        }
+    });
+        // xxx
+        
+        
+        
+        
         
         
         var divContents = $("#billdiv").html();//div which have to print
@@ -680,10 +471,10 @@
 
 
 
+var waitername=wName
 
 
-
-     var details = {billType, total, cgst, sgst, tax, pm, cName, cPhone, cEmail, discount, totalAmt}
+     var details = {billType, total, cgst, sgst, tax, pm, cName, cPhone, cEmail, discount, totalAmt, waitername}
           console.log(details)
           
    
@@ -691,7 +482,7 @@
                       .then(
                                   
                               
-                              $.post("/bills/<%= bill._id %>/bd", {billType, total, cgst, sgst, tax, pm, cName, cPhone, cEmail, discount, totalAmt:totalAmt})
+                              $.post("/bills/<%= bill._id %>/bd", {waitername, billType, total, cgst, sgst, tax, pm, cName, cPhone, cEmail, discount, totalAmt:totalAmt})
                                    )
        
       
@@ -734,10 +525,7 @@
             
     </div>
     
-
-    
-
-    <!--===========================================================-->
+    <!--============================SCRIPTING START===============================-->
 <style>
     @media (max-width:480px)  {
     /* smartphones, iPhone, portrait 480x320 phones */ 
@@ -757,17 +545,464 @@
 
     <script>
     
+// var array = [];
+//     var headers = [];
+//     var myList=[]
     
-// $('#sendBill').on('click',function()
-//   {
+//     headers.push("name")
+//     headers.push("qty")
+//     headers.push("price")
+//     headers.push("rate")
+//     headers.push("id")
+    
+//     $('#billtable tr').has('td').each(function() {
+//         var arrayItem = {};
+//         $('td', $(this)).each(function(index, item) {
+//             arrayItem[headers[index]] = $(item).html();
+//             arrayItem[headers[4]]= $(this).closest("tr").attr("id")
+//         });
+        
+      
+        
+        
+//         array.push(arrayItem);
+//         myList.push(arrayItem)
+        
+//     });
+// console.log(myList)
+// // alert(JSON.stringify(array));
 
-//     $(this).parent().val('Please wait ...')
-//       .attr('disabled','disabled');
-//     $('#theform').submit();
-//   });
+// 
+
+    var array = [];
+    var headers = [];
+    var myList=[]
+    var mealList=[]
+    var mealqty={}
+    
+  
+    
+
+    headers.push("name")
+    headers.push("qty")
+    headers.push("price")
+    headers.push("rate")
+    headers.push("id")
+    
+    $('#billtable tr').has('td').each(function() {
+        var arrayItem = {};
+        $('td', $(this)).each(function(index, item) {
+            arrayItem[headers[index]] = $(item).html();
+            arrayItem[headers[4]]= $(this).closest("tr").attr("id")
+            arrayItem[headers[2]]=Number(arrayItem[headers[2]]) //price
+            arrayItem[headers[3]]=Number(arrayItem[headers[3]]) //rate
+            arrayItem[headers[1]]=Number(arrayItem[headers[1]]) // qty
+        });
+        
+        var mealname=arrayItem[headers[0]]
+        
+        mealqty[mealname] =arrayItem[headers[1]]
+        console.log("haha " + mealqty[mealname])
+        
+        
+      mealList.push(arrayItem[headers[0]]) //name
+        
+        
+        array.push(arrayItem);
+        myList.push(arrayItem)
+        
+        
+        
+    });
+console.log(myList)
+console.log(mealList)
+
+
+// =======================
+
+
+var mealqty2={}
+
+
+
+var kotMealList = []
+
+
+
+//  =======================================
+
+$(".card").unbind().on("click", function(){
+    console.log("IN card click")
+ var mealid=$(this).data("id-value");
+
+ 
+ var mealid = mealid.split( "\n" );
+ var mealid = mealid[0]
+ var mealid = mealid.replace( "{ _id: ", "" )
+ var mealid = mealid.replace( ",", "" )
+
+ 
+ var mealname=$(this).data("mealname-value");
+ var mealprice=$(this).data("mealprice-value"); 
+
+
+ if (mealList.includes(mealname)){
+     
+      
+ console.log("IN $card, IF")
+     
+          mealqty[mealname] = mealqty[mealname]+1;
+          
+          $('#'+mealid).html('<td>' + mealname + '</td><th scope="row"><span>'+ mealqty[mealname] +'</span> <span class = "del"><i class="fa fa-minus-circle" aria-hidden="true"></i></span></th><td>' + mealprice + '</td><td>' + mealprice*mealqty[mealname] + '</td>')
+          
+           var Qty=mealqty[mealname];
+          
+        
+          
+          var myObject = new Object();
+                myObject.name = mealname;
+                myObject.qty = mealqty[mealname];
+                myObject.id = mealid;
+                myObject.price = mealprice;
+                myObject.rate = mealprice*mealqty[mealname];
+                
+            
+                myList = $.grep(myList, function(e){ 
+                 
+                  return e.name != myObject.name; 
+                  
+                    });
+                
+    
+              myList.push(myObject)
+                  
+     //change total grosss amount accordingly in bill table
+    
+     
+  
+
+  }
+ else {
+     console.log("IN $card, ELSE ")
+          mealList.push(mealname);
+          
+          mealqty[mealname] = 1;
+          
+          
+          
+          var newTab=$('<tr class="tableMealId"  id ='+ mealid + '><td>' + mealname + '</td ><th scope="row"><span>' + mealqty[mealname] + '</span> <span class = "del"><i class="fa fa-minus-circle" aria-hidden="true"></i></span></th><td>' + mealprice + '</td><td>' + mealprice*mealqty[mealname] + '</td></tr>')
+          newTab.data('id',mealid)
+           $('#billtable').append(newTab)
+          
+          
+      
+          var Qty=mealqty[mealname];
+          
+            
+            
+              var myObject = new Object();
+                myObject.name =  mealname;
+                myObject.qty = mealqty[mealname];
+                myObject.id = mealid;
+                myObject.price = mealprice;
+                myObject.rate = mealprice*mealqty[mealname];
+
+
+              myList.push(myObject)
+
+
+
+        var total = Number($('#total_gross').text())
+        
+        var cgst = $('#cgst').text()
+        var sgst = $('#sgst').text()
+        var tax = $('#tax').text()
+       
+        var t = total + mealprice 
+        var pertax= 0.05*mealprice
+        t=t+pertax
+        console.log("this is t " + t)
+        
+          var totalAmt = $('#totalAmt').text()
+        totalAmt = totalAmt + mealprice
+        $('#totalAmt').text(totalAmt)
+        
+        
+        
+        $('#total_gross').text(t.toFixed(2)) 
+      
+                  
+
+
+ }
+ 
+//  =======================================
+ 
+ 
+ $('span.del').unbind().click(function(event){
+     console.log(event.currentTarget)
+          console.log(event.target)
+
+     console.log("Event fired")
+                    var mealid = $(this).closest("tr").attr("id")
+                        console.log(mealid)
+     
+                     var span=$(this).parent().find("span").first();
+                        console.log("quantity " + span.text())
+                        var qtyspan = span.text();
+                     
+                     var mealname=$(this).closest("tr").find("td").first().text();
+                        console.log("ame " + mealname)
+                     
+                      var mealprice=$(this).closest("tr").find("td").first().next().next().text();
+                        console.log("price " +mealprice)
+    
+                    var mealrate = $(this).closest("tr").find("td").first().next().next().next().text();
+ var pertax = 0.05*mealprice
+        console.log("pertax " + pertax)
+    
+  if(qtyspan==1){
+      console.log("IF Quantity = 1")
+      // Delete Row
+       $("#billtable tr#"+mealid).remove();
+
+            mealList = $.grep(mealList, function(e){ 
+                  return e != mealname; 
+                    });
+              
+      
+      // Delete object from myList 
+           myList = $.grep(myList, function(e){ 
+                  return e.name != mealname; 
+                    });
+                    
+                    
+         // Delete object from kotList 
+           kotMealList = $.grep(kotMealList, function(e){ 
+                  return e != mealname; 
+                    });            
+                    
+        kotMealList            
+              
+        //change total grosss amount accordingly in bill table
+    
+        var total = $('#total_gross').text()
+        
+        var cgst = $('#cgst').text()
+        var sgst = $('#sgst').text()
+        var tax = $('#tax').text()
+       
+        var t = total - mealprice 
+        t=t-pertax
+        console.log("this is t " + t)
+        
+          var totalAmt = $('#totalAmt').text()
+        totalAmt = totalAmt - mealprice
+        $('#totalAmt').text(totalAmt)
+        
+        
+        
+        $('#total_gross').text(t.toFixed(2)) 
+      
+        var c = cgst - (0.025*mealprice)  
+        if(isNaN(c)|| c<0)   {
+                                     c=0
+                                    }
+                                    
+        $('#cgst').text(c.toFixed(2))
+        
+        var s = sgst - (0.025*mealprice)     
+         if(isNaN(s)|| s<0)   {
+                                     s=0
+                                    }
+                                    
+        $('#sgst').text(s.toFixed(2))
+        
+        var ta = c + s;
+        
+                    if(isNaN(ta)|| ta<0 || ta<1)   {
+                                     ta=0
+                                    }
+                                    
+        $('#tax').text(ta.toFixed(2))
+        
+        
+        console.log("TA_ " + ta)
+                    
+      
+  } else {
+      
+      console.log("ELSE Quantity > 1")
+      // Decrement qty span
+      qtyspan = Number(qtyspan) - 1;
+      
+    span.text(qtyspan)
+    // change qty obj
+    
+      
+      // decreasing myObject.qty from myList
+        
+                myList = $.grep(myList, function(e){ 
+                    if(e.id==mealid){
+                        e.qty=Number(e.qty)-1;
+                    }
+                  return e; 
+                    });
+              
+        //change rate accordingly in myList
+        
+                myList = $.grep(myList, function(e){ 
+                    if(e.id==mealid){
+                        e.rate=Number(e.rate)-Number(mealprice);
+                    }
+                  return e; 
+                    });
+        
+        //change total grosss amount accordingly in bill table
+    
+        var total = $('#total_gross').text()
+        
+        var totalAmt = $('#totalAmt').text()
+        totalAmt = totalAmt - mealprice
+        $('#totalAmt').text(totalAmt)
+        
+        var t = total - mealprice
+        t=t-pertax
+        console.log("this is t " + t)
+        $('#total_gross').text(t.toFixed(2)) 
+        
+        
+        
+      //change html
+      
+            var nee = mealrate - mealprice
+                $(this).closest("tr").find("td").first().next().next().next().text(nee);
+                
+                   //change total grosss amount accordingly in bill table
+                
+                    var total = Number($('#total_gross').text())
+                    var cgst = Number($('#cgst').text())
+                    var sgst = Number($('#sgst').text())
+                    var tax = Number($('#tax').text())
+                    
+                    
+                  
+                    var c = cgst - (0.025*mealprice)      
+                    $('#cgst').text(c.toFixed(2))
+                    
+                    var s = sgst - (0.025*mealprice)      
+                    $('#sgst').text(s.toFixed(2))
+                    
+                    var ta =  (c + s);
+                    console.log("TA_ " + ta)
+                    if(isNaN(ta)){
+                        ta=0
+                    }
+                    
+                     $('#tax').text(ta.toFixed(2))
+                     console.log("C" + c)
+                     console.log("S" + s)
+                     console.log("T" + ta)
+
+  }
+  
+   
+ 
+if (kotMealList.includes(mealname)){
+    
+          mealqty2[mealname] = mealqty2[mealname]-1;
+          
+          $('#'+mealid+'_a').html('<td>' + mealname + '</td><th scope="row">'+ mealqty2[mealname] +'</th>')
+          
+ } else {
+  
+        //   $('table#billtable tr#'+mealid+'_a').remove();
+        //   $("#billtable tr#"+mealid).remove();
+          $('#'+mealid+'_a').remove()
+console.log("HERE")
+ }
+
+
+
+}) //== minus icon click end
+
+ //  =======================================
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+if (kotMealList.includes(mealname)){
+    
+          mealqty2[mealname] = mealqty2[mealname]+1;
+          
+          $('#'+mealid+'_a').html('<td>' + mealname + '</td><th scope="row">'+ mealqty2[mealname] +'</th>')
+          
+ } else {
+  
+          kotMealList.push(mealname);
+          mealqty2[mealname] = 1;
+          
+          $('#kottable').append('<tr id ='+ mealid+ '_a><td>' + mealname + '</td><th scope="row">'+ mealqty2[mealname] +'</th></tr>');
+         
+ }
+
+
+
+
+  var pregst = mealprice - 0.05*mealprice;
+     
+ 
+ 
+ 
+
+
+//  alert(kot)
+ 
+//  $('#myTable').append('<tr><td>my data</td><td>more data</td></tr>');
+
+var result = [];
+  $('table tr').each(function(){
+  	$('td', this).each(function(index, val){
+    	if(!result[index]) result[index] = 0;
+      result[index] += parseInt($(val).text());
+    });
+  });
+  
+  $('table').append('<tr></tr>');
   
   
-    </script>
+  $(result).each(function(){
+      
+
+        var cgst=this*0.025;
+         	$('#cgst').html(cgst.toFixed(2))
+    
+        var sgst=this*0.025;
+         	$('#sgst').html(sgst.toFixed(2))
+        var tax = cgst + sgst;
+      
+        var pregsttotal = (this ).toFixed(2);
+
+    var x = tax;
+    var y = this;
+    var z = x+y
+    $('#totalAmt').html(pregsttotal)
+   	$('#total_gross').html(z.toFixed(2))
+    $('#tax').html(tax.toFixed(2))
+
+  });
+ 
+ 
+});
+
+
+</script>
     
 
 

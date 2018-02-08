@@ -91,12 +91,13 @@
                     <li><a class="nav-link"  href="/register"></span> Sign Up</a></li>
                     
                     <% } else { %>
-                    <li class="nav-item"><a class="nav-link" href="/newbill"> + New Bill</a></li>
+                    <!--<li class="nav-item"><a class="nav-link" href="/newbill"> + New Bill</a></li>-->
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                            Welcome <%= currentUser.oname %>
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                          <a class="dropdown-item" href="/api/dashboard"> Dashboard</a>
                           <a class="dropdown-item" href="/bills"> Bills</a>
                           <a class="dropdown-item" href="/meals"> Meals</a>
                           <a class="dropdown-item" href="/feedbacks"> Feedbacks</a>

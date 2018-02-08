@@ -1,0 +1,312 @@
+<% include ./partials/header %>
+
+
+
+<body>
+    
+    <div id="content">
+        <div class="container" >
+  
+     <div class="newforms" >
+        <div class="form-group">
+    <h2 style="text-align: center; " >Dashboard</h2><br>
+    </div>
+    
+    
+     
+        </div>
+            
+           
+    
+    </div>
+    
+    
+    
+    
+  
+     <div class='container fluid'>
+    <div class="row text-center" style = "display:flex; flex-wrap:wrap;">
+        
+        <br>
+            <% tables.forEach(function(table){ %>
+            <% if(table.available=="true"){ %>
+            <div class="card table-card available"  id="<%= table._id %>"  style="width: 15rem;">
+                    
+                    <% } else { %>
+                        <div class="card table-card notavailable"   id="<%= table._id %>"  style="width: 15rem;">
+
+                    <% } %>
+                        <h4 class="add" data-price="<%= table._id  %>"><%= table.name %></h4>
+                      <!--<img class="card-img-top" src="<%=table.image%>" alt="Card image cap" >-->
+                    <div class="card-block">
+                        
+                        <!--<h6 class="card-title"   data-name="<%= table.name  %>"> <%= table.name %> </h6>-->
+                        
+                        <!--<p class="card-text"><%= table.category  %></p>-->
+                        <p><%=  table.bill %></p>
+                        
+                <span type="hidden" class="tbl" id="<%= table._id  %>_a"></span>
+                    <button type="button" data-bill-value="<%=  table.bill %>" data-name-value="<%= table.name  %>"  data-id-value="<%= table._id%>"  class="btn btn-primary <%= table.available%> "><%= table.available%></button>
+                       
+                       
+
+                       
+                    </div>
+            </div>
+        <% }); %>
+    </div>
+       
+<div class='container fluid'>
+    
+       <form>
+  <div class="row">
+    <div class="col">
+      <p style="display:inline" ><b>Add Table: </b></p>
+    </div>
+    <div class="col">
+      <input type="text" id="tableName" class="form-control" placeholder="Name">
+    </div>
+    <div class="col">
+     <button type="button" class="btn btn-success" id = "addTable">Add</button>
+    </div>
+  </div>
+</form>
+    
+    
+</div>
+
+    
+   </div>
+   
+   
+   <script>
+       
+       
+
+$('#addTable').click(function () {
+    var name = $('#tableName').val();
+    
+    
+ 
+    
+    $.ajax({
+        url: '/api/newTable',
+        type: "POST",
+        data: {name},
+        dataType: 'json',
+        success: function (data) {
+           var name = data.name
+           var available = data.available
+           var username = data.username
+           
+           console.log(name)
+           console.log(available)
+           console.log(username)
+           
+           
+           
+        }
+    });
+});
+
+
+       
+       
+     $(".true").on("click", function(){  
+
+        
+         var name=$(this).data("name-value");
+         var id=$(this).data("id-value");
+         
+        console.log("sending occupied req table id" + id)
+        // $(this).html("false")
+        // $(this).removeClass("true")
+        // $(this).addClass("false")
+        
+        
+        var sid = id;
+        
+        
+    $.ajax({
+            url: '/newbill',
+            type: "POST",
+            data: {tablenumber:name, tableId:sid},
+            dataType: 'json',
+            success: function (data) {
+           
+                       var id = data.id
+                       var tid = data.tid
+                      console.log("table id in bill "+ tid)
+                      console.log("______occupied to bill___ " + id)
+                        $("#"+tid+"_a").text(id)
+                       $('#' + tid + "").removeClass("available")
+                           $('#' + tid + "").addClass("notavailable")
+                    var bill=id
+                    console.log("THIS "+ bill)
+                    var id= tid;
+                    console.log("THAT"+id)
+                          
+      
+      
+               $.ajax({
+                        url: '/api/truetable?_method=PUT',
+                        type: "POST",
+                        data: {id, bill},
+                        dataType: 'json',
+                        success: function (data) {
+                           var name = data.name
+                           var available = data.available
+                           var username = data.username
+                           var id = data.id
+                           var billd= data.bill
+                           console.log("truetable")
+                           console.log(name)
+                           console.log(available)
+                           console.log(username)
+                           
+                           console.log("sid table " + sid)
+                           console.log("id " + id)
+                           console.log("billd " + billd)
+                           console.log("bill " + bill)
+             window.location.href="/bills/"+bill
+     
+    
+        }
+    });
+      
+        }
+      
+    });
+        
+        
+
+});
+
+       
+
+  $(".false").on("click", function(){
+     
+    //  var name=$(this).data("name-value");
+     var bill=$(this).data("bill-value");
+     console.log("bill =  " + bill)
+    //  var id=$(this).data("id-value");
+//     console.log("sending unoccupied req " + id)
+//     $(this).html("true")
+    
+//     $(this).removeClass("false")
+//     $(this).addClass("true")
+//   ;
+   
+//     $.ajax({
+//         url: '/api/falsetable?_method=PUT',
+//         type: "POST",
+//         data: {id},
+//         dataType: 'json',
+//         success: function (data) {
+//           var name = data.name
+//           var available = data.available
+//           var username = data.username
+//           var tbid = data._id
+           
+           
+//           console.log(name)
+//           console.log(available)
+//           console.log(username)
+//           console.log(" in successss unoccupied table id " + tbid)
+           
+           
+           
+//           $('#' + tbid + "").removeClass("notavailable")
+//                                  $('#' + tbid + "").addClass("available")
+
+                      
+//                     //   $('#' + tbid + "").style.setProperty("background-color", "purple", "important")
+//                     //   $('#' + tid + "")[0].style.setProperty("background-color", "yellow",  "important")
+//                         // $('#' + tbid + "").attr('style','width: 15rem; background-color:purple !important');
+//         }
+//     });
+
+
+window.location.href="/bills/"+bill
+
+
+});
+
+       
+   </script>
+   
+<!--   <table>-->
+<!--    <tr>-->
+<!--        <th>User_Name</th>-->
+<!--        <th>score</th>-->
+<!--        <th>team</th>-->
+<!--    </tr>-->
+<!--</table>-->
+   
+<!--   <script>-->
+<!--   var url="/api/gettable"-->
+<!--        $.getJSON(url,-->
+<!--    function (json) {-->
+<!--        var tr;-->
+<!--        for (var i = 0; i < json.length; i++) {-->
+<!--            tr = $('<tr/>');-->
+<!--            tr.append("<td>" + json[i].name + "</td>");-->
+<!--            tr.append("<td>" + json[i].available + "</td>");-->
+<!--            tr.append("<td>" + json[i].username + "</td>");-->
+<!--            $('table').append(tr);-->
+<!--        }-->
+<!--    });-->
+<!--   </script>-->
+   
+   
+   
+    <style>
+    
+    .available{
+        background-color:#7af75d;
+    }
+    .notavailable{
+        background-color:#ffb970;
+    }
+    
+    .black{
+        background-color:black;
+    }
+        .table-card{
+            padding:1.5%;
+            display:flex;
+        }
+        
+        .newforms {
+    margin-bottom: 1em;
+}
+
+.newforms {
+    display: block;
+    padding:2em;
+    margin-top: 0em;
+}
+    </style>
+
+    
+
+<style>
+    @media (min-width:320px)  {
+    /* smartphones, iPhone, portrait 480x320 phones */ 
+    #content{
+        margin-top: 4em;
+    }
+    
+    .table-card{
+        margin-left: 4em;
+    }
+    
+
+    
+}
+</style>
+
+
+
+
+<% include ./partials/footer %>

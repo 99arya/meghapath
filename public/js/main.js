@@ -1,345 +1,3 @@
-/* global $*/
-$('document').ready(function() {
-    $("#kottable tr").remove();
-        $("#kottable").append('<tr><th scope="col">Name</th><th scope="col">Qty.</th></tr>');
-})
-
-
-
-var kot = {}
-
-var mealqty = {} 
-
-var mealqty2={}
-
-var mealList = []
-
-var kotMealList = []
-
-var myList=[]
-
-//  =======================================
-
-$(".card").on("click", function(){
- var mealid=$(this).data("id-value");
-
- 
- var mealid = mealid.split( "\n" );
- var mealid = mealid[0]
- var mealid = mealid.replace( "{ _id: ", "" )
- var mealid = mealid.replace( ",", "" )
-
- 
- var mealname=$(this).data("mealname-value");
- var mealprice=$(this).data("mealprice-value"); 
- 
-
- if (mealList.includes(mealname)){
-     
-          mealqty[mealname] = mealqty[mealname]+1;
-          
-          $('#'+mealid).html('<td>' + mealname + '</td><th scope="row"><span>'+ mealqty[mealname] +'</span> <span class = "del"><i class="fa fa-minus-circle" aria-hidden="true"></i></span></th><td>' + mealprice + '</td><td>' + mealprice*mealqty[mealname] + '</td>')
-          
-           var Qty=mealqty[mealname];
-          
-        
-          
-          var myObject = new Object();
-                myObject.name = mealname;
-                myObject.qty = mealqty[mealname];
-                myObject.id = mealid;
-                myObject.price = mealprice;
-                myObject.rate = mealprice*mealqty[mealname];
-                
-                
-                
-                myList = $.grep(myList, function(e){ 
-                  return e.name != myObject.name; 
-                    });
-              
- 
-    
-              myList.push(myObject)
-                  
-  
-  
-
-  }
- else {
-          mealList.push(mealname);
-          
-          mealqty[mealname] = 1;
-          
-          
-          var newTab=$('<tr class="tableMealId"  id ='+ mealid + '><td>' + mealname + '</td ><th scope="row"><span>' + mealqty[mealname] + '</span> <span class = "del"><i class="fa fa-minus-circle" aria-hidden="true"></i></span></th><td>' + mealprice + '</td><td>' + mealprice*mealqty[mealname] + '</td></tr>')
-          newTab.data('id',mealid)
-           $('#billtable').append(newTab)
-          
-          
-      
-          var Qty=mealqty[mealname];
-          
-            
-            
-              var myObject = new Object();
-                myObject.name =  mealname;
-                myObject.qty = mealqty[mealname];
-                myObject.id = mealid;
-                myObject.price = mealprice;
-                myObject.rate = mealprice*mealqty[mealname];
-
-
-              myList.push(myObject)
-                  
-
- }
- 
-//  =======================================
- 
- 
- $('span.del').unbind().click(function(event){
-     console.log(event.currentTarget)
-          console.log(event.target)
-
-     console.log("Event fired")
-                    var mealid = $(this).closest("tr").attr("id")
-                        console.log(mealid)
-     
-                     var span=$(this).parent().find("span").first();
-                        console.log("this- " + span.text())
-                        var qtyspan = span.text();
-                     
-                     var mealname=$(this).closest("tr").find("td").first().text();
-                        console.log(mealname)
-                     
-                      var mealprice=$(this).closest("tr").find("td").first().next().next().text();
-                        console.log(mealprice)
-    
-                    var mealrate = $(this).closest("tr").find("td").first().next().next().next().text();
-
-    
-  if(qtyspan==1){
-      console.log("IF Quantity = 1")
-      // Delete Row
-       $("#billtable tr#"+mealid).remove();
-
-            mealList = $.grep(mealList, function(e){ 
-                  return e != mealname; 
-                    });
-              
-      
-      // Delete object from myList 
-           myList = $.grep(myList, function(e){ 
-                  return e.name != mealname; 
-                    });
-                    
-                    
-         // Delete object from kotList 
-           kotMealList = $.grep(kotMealList, function(e){ 
-                  return e != mealname; 
-                    });            
-                    
-        kotMealList            
-              
-        //change total grosss amount accordingly in bill table
-    
-        var total = $('#total_gross').text()
-        var cgst = $('#cgst').text()
-        var sgst = $('#sgst').text()
-        var tax = $('#tax').text()
-        
-        var t = total - mealprice
-        
-        $('#total_gross').text(t.toFixed(2)) 
-      
-        var c = cgst - (0.025*mealprice)  
-        if(isNaN(c)|| c<0)   {
-                                     c=0
-                                    }
-                                    
-        $('#cgst').text(c.toFixed(2))
-        
-        var s = sgst - (0.025*mealprice)     
-         if(isNaN(s)|| s<0)   {
-                                     s=0
-                                    }
-                                    
-        $('#sgst').text(s.toFixed(2))
-        
-        var ta = c + s;
-        
-                    if(isNaN(ta)|| ta<0 || ta<1)   {
-                                     ta=0
-                                    }
-                                    
-        $('#tax').text(ta.toFixed(2))
-        
-        
-        console.log("TA_ " + ta)
-                    
-      
-  } else {
-      
-      console.log("ELSE Quantity > 1")
-      // Decrement qty span
-      qtyspan = Number(qtyspan) - 1;
-      
-    span.text(qtyspan)
-    // change qty obj
-    
-      
-      // decreasing myObject.qty from myList
-        
-                myList = $.grep(myList, function(e){ 
-                    if(e.id==mealid){
-                        e.qty=Number(e.qty)-1;
-                    }
-                  return e; 
-                    });
-              
-        //change rate accordingly in myList
-        
-                myList = $.grep(myList, function(e){ 
-                    if(e.id==mealid){
-                        e.rate=Number(e.rate)-Number(mealprice);
-                    }
-                  return e; 
-                    });
-        
-        //change total grosss amount accordingly in bill table
-    
-        var total = $('#total_gross').text()
-        var t = total - mealprice
-        $('#total_gross').text(t.toFixed(2)) 
-        
-      //change html
-      
-            var nee = mealrate - mealprice
-                $(this).closest("tr").find("td").first().next().next().next().text(nee);
-                
-                   //change total grosss amount accordingly in bill table
-                
-                    var total = Number($('#total_gross').text())
-                    var cgst = Number($('#cgst').text())
-                    var sgst = Number($('#sgst').text())
-                    var tax = Number($('#tax').text())
-                    
-                    
-                  
-                    var c = cgst - (0.025*mealprice)      
-                    $('#cgst').text(c.toFixed(2))
-                    
-                    var s = sgst - (0.025*mealprice)      
-                    $('#sgst').text(s.toFixed(2))
-                    
-                    var ta =  (c + s);
-                    console.log("TA_ " + ta)
-                    if(isNaN(ta)){
-                        ta=0
-                    }
-                    
-                     $('#tax').text(ta.toFixed(2))
-                     console.log("C" + c)
-                     console.log("S" + s)
-                     console.log("T" + ta)
-
-  }
-  
-   
- 
-if (kotMealList.includes(mealname)){
-    
-          mealqty2[mealname] = mealqty2[mealname]-1;
-          
-          $('#'+mealid+'_a').html('<td>' + mealname + '</td><th scope="row">'+ mealqty2[mealname] +'</th>')
-          
- } else {
-  
-        //   $('table#billtable tr#'+mealid+'_a').remove();
-        //   $("#billtable tr#"+mealid).remove();
-          $('#'+mealid+'_a').remove()
-console.log("HERE")
- }
-
-
-
-}) //== minus icon click end
-
- //  =======================================
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
-if (kotMealList.includes(mealname)){
-    
-          mealqty2[mealname] = mealqty2[mealname]+1;
-          
-          $('#'+mealid+'_a').html('<td>' + mealname + '</td><th scope="row">'+ mealqty2[mealname] +'</th>')
-          
- } else {
-  
-          kotMealList.push(mealname);
-          mealqty2[mealname] = 1;
-          
-          $('#kottable').append('<tr id ='+ mealid+ '_a><td>' + mealname + '</td><th scope="row">'+ mealqty2[mealname] +'</th></tr>');
-         
- }
-
-
-
-
-  var pregst = mealprice - 0.05*mealprice;
-     
- 
- 
- 
-
-
-//  alert(kot)
- 
-//  $('#myTable').append('<tr><td>my data</td><td>more data</td></tr>');
-
-var result = [];
-  $('table tr').each(function(){
-  	$('td', this).each(function(index, val){
-    	if(!result[index]) result[index] = 0;
-      result[index] += parseInt($(val).text());
-    });
-  });
-  
-  $('table').append('<tr></tr>');
-  
-  
-  $(result).each(function(){
-      
-
-        var cgst=this*0.025;
-         	$('#cgst').html(cgst.toFixed(2))
-    
-        var sgst=this*0.025;
-         	$('#sgst').html(sgst.toFixed(2))
-        var tax = cgst + sgst;
-      
-        var pregsttotal = (this ).toFixed(2);
-
-    var x = tax;
-    var y = this;
-    var z = x+y
-    $('#totalAmt').html(pregsttotal)
-   	$('#total_gross').html(z.toFixed(2))
-    $('#tax').html(tax.toFixed(2))
-
-  });
- 
- 
-});
-
 
   
   $(document).ready(function(printBill) {
@@ -424,42 +82,38 @@ $('#applyDiscount').click(function(){
     $('#total_gross').html(next.toFixed(2))
 })
 
+/* global $*/
 
 
 
 
 
-
-$('#findCust').click(function () {
-    var cPhone = $('#cPhone').val();
+$('#addTable').click(function () {
+    var name = $('#tableName').val();
     
     
  
     
     $.ajax({
-        url: '/api/getcust',
+        url: '/api/newTable',
         type: "POST",
-        data: {cPhone},
+        data: {name},
         dataType: 'json',
         success: function (data) {
-           var name = data.cName
-           var email = data.cEmail
-           var phone = data.cPhone
+           var name = data.name
+           var available = data.available
+           var username = data.username
            
-           $('#cPhone').val(phone)
-           $('#cEmail').val(email)
-           $('#cName').val(name)
+           console.log(name)
+           console.log(available)
+           console.log(username)
            
-            $('#cn').html(name)
-            $('#cp').html(phone)
-            $('#ce').html(email)
            
-           $('#cPhone').css('border','2px solid lightgreen')
-           $('#cEmail').css('border','2px solid lightgreen')
-           $('#cName').css('border','2px solid lightgreen')
-            
         }
     });
 });
+
+
+
 
 

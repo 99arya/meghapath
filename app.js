@@ -119,6 +119,7 @@ var billSchema = new mongoose.Schema({
     sgst: Number,
     tax: Number,
     pm: String,
+    tableId:String,
     
     cName: String,
     cPhone:String,
@@ -173,7 +174,8 @@ var contactSchema = new mongoose.Schema({
     
     var Contact = mongoose.model("Contact", contactSchema)
     
-    
+
+
     // =========
     
 app.post("/contact", function(req, res) {
@@ -676,10 +678,11 @@ app.post("/newbill",  isLoggedIn, function(req, res){
                         var tablenumber = req.body.tablenumber;
                         var waitername = req.body.waitername;
                         var username = req.user.username;
+                        var tableId = req.body.tableId
                         
        
         
-        var newBill = new Bill({bn:bn, tablenumber:tablenumber, waitername: waitername,  username:username})
+        var newBill = new Bill({tableId:tableId, bn:bn, tablenumber:tablenumber, waitername: waitername,  username:username})
         
         
         
@@ -691,10 +694,11 @@ app.post("/newbill",  isLoggedIn, function(req, res){
                  newBill.save(function(err, bill){
                     if(err){
                         console.log(err)
-                    } console.log(bill);
+                    } 
                    
-                    res.redirect('/bills/' + bill._id)
-                    console.log(bill)
+                    // res.redirect('/bills/' + bill._id)
+                    console.log(bill._id)
+                    res.json({id:bill._id, tid:bill.tableId})
                 })
                  
                 
@@ -738,7 +742,7 @@ app.get("/bills", isLoggedIn,  function(req, res) {
 app.get("/bills/:id",  isLoggedIn, function(req, res) {
         
         
-        Bill.findById(req.params.id).populate("meals bills meals").exec(function(err, foundBill){
+        Bill.findById(req.params.id).populate("meals bills meals categories").exec(function(err, foundBill){
             if(err){
                 console.log(err)
             } else {
@@ -747,8 +751,15 @@ app.get("/bills/:id",  isLoggedIn, function(req, res) {
                             if(err){
                                 console.log(err);
                             } else {
-                                res.render("show",{bill: foundBill, meals:allMeals, currentUser:req.user}); 
-                          
+                                // res.render("show",{bill: foundBill, meals:allMeals, currentUser:req.user}); 
+                            Cat.find({username:{$eq: req.user.username}}, function(err, allCats) {
+                                if(err){
+                                    console.log(err)
+                                } else {
+                                res.render("show",{bill: foundBill, meals:allMeals, cats:allCats, currentUser:req.user}); 
+
+                                }
+                            })
                             }
                         })
 
@@ -886,10 +897,12 @@ app.post("/bills/:id/bd", function(req, res) {
     var billType = req.body.billType;
     var discount = req.body.discount;
     var totalAmt = req.body.totalAmt;
+    var waitername = req.body.waitername;
+    var tableId = null
     
 
     
-         Bill.findByIdAndUpdate({_id: req.params.id},{ $set:{total:total, cgst:cgst, sgst:sgst, tax:tax, pm:pm, cName:cName, cPhone:cPhone, cEmail:cEmail, billType:billType, discount:discount, totalAmt:totalAmt }}, { new:true}, function(err, newDetails){
+         Bill.findByIdAndUpdate({_id: req.params.id},{ $set:{waitername:waitername, total:total, cgst:cgst, sgst:sgst, tax:tax, pm:pm, cName:cName, cPhone:cPhone, cEmail:cEmail, billType:billType, discount:discount, totalAmt:totalAmt, tableId:tableId }}, { new:true}, function(err, newDetails){
             if(err){
                 console.log(err)
             } else {
@@ -904,6 +917,163 @@ app.post("/bills/:id/bd", function(req, res) {
 })
 
 // =========================================================end
+  // ===================================================
+ //  table model and schema
+//======================================================
+
+var tableSchema = new mongoose.Schema({
+    
+    name: String,
+    username:String,
+    bill:String,
+    available:{
+       type:String,
+       default:true
+     }
+    
+})
+    
+    var Table = mongoose.model("Table", tableSchema)
+
+// =============get
+
+app.get("/api/dashboard", isLoggedIn, function(req, res) {
+    Table.find({}, function(err, allTables) {
+        if(err){
+            console.log(err)
+        } else {
+            res.render("dashboard", { currentUser:req.user, tables:allTables})
+        }
+    })
+})
+
+
+
+// =========================================================start
+
+
+app.get("/api/gettable", isLoggedIn, function(req, res) {
+    Table.find({username: { $eq: req.user.username }}, function(err, allTables) {
+        if(err){
+            console.log(err)
+        } else {
+            res.json(allTables)
+        }
+    })
+})
+
+
+app.post("/api/newtable",  function(req, res) {
+    
+        var name = req.body.name;
+        
+        var username = req.user.username;
+        console.log("----" + username)
+        
+    var newTable = {name:name, username:username}
+    
+
+
+
+    Table.create(newTable, function(err, newlyCreated){
+        if(err){
+                console.log(err)
+            } else {
+                // res.redirect("meals")
+                res.json(newlyCreated)
+                
+                    
+        }
+    });
+    })
+
+
+app.put("/api/truetable",   function(req, res) {
+    var name= req.body.id;
+    var bill=req.body.bill
+    
+    Table.findOneAndUpdate({_id: { $eq: name }}, {$set:{available:"false", bill:bill}}, function(err, done){
+        if(err){
+            console.log(err)
+            
+        } else {
+            res.json(done)
+            console.log("falsed")
+        }
+    
+}) })
+
+
+
+
+app.put("/api/falsetable", function(req, res) {
+    var name= req.body.id;
+    var bill=""
+    
+    Table.findOneAndUpdate({_id: { $eq: name }}, {$set:{available:"true",  bill:bill}}, function(err, done){
+        if(err){
+            console.log(err)
+            
+        } else {
+            res.json(done)
+            console.log("trued")
+        }
+    
+}) })
+
+
+// =========================================================end
+  // ==================================================================
+ //category start
+//===================================================================
+
+var catSchema = new mongoose.Schema({
+    
+        name: String,
+        username:String,
+        
+    })
+        
+    var Cat = mongoose.model("Cat", catSchema)
+
+// ====new category=====
+
+app.post("/api/newcategory",  function(req, res) {
+        
+            var name = req.body.name;
+            
+            var username = req.user.username;
+            console.log("----" + username)
+            
+        var newCat = {name:name, username:username}
+  
+        Cat.create(newCat, function(err, newlyCreated){
+            if(err){
+                    console.log(err)
+                } else {
+                    // res.redirect("meals")
+                    res.json(newlyCreated)
+               
+            }
+        });
+        })
+        
+// =====get categories===
+
+app.get("/api/getcategories", isLoggedIn, function(req, res) {
+    Cat.find({username: { $eq: req.user.username }}, function(err, allCats) {
+        if(err){
+            console.log(err)
+        } else {
+            res.json(allCats)
+        }
+    })
+})
+
+  // ==================================================================
+ //category end
+//===================================================================
+
 
 
  
@@ -913,9 +1083,9 @@ app.post("/bills/:id/bd", function(req, res) {
 
 
 
-var tableRoutes=require("./routes/tables")
+// var tableRoutes=require("./routes/tables")
 
-app.use('/api/tables', tableRoutes)
+// app.use('/api/tables', tableRoutes)
 
  
 

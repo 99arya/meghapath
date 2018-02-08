@@ -16,8 +16,10 @@ router.get('/', function(req, res){
 
 
 router.post('/', function(req, res){
-    console.log(req.body)
-    db.Table.create(req.body)
+    var username = req.user.username
+    var name = req.body.name;
+    
+    db.Table.create({username:username, name:name})
     .then(function(newTable){
         res.json(newTable)
         

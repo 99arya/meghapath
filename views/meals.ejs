@@ -20,10 +20,46 @@
                 <input class="form-control" type="text" name="name" placeholder="Name of The Meal">
             </div>
             
-            <div class="form-group">
-                <p for="category">Category: </p>
-                <input class="form-control" type="text" name="category" placeholder="Category">
-            </div>
+            <!--<div class="form-group">-->
+            <!--    <p for="category">Category: </p>-->
+            <!--    <input class="form-control" type="text"placeholder="Category">-->
+            <!--</div>-->
+  
+            
+            
+<div class="form-group">
+
+<p class="ilm">Select Category  
+        <span class="right">
+                <select  style="display:inline" class="form-control"  name="category"  id="category">
+                  <option id="---">---</option>
+                    
+                </select></span></p></div>
+            
+            
+               <script>
+   var url="/api/getcategories"
+        $.getJSON(url,
+    function (json) {
+        
+        
+        
+        console.log(json)
+        
+        
+        var category = $("#category");
+            $.each(json, function() {
+                category.append($("<option />").val(this.name).text(this.name));
+            });
+        
+    
+        
+    });
+    
+              
+   </script>
+
+        
             
             <div class="form-group">
                 <p for="price">Price: </p>
@@ -35,13 +71,73 @@
             <button class="btn btn-lg btn-primary btn-block" >Submit</button>
             </div> 
         </form>
+        
+        
+               
+            
+  
+   
+    <!--  <p class="ilm" style="display:inline" ><b>Add Category: </b>-->
+    
+    <!--<span class="right">-->
+    
+    <!--  <input type="text" id="categoryName" class="form-control" placeholder="Category Name">-->
+    
+    
+    <!-- <button type="button" class="btn btn-success" id = "addCategory">Add</button>-->
+    <!--</span></p>-->
+  
+<div class="jumbotron" style="background-color:white">
+            <div class="row ">
+    <div class="col">
+      <p style="display:inline" ><b>Add Category: </b></p>
+    </div>
+    <div class="col">
+      <input type="text" id="categoryName" class="form-control" placeholder="Category Name">
+    </div>
+    <div class="col">
+     <button type="button" class="btn btn-success" style="width:24em;" id = "addCategory">Add</button>
+    </div>
+  </div>
+            </div>
+            <script>
+                
+$('#addCategory').click(function () {
+    var name = $('#categoryName').val();
+    
+    
+ 
+    
+    $.ajax({
+        url: '/api/newcategory',
+        type: "POST",
+        data: {name},
+        dataType: 'json',
+        success: function (data) {
+           var name = data.name
+           
+           var username = data.username
+           
+           console.log(name)
+           
+           console.log(username)
+           
+           
+           
+        }
+    });
+});
+            </script>
+            
+        
+        
         </div>
             
            
     
     </div>
   
-     <div class='container fluid'>
+     <div class='container fluid'><h1>MEALS</h1>
     <div class="row text-center" style = "display:flex; flex-wrap:wrap;">
         
         <br>
