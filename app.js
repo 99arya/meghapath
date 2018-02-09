@@ -20,51 +20,21 @@ var passport = require("passport"),
 
 var port = process.env.PORT || 80;
 
-var sg = require('sendgrid')("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");
+var helper = require('sendgrid').mail;
+var from_email = new helper.Email('test@example.com');
+var to_email = new helper.Email('sumit.arya@channelplay.in');
+var subject = 'Hello World from the SendGrid Node.js Library!';
+var content = new helper.Content('text/plain', 'Hello, Email!');
+var mail = new helper.Mail(from_email, subject, to_email, content);
+
+var sg = require('sendgrid')(process.env.SENDGRID_API_KEY);
 var request = sg.emptyRequest({
   method: 'POST',
   path: '/v3/mail/send',
-  body: {
-    personalizations: [
-      {
-        to: [
-          {
-            email: 'sumit.arya@channelplay.in',
-          },
-        ],
-        subject: 'Hello World from the SendGrid Node.js Library!',
-      },
-    ],
-    from: {
-      email: 'test@example.com',
-    },
-    content: [
-      {
-        type: 'text/plain',
-        value: 'Hello, Email!',
-      },
-    ],
-  },
+  body: mail.toJSON(),
 });
 
-//With promise
-sg.API(request)
-  .then(response => {
-    console.log(response.statusCode);
-    console.log(response.body);
-    console.log(response.headers);
-  })
-  .catch(error => {
-    //error is an instance of SendGridError
-    //The full response is attached to error.response
-    console.log(error.response.statusCode);
-  });
-
-//With callback
 sg.API(request, function(error, response) {
-  if (error) {
-    console.log('Error response received');
-  }
   console.log(response.statusCode);
   console.log(response.body);
   console.log(response.headers);
