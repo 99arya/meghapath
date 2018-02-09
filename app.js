@@ -46,8 +46,8 @@ app.use(bodyParser.json());
 
 
     // mongoose.connect("mongodb://localhost/cafe_o2")
-    // mongoose.connect("mongodb://sumitarya:behaPPYhaha99!@ds255715.mlab.com:55715/o2db")
-    mongoose.connect(process.env.MONGOURL)
+    mongoose.connect("mongodb://sumitarya:behaPPYhaha99!@ds255715.mlab.com:55715/o2db")
+    // mongoose.connect(process.env.MONGOURL)
     // mongoose.Promise = require('bluebird');
     app.use(express.static(path.join(__dirname, 'public')));
     app.use(express.static(__dirname + '/views'));
