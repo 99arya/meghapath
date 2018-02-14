@@ -13,6 +13,7 @@
   "author": "sumit Arya <aryasumit145@gmail.com> - Ornio Lab",
   "license": "ISC",
   "dependencies": {
+    "@sendgrid/mail": "^6.2.1",
     "alertify": "^0.3.0",
     "body-parser": "^1.18.2",
     "connect-flash": "^0.1.1",
@@ -22,6 +23,7 @@
     "jquery": "^3.2.1",
     "jquery-easing": "0.0.1",
     "js-alert": "^1.0.4",
+    "logger": "0.0.1",
     "method-override": "^2.3.10",
     "moment": "^2.20.1",
     "mongoose": "^4.13.5",
@@ -32,6 +34,7 @@
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",
     "passport-local-mongoose": "^4.4.0",
-    "table-to-json": "^0.12.0"
+    "table-to-json": "^0.12.0",
+    "winston": "^2.4.0"
   }
 }

@@ -62,16 +62,7 @@ function download(){
     a.click();
 }
 
-$('#delkot').on('click',function(e){
-         e.preventDefault();
-        $("#kottable tr").remove();
-        $("#kottable").append('<tr><th scope="col">Name</th><th scope="col">Qty.</th></tr>');
-        
-        kotMealList = [];
-        mealqty2={}
-        
-      });
-      
+  
           
 $('#applyDiscount').click(function(){
     var old = $('#total_gross').text()

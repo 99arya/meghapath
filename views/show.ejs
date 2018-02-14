@@ -19,7 +19,7 @@
    
    
      <div class="col-lg-2 col-sm-10 col-md-10">
-     <div id = "kotdiv">
+     <div class = "kotdiv">
          
                  <p class="head">-<%= bill.billType %><span id="kotspan"></span>-</p><hr>
 
@@ -50,8 +50,59 @@
     <% }); %>  
   </tbody>
 </table>
+
+
+
+    </div>
+    
+    <!--//kotdiv--> 
+    
+         <br>
+              <% bill.kots.forEach(function(kot){ %> 
+              <div class = "kotdiv">
+
+         
+                
+            <p class="text-center"><b>KOT Number : </b><%= kot.kn %></p>
+            <p class="text-center"><b>KOT Status : </b><%= kot.kotStatus %></p>
+         
+
+         <hr>
+               <table id="kottable" class="table table-sm table-bordered ">
+  <thead>
+    <tr>
+      
+      <th scope="col">Particulars</th>
+      <th scope="col">Qty.</th>
+      
+    </tr>
+  </thead>
+  <tbody>
+    <% kot.meals.forEach(function(meal){ %> 
+    <tr>
+      
+      <td><%= meal.name %></td>
+      <th scope="row"><%= meal.qty %></th>
+      
+      
+    </tr>
+    <% }); %> 
+  
+  </tbody>
+</table>
+
+
+
     </div><br>
+        <% }); %>
+    <!--//kotdiv-->
+    
+    
+    <br>
     <div class="form-group">
+          <button style="margin-left:auto;margin-right:auto;display:block;margin-top:0%;margin-bottom:0%"  id="sendKot" type="button" class="btn btn-lg btn-success btn-block">Upload Kot</button><br>
+          <button style="margin-left:auto;margin-right:auto;display:block;margin-top:0%;margin-bottom:0%"  id="newKot" type="button" class="btn btn-lg btn-success btn-block">New Kot</button><br>
+
     <button style="margin-left:auto;margin-right:auto;display:block;margin-top:0%;margin-bottom:0%"  id="printkot" type="button" class="btn btn-success">Print KOT</button></div>
    <div class="form-group"> <button style="margin-left:auto;margin-right:auto;display:block;margin-top:0%;margin-bottom:0%"  id="delkot" type="button" class="btn btn-danger">Delete KOT</button></div>
     
@@ -168,44 +219,12 @@
       <input type="text"  value="<%= bill.cPhone %>" id="cPhone" name="cPhone" class="form-control" placeholder="Number">
     </div>
     <div class="col">
-     <button type="button" class="btn btn-success" id = "findCust">Go</button>
+     <button type="button" class="btn btn-success" id = "findCust">FIND</button>
     </div>
+    
   </div>
 </form>
-           <script>
-$('#findCust').click(function () {
-    var cPhone = $('#cPhone').val();
-    
-    
- 
-    
-    $.ajax({
-        url: '/api/getcust',
-        type: "POST",
-        data: {cPhone},
-        dataType: 'json',
-        success: function (data) {
-           var name = data.cName
-           var email = data.cEmail
-           var phone = data.cPhone
-           
-           $('#cPhone').val(phone)
-           $('#cEmail').val(email)
-           $('#cName').val(name)
-           
-            $('#cn').html(name)
-            $('#cp').html(phone)
-            $('#ce').html(email)
-           
-           $('#cPhone').css('border','2px solid lightgreen')
-           $('#cEmail').css('border','2px solid lightgreen')
-           $('#cName').css('border','2px solid lightgreen')
-            
-        }
-    });
-});
-</script>  
-             
+     
     <form class="form-inline" id = "theform">
         
         
@@ -222,7 +241,8 @@ $('#findCust').click(function () {
         <div class="form-group">
              <p style="display:inline-block"  for="custEmail">Customer E-Mail</p>
         <input class="form-control"  style="margin-left:2em;" type = "text" name="cEmail" id = "cEmail" placeholder = "Customer E-Mail"  value="<%= bill.cEmail %>"></div>
-    
+         <button type="button" class="btn btn-success" id = "saveCust">SAVE</button>
+<button type = "button" id ="noabc">noabc</button>
     
            <div class="form-group">
              <p style="display:inline-block "  for="wName"> Waiter's -- Name </p>
@@ -246,12 +266,13 @@ $('#findCust').click(function () {
         
           <hr id="billtablemargin">
           
-    <li class="il"><b>Waiter Name: </b><%= bill.waitername %><span class="wn"></span><span class="right"> <b>Order No.:</b> <%= bill.bn %></span></li>
+    <li class="il"><b>Waiter Name: </b><span class="wn"><%= bill.waitername %></span><span class="right"> <b>Order No.:</b> <span id = "bn"><%= bill.bn %></span></span></li>
     <li class="il dates" style="margin-top:0.8em; margin-bottom:0.8em; line-height:2px;" ><b>Date: </b> <%= bill.created %></li>
 
 
 
-    <li class="il dates"><b>Bill ID: </b><%= bill._id %></li>
+    <li class="il dates"><b>Bill ID: </b><span id="bId"><%= bill._id %></span></li>
+    <li class="il dates"><b>Table: </b><span id="tn"><%= bill.tablenumber %></span></li>
 
         <hr><li class="il"><b> Customer Details: </b><span class="right"> <p style="display:inline" ></p></span></li>
 
@@ -449,24 +470,24 @@ $('#findCust').click(function () {
         
         
         
-        var divContents = $("#billdiv").html();//div which have to print
-                var printWindow = window.open('', '', 'height=700,width=900');
-                printWindow.document.write('<html><head><title>BILL</title>');
-                printWindow.document.write('<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" >');//external styles
-                printWindow.document.write('<link href="https://fonts.googleapis.com/css?family=Share+Tech+Mono" rel="stylesheet">');//external styles
-                printWindow.document.write('<style>font-family: "Share Tech Mono", monospace;</style>');//external styles
-                printWindow.document.write('<link rel="stylesheet" href="/stylesheets/main.css" type="text/css"/>');
-                printWindow.document.write('</head><body>');
+        // var divContents = $("#billdiv").html();//div which have to print
+        //         var printWindow = window.open('', '', 'height=700,width=900');
+        //         printWindow.document.write('<html><head><title>BILL</title>');
+        //         printWindow.document.write('<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" >');//external styles
+        //         printWindow.document.write('<link href="https://fonts.googleapis.com/css?family=Share+Tech+Mono" rel="stylesheet">');//external styles
+        //         printWindow.document.write('<style>font-family: "Share Tech Mono", monospace;</style>');//external styles
+        //         printWindow.document.write('<link rel="stylesheet" href="/stylesheets/main.css" type="text/css"/>');
+        //         printWindow.document.write('</head><body>');
                 
-                printWindow.document.write(divContents);
-                printWindow.document.write('</body></html>');
-                printWindow.document.close();
+        //         printWindow.document.write(divContents);
+        //         printWindow.document.write('</body></html>');
+        //         printWindow.document.close();
 
-                printWindow.onload=function(){
-                printWindow.focus();                                         
-                printWindow.print();
-                printWindow.close();
-                }
+        //         printWindow.onload=function(){
+        //         printWindow.focus();                                         
+        //         printWindow.print();
+        //         printWindow.close();
+        //         }
 
 
 
@@ -485,6 +506,103 @@ var waitername=wName
                               $.post("/bills/<%= bill._id %>/bd", {waitername, billType, total, cgst, sgst, tax, pm, cName, cPhone, cEmail, discount, totalAmt:totalAmt})
                                    )
        
+      
+
+})
+
+       
+     $('#sendKot').click(function(){
+    $(this).prop('disabled', true);
+          var meals = JSON.stringify(yourList);
+          var total = $('#total_gross').text()
+          var cgst = $('#cgst').text()
+          var sgst = $('#sgst').text()
+          var tax = $('#tax').text()
+          var pm = $('#payment').find(":selected").text();
+          var cName = $('#cName').val()
+          var cPhone = $('#cPhone').val()
+          var cEmail = $('#cEmail').val()
+          var billType = $('#billType').find(":selected").text();
+          var discount = $('#discountPercentage').val();
+          var totalAmt = $('#totalAmt').text()
+          var wName = $('#wName').val()
+          console.log("wName "+ wName)
+
+        $('#cn').html(cName)
+        $('#cp').html(cPhone)
+        $('#ce').html(cEmail)
+        $('#bt').html(billType)
+        $('#dis').html(discount)
+        $('#toa').html(totalAmt)
+        $('#pm').html(pm)
+        $('.wn').html(wName)
+        console.log(wName)
+        
+        
+        var id = $('#tId').text()
+        
+        // xxx
+       // xxx
+        
+        
+        
+        
+        
+        
+     
+
+
+var waitername=wName
+
+
+     var details = {billType, total, cgst, sgst, tax, pm, cName, cPhone, cEmail, discount, totalAmt, waitername}
+          console.log(details)
+          
+   
+              $.post( "/bills/<%= bill._id %>/kot", {meals} )
+                      .then(
+                                  console.log("success" + meals)
+                              
+                                   )
+       
+      
+
+})
+
+//   ================kot
+
+       
+     $('#newKot').click(function(){
+          var meals = JSON.stringify(yourList);
+         
+          var cName = $('#cName').val()
+          var bn = $('#bn').text()
+          var tn = $('#tn').text()
+          var bId = $('#bId').text()
+          
+          var waitername  = $('#wName').val()
+          var tableId = $('#tId').text()
+          var billType = $('#billType').find(":selected").text();
+
+
+
+
+     var details = {bn, tn, bId, tableId, billType,  cName,  waitername}
+          console.log(details)
+          
+   
+              $.post("/api/newKot", {bn, tn, bId, tableId, billType,  cName,  waitername})
+                   .done(function( data ) {
+                        var kId = data._id;
+                        
+                        $.post("/api/kotmeals/" + kId + "", {meals})
+                        .done(function(data){
+                            
+                            $.post("/api/pushkot/" + bId + "", {kId})
+                            
+                        })
+                        
+              });
       
 
 })
@@ -579,42 +697,42 @@ var waitername=wName
     var myList=[]
     var mealList=[]
     var mealqty={}
+    var yourList=[]
     
   
     
 
     headers.push("name")
     headers.push("qty")
-    headers.push("price")
-    headers.push("rate")
+    
     headers.push("id")
     
-    $('#billtable tr').has('td').each(function() {
+    $('#kottable tr').has('td').each(function() {
         var arrayItem = {};
         $('td', $(this)).each(function(index, item) {
             arrayItem[headers[index]] = $(item).html();
             arrayItem[headers[4]]= $(this).closest("tr").attr("id")
-            arrayItem[headers[2]]=Number(arrayItem[headers[2]]) //price
-            arrayItem[headers[3]]=Number(arrayItem[headers[3]]) //rate
+            
             arrayItem[headers[1]]=Number(arrayItem[headers[1]]) // qty
         });
         
         var mealname=arrayItem[headers[0]]
         
         mealqty[mealname] =arrayItem[headers[1]]
-        console.log("haha " + mealqty[mealname])
+        console.log("kot haha " + mealqty[mealname])
         
         
       mealList.push(arrayItem[headers[0]]) //name
         
         
         array.push(arrayItem);
-        myList.push(arrayItem)
+        yourList.push(arrayItem)
         
         
         
     });
 console.log(myList)
+console.log(yourList)
 console.log(mealList)
 
 
@@ -676,6 +794,8 @@ $(".card").unbind().on("click", function(){
     
               myList.push(myObject)
                   
+                
+                  
      //change total grosss amount accordingly in bill table
     
      
@@ -709,6 +829,8 @@ $(".card").unbind().on("click", function(){
 
 
               myList.push(myObject)
+
+
 
 
 
@@ -775,7 +897,13 @@ $(".card").unbind().on("click", function(){
            myList = $.grep(myList, function(e){ 
                   return e.name != mealname; 
                     });
+                      
+                      // Delete object from yourList 
+           yourList = $.grep(yourList, function(e){ 
+                  return e.name != mealname; 
+                    });
                     
+                    console.log(yourList)
                     
          // Delete object from kotList 
            kotMealList = $.grep(kotMealList, function(e){ 
@@ -849,6 +977,16 @@ $(".card").unbind().on("click", function(){
                   return e; 
                     });
               
+      // decreasing myObject.qty from myList
+        
+                yourList = $.grep(yourList, function(e){ 
+                    if(e.id==mealid){
+                        e.qty=Number(e.qty)-1;
+                    }
+                  return e; 
+                    });
+                    console.log(yourList)
+              
         //change rate accordingly in myList
         
                 myList = $.grep(myList, function(e){ 
@@ -915,6 +1053,8 @@ if (kotMealList.includes(mealname)){
           $('#'+mealid+'_a').html('<td>' + mealname + '</td><th scope="row">'+ mealqty2[mealname] +'</th>')
           
  } else {
+     
+     
   
         //   $('table#billtable tr#'+mealid+'_a').remove();
         //   $("#billtable tr#"+mealid).remove();
@@ -943,8 +1083,50 @@ if (kotMealList.includes(mealname)){
           
           $('#'+mealid+'_a').html('<td>' + mealname + '</td><th scope="row">'+ mealqty2[mealname] +'</th>')
           
+            //kot
+                  
+                  
+                   
+          var yourObject = new Object();
+                yourObject.name = mealname;
+                yourObject.qty = mealqty[mealname];
+                yourObject.id = mealid;
+                
+                
+            
+                yourList = $.grep(yourList, function(e){ 
+                 
+                  return e.name != yourObject.name; 
+                  
+                    });
+                
+    
+              yourList.push(yourObject)
+              console.log(yourObject)
+              console.log(yourList)
+          
+          
  } else {
-  
+  //kot
+
+         
+          var yourObject = new Object();
+                yourObject.name = mealname;
+                yourObject.qty = mealqty[mealname];
+                yourObject.id = mealid;
+                
+                
+            
+                yourList = $.grep(yourList, function(e){ 
+                 
+                  return e.name != yourObject.name; 
+                  
+                    });
+                
+    
+              yourList.push(yourObject)
+              console.log(yourObject)
+              console.log(yourList)
           kotMealList.push(mealname);
           mealqty2[mealname] = 1;
           
@@ -1002,9 +1184,76 @@ var result = [];
 });
 
 
+
+$('#delkot').on('click',function(e){
+         e.preventDefault();
+        $("#kottable tr").remove();
+        $("#kottable").append('<tr><th scope="col">Name</th><th scope="col">Qty.</th></tr>');
+        
+        yourList=[]
+        kotMealList = [];
+        mealqty2={}
+        
+      });
+      
 </script>
     
 
+    <script>
+
+$("#saveCust").click(function(){
+    
+    var cPhone = $('#cPhone').val();
+    var cEmail = $('#cEmail').val()
+    var cName  =   $('#cName').val()
+    console.log(cPhone+cEmail+cName)
+    $.post("/api/customer", {cPhone, cEmail, cName})
+    .done(function(data){
+        console.log(data)
+    })
+    
+    
+    
+    
+    
+})
+
+
+</script>
+    
+    <script>
+
+$('#findCust').click(function () {
+    var cPhone = $('#cPhone').val();
+  
+    $.ajax({
+        url: '/api/getcustomer',
+        type: "POST",
+        data: {cPhone},
+        dataType: 'json',
+        success: function (data) {
+           var name = data.cName
+           var email = data.cEmail
+           var phone = data.cPhone
+           
+           $('#cPhone').val(phone)
+           $('#cEmail').val(email)
+           $('#cName').val(name)
+           
+            $('#cn').html(name)
+            $('#cp').html(phone)
+            $('#ce').html(email)
+           
+           $('#cPhone').css('border','2px solid lightgreen')
+           $('#cEmail').css('border','2px solid lightgreen')
+           $('#cName').css('border','2px solid lightgreen')
+            
+        }
+    });
+});
+</script>  
+             
+  
 
 <script type="text/javascript" src="../js/main.js"></script>
 <script type="text/javascript" src="../js/alert.js"></script>
